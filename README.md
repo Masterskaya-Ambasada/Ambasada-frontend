@@ -18,11 +18,15 @@
 
 [Figma](https://www.figma.com/design/HaL00M2j04KDwDzFXfos0c/%D0%A1%D0%B0%D0%B9%D1%82-%D0%90%D0%BC%D0%B1%D0%B0%D1%81%D0%B0%D0%B4%D0%B0-%D0%B7%D0%B0-%D0%A3%D1%80%D0%B1%D0%B0%D0%BD%D0%B8%D0%B7%D0%B0%D0%BC--%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D0%B0-2-?node-id=419-6033&p=f&t=XdvSQ9HZGxQ2dtC2-0)
 
+# Ambasada Frontend
+Проект на React + TypeScript (Vite)  
+Node.js >= 22.0.0  
+React 19.2.0
+
 ## Установка проекта
 
 ```bash
 npm install
-npm run prepare
 ```
 
 ## Запуск проекта в development режиме
