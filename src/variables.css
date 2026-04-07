@@ -1,0 +1,60 @@
+:root {
+  /*переменные для палитры цветов*/
+  --balance: #c1b7ff;
+  --ecologic: #78ba07;
+  --energy: #eb3d00;
+  --black: #1a1a1a;
+  --white: #fcffff;
+  --politic_black: #000000;
+  --politic_white: #ffffff;
+  --fault: #d41414;
+  --gray: #bdbdbd80;
+
+  /*Оттенки Градиент */
+  --purpure_1: #cdc5ff;
+  --purpure_2: #dad4ff;
+  --purpure_3: #e6e2ff;
+  --green_1: #90cc28;
+  --green_2: #aae347;
+  --green_3: #cbf287;
+  --orange_1: #ff6731;
+  --orange_2: #ff8a60;
+  --orange_3: #ffb69c;
+  --black_1: #484848;
+  --black_2: #848484;
+  --black_3: #bdbdbd;
+
+  /* Шрифты */
+  --main-font-family:
+    "Rubik", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue";
+  --button-font-family: "Inter", sans-serif;
+
+  /* Параметры шрифтов desktop*/
+  --desktop_h1: 400 60px/1.4 var(--main-font-family);
+  --desktop_h2: 400 48px/1.2 var(--main-font-family);
+  --desktop_h3: 400 36px/1.4 var(--main-font-family);
+  --desktop_h4: 300 40px/1.4 var(--main-font-family);
+  --desktop_main: 300 24px/1.4 var(--main-font-family);
+  --desktop_caption: 300 20px/1 var(--main-font-family);
+  --desktop_button: 400 24px/1.4 var(--button-font-family);
+  --desktop_numbers: 600 24px/1 var(--main-font-family);
+  --desktop_politic: 300 20px/1.5 var(--main-font-family);
+
+  /* Параметры шрифтов tablet */
+  --tablet_h1: 400 36px/1.4 var(--main-font-family);
+  --tablet_h2: 400 32px/1.2 var(--main-font-family);
+  --tablet_h3: 400 28px/1.4 var(--main-font-family);
+  --tablet_h4: 300 28px/1.2 var(--main-font-family);
+  --tablet_main: 300 20px/1.4 var(--main-font-family);
+  --tablet_caption: 400 20px/1 var(--main-font-family);
+  --tablet_button: 400 20px/1 var(--button-font-family);
+
+  /* Параметры шрифтов mobile */
+  --mobile_h1: 400 36px/1.4 var(--main-font-family);
+  --mobile_h2: 400 24px/1.2 var(--main-font-family);
+  --mobile_h3: 400 20px/1.4 var(--main-font-family);
+  --mobile_h4: 300 24px/1.2 var(--main-font-family);
+  --mobile_main: 300 14px/1.4 var(--main-font-family);
+  --mobile_caption: 400 12px/1 var(--main-font-family);
+  --mobile_button: 400 16px/1.2 var(--button-font-family);
+}
