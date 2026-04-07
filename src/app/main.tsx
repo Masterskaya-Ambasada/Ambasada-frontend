@@ -1,10 +1,19 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './app/styles/index.css'
-import App from './app/App.tsx'
+import './styles/index.css'
+import App from './App.tsx'
 
-createRoot(document.getElementById('root')!).render(
+async function enableMocks() {
+  if (import.meta.env.DEV) {
+    const { worker } = await import('../shared/mocks/browser')
+    await worker.start()
+  }
+}
+
+enableMocks().then(() => {
+  createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
   </StrictMode>
 )
+})
