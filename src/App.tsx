@@ -1,30 +1,32 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { 
   BrowserRouter, 
   Routes, 
   Route, 
-  useParams } from 'react-router-dom';
+   } from 'react-router-dom';
 import "./App.css";
 
 // LAZY-ИМПОРТЫ страниц (code splitting по роутам)
-// const Home = lazy(() => import('./pages/Home/Home'));
-// const About = lazy(() => import('./pages/About/About'));
-// const Contacts = lazy(() => import('./pages/Contacts/Contacts'));
-// const Policy = lazy(() => import('./pages/Policy/Policy'));
+ const Home = lazy(() => import('./pages/Home'));
+ const ProjectsList = lazy(() => import('./pages/ProjectsList'));
+ const ProjectDetails = lazy(() => import('./pages/ProjectDetails'));
+ const About = lazy(() => import('./pages/About'));
+ const Contacts = lazy(() => import('./pages/Contacts'));
+ const Policy = lazy(() => import('./pages/Policy'));
 
 const App = () => {
   return (
     <BrowserRouter>
       <Suspense fallback={<div className="loading">Загрузка приложения...</div>}>
-       <Routes>
-         <Route path="/" element={<div>Главная страница</div>} />
-         <Route path="projects" element={<div>Список проектов</div>} />
-         <Route path="projects/:slug" element={<ProjectDetails />} />
-         <Route path="about" element={<div>О нас</div>} />
-         <Route path="contacts" element={<div>Контакты</div>} />
-         <Route path="policy" element={<div>Политика конфиденциальности</div>} />
-         <Route path="*" element={<NotFound />} />
-       </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="projects" element={<ProjectsList />} />
+          <Route path="projects/:slug" element={<ProjectDetails />} />
+          <Route path="about" element={<About />} />
+          <Route path="contacts" element={<Contacts />} />
+          <Route path="policy" element={<Policy />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </Suspense>
     </BrowserRouter>
   );
@@ -41,14 +43,5 @@ const NotFound: React.FC = () => {
   );
 };
 
-// Компонент для отображения деталей проекта
-const ProjectDetails = () => {
-  const { slug } = useParams();
-  return (
-    <div>
-      <h1>Детали проекта {slug}</h1>
-    </div>
-  );
-};
 
 export default App;
