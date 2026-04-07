@@ -24,7 +24,6 @@ export default defineConfig([
       globals: globals.browser,
     },
     plugins: {
-      "react-refresh": reactRefresh,
       "@typescript-eslint": tseslint.plugin,
       prettier: prettier,
     },
