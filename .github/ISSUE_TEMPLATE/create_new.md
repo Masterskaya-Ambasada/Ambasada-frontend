@@ -1,9 +1,9 @@
 ---
 name: Create component
 about: Шаблон для задачи создания компонента
-title: '[FEATURE]: '
-labels: ''
-assignees: ''
+title: "[FEATURE]: "
+labels: ""
+assignees: ""
 ---
 
 ### Что

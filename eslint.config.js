@@ -53,4 +53,22 @@ export default defineConfig([
       ],
     },
   },
-])
+
+  {
+    files: ["**/*.{js,ts}", "eslint.config.js", "vite.config.ts"],
+    ignores: ["src/**/*", "dist/**/*"],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.node,
+    },
+    plugins: {
+      "@typescript-eslint": tseslint.plugin,
+      prettier: prettier,
+    },
+    rules: {
+      "@typescript-eslint/no-require-imports": "off",
+      "@typescript-eslint/no-unused-vars": "warn",
+      "prettier/prettier": "error",
+    },
+  },
+]);
