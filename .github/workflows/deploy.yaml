@@ -1,9 +1,8 @@
 ---
 name: Deploy
-on:  
+on:
   push:
     branches: [develop, devops/test-deploy-dev]
-
 
 jobs:
   build-and-deploy:
@@ -17,7 +16,7 @@ jobs:
       - name: 2. Install npm
         run: |
           sudo apt install nodejs npm -y
-          npm ci 
+          npm ci
 
       - name: 3. Build dist folder
         run: |
@@ -30,6 +29,5 @@ jobs:
           username: ${{ secrets.SSH_DEPLOY_USER }}
           key: ${{ secrets.SSH_DEPLOY_KEY }}
           overwrite: true
-          source: 'dist'
-          target: '~/frontend/'
-
+          source: "dist"
+          target: "~/frontend/"
