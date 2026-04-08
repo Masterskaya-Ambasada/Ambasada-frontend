@@ -57,4 +57,89 @@
   --mobile_main: 300 14px/1.4 var(--main-font-family);
   --mobile_caption: 400 12px/1 var(--main-font-family);
   --mobile_button: 400 16px/1.2 var(--button-font-family);
+
+  /* breackpoints */
+  --breakpoint_desktop: 1440px;
+  --breakpoint_tablet: 834px;
+  --breakpoint_mobile: 375px;
+
+  --spacing-0: 0;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --spacing-20: 80px;
+  --spacing-24: 96px;
+  --spacing-32: 128px;
+  --spacing-120: 120px;
+}
+
+.btn {
+  width: 500px;
+  max-width: 100%;
+  height: 72px;
+  border-radius: 40px;
+  padding: 0 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-4);
+  flex-direction: row;
+  box-sizing: border-box;
+  background-color: var(--energy);
+  color: var(--politic_white);
+  font: var(--desktop_button);
+  font-family: var(--button-font-family);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn:disabled,
+.btn--inactive {
+  background-color: var(--black_3);
+  color: var(--black_2);
+  opacity: 0.5;
+}
+
+@media (max-width: 1023px) {
+  .btn {
+    width: 383px;
+    height: 48px;
+    padding: 10px;
+    gap: 10px;
+    font: var(--tablet_button);
+  }
+}
+
+@media (max-width: 833px) {
+  .btn {
+    width: 255px;
+    height: 36px;
+    font: var(--mobile_button);
+  }
+}
+
+.small_btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  background-color: var(--energy);
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
