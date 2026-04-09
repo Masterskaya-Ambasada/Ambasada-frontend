@@ -1,6 +1,9 @@
 import { http, HttpResponse } from "msw";
 
 export const handlers = [
+  http.get("/", () => {
+    return new HttpResponse(null, { status: 200 });
+  }),
   http.get("/api/v1/init", () => {
     return HttpResponse.json({
       site_name: "Амбасада за урбанизм",
