@@ -3,13 +3,18 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "./assets/vite.svg";
 import heroImg from "./assets/hero.png";
 import "./App.css";
+import LanguageSwitcher from "./components/LanguageSwitcher/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 function App() {
   const [count, setCount] = useState(0);
+  const { t } = useTranslation("common");
 
   return (
     <>
       <section id="center">
+        <LanguageSwitcher></LanguageSwitcher>
+        <span>{t("test")}</span>
         <div className="hero">
           <img src={heroImg} className="base" width="170" height="179" alt="" />
           <img src={reactLogo} className="framework" alt="React logo" />

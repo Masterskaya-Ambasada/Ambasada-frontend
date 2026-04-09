@@ -1,0 +1,9 @@
+{
+  "test": "Output of a line for a test translation check",
+  "toggle": "Toggle Language",
+  "language": {
+    "ru": "Russian",
+    "en": "English",
+    "sr": "Serbian"
+  }
+}
