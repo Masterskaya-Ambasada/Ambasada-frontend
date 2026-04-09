@@ -99,8 +99,7 @@ ghost - светло-серая с серыми буквами
 <button class="btn btn--ghost"/>
 */
 .btn {
-  width: 500px;
-  max-width: 100%;
+  width: 100%;
   height: 72px;
   border-radius: 40px;
   padding: 0 80px;
@@ -156,7 +155,6 @@ ghost - светло-серая с серыми буквами
 
 @media (max-width: 1023px) {
   .btn {
-    width: 383px;
     height: 48px;
     padding: 10px;
     gap: 10px;
@@ -169,7 +167,6 @@ ghost - светло-серая с серыми буквами
 
 @media (max-width: 833px) {
   .btn {
-    width: 255px;
     height: 36px;
     font: var(--mobile_button);
   }
@@ -228,7 +225,7 @@ ghost - светло-серая с серыми буквами
 
 @media (max-width: 833px) {
   .small_btn {
-    width: 255px;
+    width: 100%;
     height: 40px;
     border-radius: 24px;
     color: var(--politic_white);
