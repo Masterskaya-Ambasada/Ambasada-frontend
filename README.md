@@ -53,3 +53,43 @@ npm run dev
 - `.env.example` — шаблон (хранится в репозитории)
 - Процесс настройки: копируем `.env.example` → создаём `.env` → заполняем своими значениями
  
+
+# i18n Настройка (ru, en, sr-Cyrl, sr-Latn)
+
+## Установка
+```bash
+npm i i18next react-i18next i18next-browser-languagedetector i18next-http-backend
+```
+
+## Поддерживаемые языки
+- Русский (ru) — основной
+- Английский (en)
+- Сербский кириллица (sr-Cyrl)
+- Сербский латиница (sr-Latn)
+
+## Структура файлов
+public/locales/
+├── ru/common.json
+├── en/common.json
+├── sr-Cyrl/common.json
+└── sr-Latn/common.json
+src/
+├── i18n.ts
+├── components/LanguageSwitcher/LanguageSwitcher.tsx
+└── utils/api.ts
+
+## Использование
+```tsx
+import { useTranslation } from 'react-i18next';
+
+const { t } = useTranslation('common');
+<h1>{t('title')}</h1>  // "Список проектов" / "List of projects" / "Spisak Projekata"
+```
+
+## API с языком
+```tsx
+import api from './utils/api';
+
+const projects = await api.get<TProjectListItem[]>('/api/projects');
+// Accept-Language: ru 
+```
