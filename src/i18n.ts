@@ -10,7 +10,7 @@ i18n
   .init({
     debug: true,
     fallbackLng: "ru",
-    supportedLngs: ["ru", "en", "sr"],
+    supportedLngs: ['ru', 'en', 'sr-Latn', 'sr-Cyrl'],
     detection: {
       order: ["localStorage", "cookie", "navigator"],
       lookupLocalStorage: "i18nextLng",

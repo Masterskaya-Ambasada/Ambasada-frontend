@@ -54,7 +54,7 @@ npm run dev
 - Процесс настройки: копируем `.env.example` → создаём `.env` → заполняем своими значениями
  
 
-# i18n Настройка (ru, en, sr)
+# i18n Настройка (ru, en, sr-Cyrl, sr-Latn)
 
 ## Установка
 ```bash
@@ -64,13 +64,15 @@ npm i i18next react-i18next i18next-browser-languagedetector i18next-http-backen
 ## Поддерживаемые языки
 - Русский (ru) — основной
 - Английский (en)
-- Сербский (sr)
+- Сербский кириллица (sr-Cyrl)
+- Сербский латиница (sr-Latn)
 
 ## Структура файлов
 public/locales/
 ├── ru/common.json
 ├── en/common.json
-└── sr/common.json
+├── sr-Cyrl/common.json
+└── sr-Latn/common.json
 src/
 ├── i18n.ts
 ├── components/LanguageSwitcher/LanguageSwitcher.tsx

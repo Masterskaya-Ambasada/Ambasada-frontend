@@ -4,6 +4,7 @@
   "language": {
     "ru": "Russian",
     "en": "English",
-    "sr": "Serbian"
+    "sr-latn": "Serbian",
+    "sr-cyrl": "Serbian"
   }
 }

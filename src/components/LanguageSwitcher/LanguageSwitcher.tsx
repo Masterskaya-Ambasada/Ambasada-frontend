@@ -9,7 +9,7 @@ export default function LanguageSwitcher() {
 
   return (
     <div>
-      {["ru", "en", "sr"].map((lng) => (
+      {["ru", "en", "sr-Cyrl", "sr-Latn"].map((lng) => (
         <button key={lng} onClick={() => changeLang(lng)}>
           {lng}
         </button>
