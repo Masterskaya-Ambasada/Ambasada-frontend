@@ -4,6 +4,7 @@ import viteLogo from "./assets/vite.svg";
 import heroImg from "./assets/hero.png";
 import "./App.css";
 import './shared/styles/variables.css';
+import './shared/styles/commonStyles.css';
 
 function App() {
   const [count, setCount] = useState(0);
