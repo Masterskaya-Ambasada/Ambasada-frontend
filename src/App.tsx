@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { AppRouter } from "./App/router";
 import "./App.css";
+import './shared/styles/variables.css';
+import './shared/styles/commonStyles.css';
 
 const App: React.FC = () => {
   return (
