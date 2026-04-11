@@ -1,10 +1,22 @@
 [
   {
-    "id": "1",
-    "name": "Frontend"
+    "id": "all",
+    "name": "Все"
   },
   {
-    "id": "2",
-    "name": "Backend"
+    "id": "research",
+    "name": "Исследование"
+  },
+  {
+    "id": "concept",
+    "name": "Концепция"
+  },
+  {
+    "id": "navigation",
+    "name": "Навигация"
+  },
+  {
+    "id": "event",
+    "name": "Событие"
   }
 ]
