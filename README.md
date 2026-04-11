@@ -52,4 +52,19 @@ npm run dev
 - `.env` — персональный файл (не коммитится)
 - `.env.example` — шаблон (хранится в репозитории)
 - Процесс настройки: копируем `.env.example` → создаём `.env` → заполняем своими значениями
- 
+
+## 🧪 Mock API (MSW)
+
+В проекте используется Mock Service Worker (MSW) для имитации backend API в режиме разработки.
+
+## 🚀 Включить моки
+
+.env:
+`VITE_USE_MSW=true`
+`VITE_API_URL=http://localhost:3000`
+
+## ❌ Отключить моки
+
+.env:
+`VITE_USE_MSW=false`
+`VITE_API_URL=http://localhost:3000`
