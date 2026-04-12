@@ -20,6 +20,7 @@
 
 # Ambasada Frontend
 
+
 Проект на React + TypeScript (Vite)  
 Node.js >= 22.0.0  
 React 19.2.0
