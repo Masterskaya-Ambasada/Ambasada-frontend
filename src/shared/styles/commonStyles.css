@@ -146,7 +146,7 @@ ghost - светло-серая с серыми буквами
   box-shadow: var(--focus-ring);
 }
 
-@media (min-width: var(--breakpoint_tablet)) {
+@media (min-width: 834px) {
   .small_btn::before {
     content: "";
     position: absolute;
