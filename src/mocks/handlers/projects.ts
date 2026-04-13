@@ -4,9 +4,52 @@ import categories from "../fixtures/projects/categories.json";
 import tags from "../fixtures/projects/tags.json";
 
 export const projectHandlers = [
-  // GET /projects
-  http.get("/api/v1/projects", () => {
-    return HttpResponse.json(projects);
+  // GET /projects (фильтрацией и пагинацией)
+  http.get("/api/v1/projects", ({ request }) => {
+    const url = new URL(request.url);
+
+    const projectType = url.searchParams.get("project_type");
+    const tag = url.searchParams.get("tag");
+    const search = url.searchParams.get("search");
+
+    const offset = Number(url.searchParams.get("offset")) || 0;
+    const limit = Number(url.searchParams.get("limit")) || 10;
+
+    let filtered = [...projects.items];
+
+    // фильтр по типу проекта
+    if (projectType) {
+      filtered = filtered.filter(
+        (p) => p.project_type.toLowerCase() === projectType.toLowerCase(),
+      );
+    }
+
+    // фильтр по тегу
+    if (tag) {
+      filtered = filtered.filter((p) =>
+        p.tags.some((t) => t.toLowerCase() === tag.toLowerCase()),
+      );
+    }
+
+    // поиск по названию
+    if (search) {
+      filtered = filtered.filter((p) =>
+        p.title.toLowerCase().includes(search.toLowerCase()),
+      );
+    }
+
+    // пагинация
+    const paginated = filtered.slice(offset, offset + limit);
+
+    return HttpResponse.json({
+      items: paginated,
+      pagination: {
+        totalItems: filtered.length,
+        offset,
+        limit,
+        isNext: offset + limit < filtered.length,
+      },
+    });
   }),
 
   // GET /projects/categories

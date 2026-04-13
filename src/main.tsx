@@ -1,19 +1,20 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./App.tsx";
+import App from "./App/App";
 
 // функция включения моков
 async function enableMocking() {
-  if (import.meta.env.VITE_USE_MSW === "true") {
-    const { worker } = await import("./mocks/browser");
+  const shouldMock =
+    import.meta.env.DEV && import.meta.env.VITE_USE_MSW === "true";
 
-    return worker.start({
-      onUnhandledRequest: "bypass", // реальные запросы не ломаются
-    });
-  }
+  if (!shouldMock) return;
 
-  return Promise.resolve();
+  const { worker } = await import("./mocks/browser");
+
+  return worker.start({
+    onUnhandledRequest: "bypass",
+  });
 }
 
 // ждём инициализацию MSW, потом рендерим приложение

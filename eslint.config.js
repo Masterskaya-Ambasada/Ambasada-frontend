@@ -5,6 +5,7 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 import prettier from "eslint-plugin-prettier";
 import eslintConfigPrettier from "eslint-config-prettier";
+import boundaries from "eslint-plugin-boundaries";
 import { defineConfig, globalIgnores } from "eslint/config";
 
 export default defineConfig([
@@ -14,7 +15,7 @@ export default defineConfig([
     files: ["**/*.{ts,tsx}"],
     extends: [
       js.configs.recommended,
-      tseslint.configs.recommended,
+      ...tseslint.configs.recommended,
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
       eslintConfigPrettier,
@@ -25,7 +26,18 @@ export default defineConfig([
     },
     plugins: {
       "@typescript-eslint": tseslint.plugin,
-      prettier: prettier,
+      prettier,
+      boundaries,
+    },
+    settings: {
+      "boundaries/elements": [
+        { type: "app", pattern: "src/app/**" },
+        { type: "pages", pattern: "src/pages/**" },
+        { type: "widgets", pattern: "src/widgets/**" },
+        { type: "features", pattern: "src/features/**" },
+        { type: "entities", pattern: "src/entities/**" },
+        { type: "shared", pattern: "src/shared/**" },
+      ],
     },
     rules: {
       "react-refresh/only-export-components": [
@@ -37,6 +49,43 @@ export default defineConfig([
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
       ],
       "prettier/prettier": "error",
+
+      // Контроль направлений импортов между слоями
+      "boundaries/element-types": [
+        "error",
+        {
+          default: "disallow",
+          rules: [
+            {
+              from: "app",
+              allow: ["pages", "widgets", "features", "entities", "shared"],
+            },
+            {
+              from: "pages",
+              allow: ["widgets", "features", "entities", "shared"],
+            },
+            {
+              from: "widgets",
+              allow: ["features", "entities", "shared"],
+            },
+            {
+              from: "features",
+              allow: ["entities", "shared"],
+            },
+            {
+              from: "entities",
+              allow: ["shared"],
+            },
+            {
+              from: "shared",
+              allow: ["shared"],
+            },
+          ],
+        },
+      ],
+
+      // Запрещает импортировать внутренности мимо публичного API
+      "boundaries/no-private": "error",
     },
   },
 
@@ -49,7 +98,7 @@ export default defineConfig([
     },
     plugins: {
       "@typescript-eslint": tseslint.plugin,
-      prettier: prettier,
+      prettier,
     },
     rules: {
       "@typescript-eslint/no-require-imports": "off",
