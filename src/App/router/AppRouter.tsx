@@ -9,7 +9,7 @@ const ProjectDetails = lazy(() => import("../pages/ProjectDetails"));
 const About = lazy(() => import("../pages/About"));
 const Contacts = lazy(() => import("../pages/Contacts"));
 const Policy = lazy(() => import("../pages/Policy"));
-const NotFound = lazy(() => import("../pages/NotFound"));
+const NotFoundPage = lazy(() => import("../../pages/not-found/ui/NotFoundPage"));
 
 export const AppRouter: React.FC = () => {
   return (
@@ -21,7 +21,7 @@ export const AppRouter: React.FC = () => {
         <Route path={routesPaths.about} element={<About />} />
         <Route path={routesPaths.contacts} element={<Contacts />} />
         <Route path={routesPaths.policy} element={<Policy />} />
-        <Route path={routesPaths.notFound} element={<NotFound />} />
+        <Route path={routesPaths.NotFoundPage} element={<NotFoundPage />} />
       </Routes>
     </Suspense>
   );
