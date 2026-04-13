@@ -1,5 +1,7 @@
 body {
   font-family: var(--main-font-family);
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 img {
