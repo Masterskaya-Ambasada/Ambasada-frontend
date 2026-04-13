@@ -1,8 +1,6 @@
 /* Общий стиль для страницы */
 
 .container {
-  margin: 0 auto;
-  max-width: 1440px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -148,7 +146,7 @@ ghost - светло-серая с серыми буквами
   box-shadow: var(--focus-ring);
 }
 
-@media (min-width: 834px) {
+@media (min-width: var(--breakpoint_tablet)) {
   .small_btn::before {
     content: "";
     position: absolute;
