@@ -1,6 +1,8 @@
 /* Общий стиль для страницы */
 
 .container {
+  max-width: var(--breakpoint_desktop);
+  margin: 0 auto;
   display: flex;
   align-items: center;
   flex-direction: column;
