@@ -5,6 +5,6 @@ const getCurrentLanguage = (): string => {
 };
 
 export const apiClient = createApiClient({
-  baseUrl: import.meta.env.VITE_API_URL || "https://azu.rassokha.pro/api/",
+  baseUrl: import.meta.env.VITE_API_URL,
   getLanguage: getCurrentLanguage,
 });

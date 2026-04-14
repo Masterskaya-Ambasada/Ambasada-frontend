@@ -64,10 +64,12 @@ export const createApiClient = (config: IApiClientConfig) => {
     const language = getLanguage();
 
     const requestHeaders: HeadersInit = {
-      "Content-Type": "application/json",
       "Accept-Language": language,
       ...headers,
     };
+    if (body !== undefined) {
+      requestHeaders["Content-Type"] = "application/json";
+    }
 
     const requestOptions: RequestInit = {
       method,
@@ -76,7 +78,7 @@ export const createApiClient = (config: IApiClientConfig) => {
       signal,
     };
 
-    if (body) {
+    if (body !== undefined) {
       requestOptions.body = JSON.stringify(body);
     }
 
