@@ -68,12 +68,12 @@ npm i i18next react-i18next i18next-browser-languagedetector i18next-http-backen
 - Сербский латиница (sr-Latn)
 
 ## Структура файлов
-public/locales/
-├── ru/common.json
-├── en/common.json
-├── sr-Cyrl/common.json
-└── sr-Latn/common.json
 src/
+├──locales/
+   ├── ru/common.json
+   ├── en/common.json
+   ├── sr-Cyrl/common.json
+   └── sr-Latn/common.json
 ├── i18n.ts
 ├── components/LanguageSwitcher/LanguageSwitcher.tsx
 └── utils/api.ts
