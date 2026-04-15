@@ -1,18 +1,24 @@
 import { Link } from "react-router-dom";
-import styles from './NotFoundPage.module.css'
+import styles from './NotFound.module.css'
 
-const NotFoundPage = () => {
+const NotFound = () => {
     return (
         <main className={styles.page}>
             <div className={styles.content}>
-                <h1 className={styles.code}>404</h1>
+                <div className={styles.code}>
+                    <span>4</span>
+                    <span className={styles.circle} aria-hidden='true' />
+                    <span>4</span>
+                </div>
+                <div className={styles.wrapper}>
                 <p className={styles.text}>Кажется, вы свернули не туда</p>
 
                 <Link to='/' className={styles.button}>
                 Вернуться на Главную
                 </Link>
+                </div>
             </div>
         </main>
     )
 }
-export default NotFoundPage;
+export default NotFound;
