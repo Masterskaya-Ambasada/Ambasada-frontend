@@ -1,7 +1,11 @@
+import "../i18n";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./styles/index.css";
 import App from "./App";
+import "../shared/styles/variables.css";
+import "../shared/styles/reset.css";
+import "../shared/styles/commonStyles.css";
+import "./styles/index.css";
 
 // функция включения моков
 async function enableMocking() {
