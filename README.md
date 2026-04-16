@@ -20,6 +20,7 @@
 
 # Ambasada Frontend
 
+
 Проект на React + TypeScript (Vite)  
 Node.js >= 22.0.0  
 React 19.2.0
@@ -53,3 +54,62 @@ npm run dev
 - `.env` — персональный файл (не коммитится)
 - `.env.example` — шаблон (хранится в репозитории)
 - Процесс настройки: копируем `.env.example` → создаём `.env` → заполняем своими значениями
+
+
+## 🧪 Mock API (MSW)
+
+В проекте используется Mock Service Worker (MSW) для имитации backend API в режиме разработки.
+
+## 🚀 Включить моки
+
+.env:
+`VITE_USE_MSW=true`
+`VITE_API_URL=http://localhost:3000`
+
+## ❌ Отключить моки
+
+.env:
+`VITE_USE_MSW=false`
+`VITE_API_URL=http://localhost:3000`
+ 
+
+# i18n Настройка (ru, en, sr-Cyrl, sr-Latn)
+
+## Установка
+```bash
+npm i i18next react-i18next i18next-browser-languagedetector i18next-http-backend
+```
+
+## Поддерживаемые языки
+- Русский (ru) — основной
+- Английский (en)
+- Сербский кириллица (sr-Cyrl)
+- Сербский латиница (sr-Latn)
+
+## Структура файлов
+src/
+├──locales/
+   ├── ru/common.json
+   ├── en/common.jsongit
+   ├── sr-Cyrl/common.json
+   └── sr-Latn/common.json
+├── i18n.ts
+├── components/LanguageSwitcher/LanguageSwitcher.tsx
+└── utils/api.ts
+
+## Использование
+```tsx
+import { useTranslation } from 'react-i18next';
+
+const { t } = useTranslation('common');
+<h1>{t('title')}</h1>  // "Список проектов" / "List of projects" / "Spisak Projekata"
+```
+
+## API с языком
+```tsx
+import api from './utils/api';
+
+const projects = await api.get<TProjectListItem[]>('/api/projects');
+// Accept-Language: ru 
+```
+

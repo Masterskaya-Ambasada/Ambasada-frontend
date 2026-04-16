@@ -1,0 +1,10 @@
+{
+  "test": "Izlaz niza za probnu proveru prevoda",
+  "toggle": "Promeni jezik",
+  "language": {
+    "ru": "Ruski",
+    "en": "Engleski",
+    "sr-Latn": "Srpski",
+    "sr-Cyrl": "Srpski"
+  }
+}
