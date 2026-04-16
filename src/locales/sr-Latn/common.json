@@ -6,5 +6,10 @@
     "en": "Engleski",
     "sr-Latn": "Srpski",
     "sr-Cyrl": "Srpski"
+  },
+  "notFound": {
+    "title": "Izgleda da ste skrenuli pogrešno",
+    "buttonDesktop": "Vrati se na početnu",
+    "buttonMobile": "Idi na početnu"
   }
 }

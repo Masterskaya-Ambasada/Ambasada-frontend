@@ -6,5 +6,10 @@
     "en": "English",
     "sr-Latn": "Serbian",
     "sr-Cyrl": "Serbian"
+  },
+  "notFound": {
+    "title": "Looks like you took a wrong turn",
+    "buttonDesktop": "Back to Home",
+    "buttonMobile": "Go to Home"
   }
 }

@@ -23,13 +23,13 @@
   color: var(--politic_black);
 }
 
- .circle {
+.circle {
   width: 212px;
   height: 212px;
   border: 27px solid var(--energy);
   border-radius: 50%;
   flex-shrink: 0;
-  }
+}
 
 .wrapper {
   display: flex;
@@ -42,7 +42,7 @@
 .text {
   font: var(--desktop_main);
   color: var(--politic_black);
-  }
+}
 
 .button {
   width: 427px;
@@ -55,8 +55,6 @@
 .buttonTextMobile {
   display: none;
 }
-
-
 
 @media (max-width: 1023px) {
   .content {
@@ -108,11 +106,11 @@
   }
 
   .wrapper {
-  gap: var(--spacing-5);
-}
+    gap: var(--spacing-5);
+  }
 
   .text {
-    font-size: var(--mobile_main);
+    font: var(--mobile_main);
   }
 
   .button {

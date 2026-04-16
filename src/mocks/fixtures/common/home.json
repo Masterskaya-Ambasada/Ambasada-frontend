@@ -4,15 +4,13 @@
     "subtitle": "Исследуем, проектируем и меняем городскую среду",
     "image_left": "https://cdn.../hero.webp",
     "image_right": "https://cdn.../hero.webp",
-     "action_button": {"label": "Узнать больше",
-    "link": "/projects"}
+    "action_button": { "label": "Узнать больше", "link": "/projects" }
   },
 
-    "about_preview": {
+  "about_preview": {
     "title": "О сообществе",
     "text": "Мы — объединение архитекторов и урбанистов...",
-     "action_button": {"label": "Узнать больше",
-    "link": "/about" }
+    "action_button": { "label": "Узнать больше", "link": "/about" }
   },
 
   "team_preview": {
@@ -21,8 +19,10 @@
       { "name": "Имя Фамилия", "role": "Архитектор", "photo": "url" },
       { "name": "Имя Фамилия", "role": "Дизайнер", "photo": "url" }
     ],
-    "action_button": {"label": "Присоединиться к команде",
-    "link": "/contacts" }
+    "action_button": {
+      "label": "Присоединиться к команде",
+      "link": "/contacts"
+    }
   },
 
   "projects_preview": {
@@ -37,9 +37,10 @@
         "year": "2023",
         "image": "https://cdn.../p1.webp",
         "isFirst": true,
-        "action_button":
-          {"label": "Перейти к проекту",
-           "link": "/projects/{id}"}
+        "action_button": {
+          "label": "Перейти к проекту",
+          "link": "/projects/{id}"
+        }
       },
       {
         "id": "slug-2",
@@ -51,9 +52,9 @@
         "tags": ["Урбанистика", "Белград"]
       }
     ],
-     "action_button": {
-    "label": "Перейти к проектам",
-    "link": "/projects"
+    "action_button": {
+      "label": "Перейти к проектам",
+      "link": "/projects"
     }
   },
 

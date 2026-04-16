@@ -3,12 +3,12 @@ import { AppRouter } from "./router";
 //import { useTranslation } from "react-i18next";
 
 function App() {
-// const { t } = useTranslation("common");
+  // const { t } = useTranslation("common");
   return (
     <BrowserRouter>
       <AppRouter />
-  </BrowserRouter>
-  )
+    </BrowserRouter>
+  );
 }
 
 export default App;
