@@ -3,12 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #FCFFFF;
-  font-family: 'Rubik', sans-serif;
-  font-weight: 400;
-  line-height: 140%;
-  letter-spacing: 0;
-  box-sizing: border-box;
+  background-color: var(--white);
 }
 
 .content {
@@ -16,77 +11,84 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 24px;
+  gap: var(--spacing-6);
 }
 
 .code {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 32px;
-  font-size: 300px;
-  color: #08060d;
-  padding: 90px;
+  gap: var(--spacing-8);
+  font: 400 300px/1 var(--main-font-family);
+  color: var(--politic_black);
+  padding: var(--spacing-8) 0;
 }
 
  .circle {
   width: 212px;
   height: 212px;
-  border: 27px solid #EB3D00;
+  border: 27px solid var(--energy);
   border-radius: 50%;
   flex-shrink: 0;
-  box-sizing: border-box;
-}
+  }
 
 .wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 40px;
+  gap: var(--spacing-10);
 }
 
 .text {
-  font-size: 24px;
-  color: #000000;
-}
+  font: var(--desktop_main);
+  color: var(--politic_black);
+  }
 
 .button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: 427px;
-  height: 72px;
-  border-radius: 40px;
-  background-color: #EB3D00;
-  color: #ffffff;
-  font-size: 24px;
-  text-decoration: none;
-  transition: opacity 0.2s ease;
-  gap: 20px;
 }
 
-.button:hover {
-  opacity: 0.85;
-}
-
-.button:focus-visible {
-  outline: 2px solid #000000;
-  outline-offset: 4px;
-}
-
-@media (max-width: 768px) {
+@media (max-width: 1023px) {
   .code {
-    font-size: 80px;
+    font: 400 200px/1 var(--main-font-family);
+    gap: var(--spacing-5);
+    padding: var(--spacing-10) 0;
+  }
+
+  .circle {
+    width: 138px;
+    height: 138px;
+    border-width: 18px;
   }
 
   .text {
-    font-size: 18px;
-    margin-bottom: 24px;
+    font: var(--tablet_main);
   }
 
   .button {
-    width: 100%;
-    max-width: 280px;
+    width: 350px;
+  }
+}
+
+@media (max-width: 833px) {
+  .code {
+    font: 400 140px/1 var(--main-font-family);
+    gap: var(--spacing-3);
+    padding: var(--spacing-5) 0;
+  }
+
+  .circle {
+    width: 82px;
+    height: 82px;
+    border-width: 10px;
+  }
+
+  .text {
+    font: var(--mobile_main);
+  }
+
+  .button {
+    width: 255px;
   }
 }

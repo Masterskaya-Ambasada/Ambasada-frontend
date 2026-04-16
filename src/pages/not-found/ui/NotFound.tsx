@@ -13,7 +13,7 @@ const NotFound = () => {
                 <div className={styles.wrapper}>
                 <p className={styles.text}>Кажется, вы свернули не туда</p>
 
-                <Link to='/' className={styles.button}>
+                <Link to='/' className={`btn btn--primary ${styles.button}`}>
                 Вернуться на Главную
                 </Link>
                 </div>
