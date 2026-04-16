@@ -48,6 +48,16 @@
   width: 427px;
 }
 
+.buttonTextDesktop {
+  display: inline;
+}
+
+.buttonTextMobile {
+  display: none;
+}
+
+
+
 @media (max-width: 1023px) {
   .content {
     gap: 40px;
@@ -71,11 +81,19 @@
   .button {
     width: 350px;
   }
+
+  .buttonTextDesktop {
+    display: none;
+  }
+
+  .buttonTextMobile {
+    display: inline;
+  }
 }
 
 @media (max-width: 833px) {
   .content {
-    gap: 60px;
+    gap: 5px;
   }
   .code {
     font: 400 120px/1 var(--main-font-family);
@@ -94,7 +112,7 @@
 }
 
   .text {
-    font: var(--mobile_main);
+    font-size: var(--mobile_main);
   }
 
   .button {

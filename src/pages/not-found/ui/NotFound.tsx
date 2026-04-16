@@ -14,7 +14,8 @@ const NotFound = () => {
                 <p className={styles.text}>Кажется, вы свернули не туда</p>
 
                 <Link to='/' className={`btn btn--primary ${styles.button}`}>
-                Вернуться на Главную
+                <span className={styles.buttonTextDesktop}>Вернуться на Главную</span>
+                <span className={styles.buttonTextMobile}>Перейти на Главную</span>
                 </Link>
                 </div>
             </div>
