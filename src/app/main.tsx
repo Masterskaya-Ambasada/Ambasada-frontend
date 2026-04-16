@@ -4,7 +4,6 @@ import { createRoot } from "react-dom/client";
 import "../shared/styles/variables.css";
 import "../shared/styles/reset.css";
 import "../shared/styles/commonStyles.css";
-import "./styles/index.css";
 import App from "./App";
 
 // функция включения моков
