@@ -1,5 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
-import { AppRouter } from "./router";
+import { AppRouter } from "./router/AppRouter";
 //import { useTranslation } from "react-i18next";
 
 function App() {
