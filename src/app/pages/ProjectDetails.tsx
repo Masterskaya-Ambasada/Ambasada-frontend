@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { routesPaths } from "../router/routesPaths";
+import { routesPaths } from "../router";
 
 const ProjectDetails: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();

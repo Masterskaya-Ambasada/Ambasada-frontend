@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { routesPaths } from "../router/routesPaths";
+import { routesPaths } from "../router";
 
-const Contacts: React.FC = () => {
+const Policy: React.FC = () => {
   return (
     <div>
-      <h1>Контакты</h1>
+      <h1>Политика конфиденциальности</h1>
       <Link to={routesPaths.home}>На главную</Link>
     </div>
   );
 };
 
-export default Contacts;
+export default Policy;
