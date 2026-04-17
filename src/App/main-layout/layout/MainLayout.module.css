@@ -10,8 +10,7 @@
 }
 
 .mainInner {
-  max-width: 1440px;
+  max-width: var(--breakpoint_desktop);
   margin: 0 auto;
   width: 100%;
-  padding: 0 36px;
 }

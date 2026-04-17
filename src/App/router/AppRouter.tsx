@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import { routesPaths } from "./routesPaths";
+import MainLayout from "../main-layout/layout/MainLayout";
 
 // Lazy-импорты страниц (code splitting по роутам)
 const Home = lazy(() => import("../pages/Home"));
@@ -15,13 +16,15 @@ export const AppRouter: React.FC = () => {
   return (
     <Suspense fallback={<div className="loading">Загрузка приложения...</div>}>
       <Routes>
-        <Route path={routesPaths.home} element={<Home />} />
-        <Route path={routesPaths.projects} element={<ProjectsList />} />
-        <Route path={routesPaths.projectDetails} element={<ProjectDetails />} />
-        <Route path={routesPaths.about} element={<About />} />
-        <Route path={routesPaths.contacts} element={<Contacts />} />
-        <Route path={routesPaths.policy} element={<Policy />} />
-        <Route path={routesPaths.notFound} element={<NotFound />} />
+        <Route element={<MainLayout />}>
+          <Route path={routesPaths.home} element={<Home />} />
+          <Route path={routesPaths.projects} element={<ProjectsList />} />
+          <Route path={routesPaths.projectDetails} element={<ProjectDetails />} />
+          <Route path={routesPaths.about} element={<About />} />
+          <Route path={routesPaths.contacts} element={<Contacts />} />
+          <Route path={routesPaths.policy} element={<Policy />} />
+          <Route path={routesPaths.notFound} element={<NotFound />} />
+        </Route>
       </Routes>
     </Suspense>
   );
