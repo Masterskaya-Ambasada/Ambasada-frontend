@@ -19,7 +19,10 @@ export const AppRouter: React.FC = () => {
         <Route element={<MainLayout />}>
           <Route path={routesPaths.home} element={<Home />} />
           <Route path={routesPaths.projects} element={<ProjectsList />} />
-          <Route path={routesPaths.projectDetails} element={<ProjectDetails />} />
+          <Route
+            path={routesPaths.projectDetails}
+            element={<ProjectDetails />}
+          />
           <Route path={routesPaths.about} element={<About />} />
           <Route path={routesPaths.contacts} element={<Contacts />} />
           <Route path={routesPaths.policy} element={<Policy />} />
