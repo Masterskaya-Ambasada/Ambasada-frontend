@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { routesPaths } from "../router/routesPaths";
+import { routesPaths } from "../providers/router/routesPaths";
 
 const NotFound: React.FC = () => {
   return (

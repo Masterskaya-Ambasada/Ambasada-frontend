@@ -1,16 +1,16 @@
 import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import { routesPaths } from "./routesPaths";
-import MainLayout from "../main-layout/layout/MainLayout";
+import MainLayout from "../../../pages/main";
 
 // Lazy-импорты страниц (code splitting по роутам)
-const Home = lazy(() => import("../pages/Home"));
-const ProjectsList = lazy(() => import("../pages/ProjectsList"));
-const ProjectDetails = lazy(() => import("../pages/ProjectDetails"));
-const About = lazy(() => import("../pages/About"));
-const Contacts = lazy(() => import("../pages/Contacts"));
-const Policy = lazy(() => import("../pages/Policy"));
-const NotFound = lazy(() => import("../pages/NotFound"));
+const Home = lazy(() => import("../../pages/Home"));
+const ProjectsList = lazy(() => import("../../pages/ProjectsList"));
+const ProjectDetails = lazy(() => import("../../pages/ProjectDetails"));
+const About = lazy(() => import("../../pages/About"));
+const Contacts = lazy(() => import("../../pages/Contacts"));
+const Policy = lazy(() => import("../../pages/Policy"));
+const NotFound = lazy(() => import("../../pages/NotFound"));
 
 export const AppRouter: React.FC = () => {
   return (
