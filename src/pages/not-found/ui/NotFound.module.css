@@ -1,0 +1,120 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--white);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 60px;
+}
+
+.code {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
+  font: 400 300px/1 var(--main-font-family);
+  color: var(--politic_black);
+}
+
+.circle {
+  width: 212px;
+  height: 212px;
+  border: 27px solid var(--energy);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-10);
+}
+
+.text {
+  font: var(--desktop_main);
+  color: var(--politic_black);
+}
+
+.button {
+  width: 427px;
+}
+
+.buttonTextDesktop {
+  display: inline;
+  letter-spacing: 0.5px;
+}
+
+.buttonTextMobile {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .content {
+    gap: 40px;
+  }
+
+  .code {
+    font: 400 200px/1 var(--main-font-family);
+    gap: var(--spacing-5);
+  }
+
+  .circle {
+    width: 138px;
+    height: 138px;
+    border-width: 18px;
+  }
+
+  .text {
+    font: var(--tablet_main);
+  }
+
+  .button {
+    width: 350px;
+  }
+
+  .buttonTextDesktop {
+    display: none;
+  }
+
+  .buttonTextMobile {
+    display: inline;
+  }
+}
+
+@media (max-width: 833px) {
+  .content {
+    gap: 5px;
+  }
+  .code {
+    font: 400 120px/1 var(--main-font-family);
+    gap: var(--spacing-3);
+    padding: var(--spacing-5) 0;
+  }
+
+  .circle {
+    width: 82px;
+    height: 82px;
+    border-width: 10px;
+  }
+
+  .wrapper {
+    gap: var(--spacing-5);
+  }
+
+  .text {
+    font: var(--mobile_main);
+  }
+
+  .button {
+    width: 255px;
+  }
+}

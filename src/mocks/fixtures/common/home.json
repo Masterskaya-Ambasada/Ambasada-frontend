@@ -1,0 +1,65 @@
+{
+  "hero": {
+    "title": "Амбасада за урбанизам",
+    "subtitle": "Исследуем, проектируем и меняем городскую среду",
+    "image_left": "https://cdn.../hero.webp",
+    "image_right": "https://cdn.../hero.webp",
+    "action_button": { "label": "Узнать больше", "link": "/projects" }
+  },
+
+  "about_preview": {
+    "title": "О сообществе",
+    "text": "Мы — объединение архитекторов и урбанистов...",
+    "action_button": { "label": "Узнать больше", "link": "/about" }
+  },
+
+  "team_preview": {
+    "title": "Команда",
+    "members": [
+      { "name": "Имя Фамилия", "role": "Архитектор", "photo": "url" },
+      { "name": "Имя Фамилия", "role": "Дизайнер", "photo": "url" }
+    ],
+    "action_button": {
+      "label": "Присоединиться к команде",
+      "link": "/contacts"
+    }
+  },
+
+  "projects_preview": {
+    "title": "Проекты",
+    "items": [
+      {
+        "id": "slug-1",
+        "title": "Звездарска шума",
+        "description": "Звездарский лес — одна из крупнейших зелёных зон Белграда и важное общественное пространство для жителей окружающих районов. Это исследование посвящено тому, как парк используется сегодня и как его воспринимают люди, которые проводят здесь время ежедневно",
+        "project_type": "Навигация",
+        "tags": ["Урбанистика", "Белград"],
+        "year": "2023",
+        "image": "https://cdn.../p1.webp",
+        "isFirst": true,
+        "action_button": {
+          "label": "Перейти к проекту",
+          "link": "/projects/{id}"
+        }
+      },
+      {
+        "id": "slug-2",
+        "title": "Урбанфест",
+        "description": "Фестиваль урбанистики с лекциями и воркшопами,а так же неформальное городское объединение энтузиастов",
+        "project_type": "Исследование",
+        "year": "2024",
+        "image": "https://cdn.../p2.webp",
+        "tags": ["Урбанистика", "Белград"]
+      }
+    ],
+    "action_button": {
+      "label": "Перейти к проектам",
+      "link": "/projects"
+    }
+  },
+
+  "contact_section": {
+    "title": "Связаться с нами",
+    "email": "hello@ambasada.com"
+  }
+}
