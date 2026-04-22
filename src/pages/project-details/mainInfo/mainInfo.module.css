@@ -4,7 +4,6 @@
   margin: 0 auto;
   padding: 0 var(--spacing-5);
   background-color: var(--bg_color);
-
   display: flex;
   flex-direction: column;
   gap: var(--spacing-6);
@@ -61,8 +60,20 @@
   border-radius: 20px;
 }
 
-/* desktop */
-@media (min-width: 1440px) {
+.tagEllipsis {
+  padding: 8px 20px;
+  color: var(--ecologic);
+  font: var(--mobile_button);
+  border: 2px solid var(--ecologic);
+  border-radius: 20px;
+  cursor: pointer;
+  display: inline-block;
+  background-color: var(--white);
+}
+
+.tagEllipsis:hover {
+  background-color: var(--ecologic);
+  color: var(--white);
 }
 
 /* tablet */
@@ -101,11 +112,12 @@
   }
   .info {
     margin-top: clamp(20.9375rem, -0.4575rem + 91.2854vw, 47.125rem);
-    gap: clamp(0.9375rem, 0.6822rem + 1.0893vw, 1.25rem);
+    gap: clamp(0.625rem, 0.1144rem + 2.1786vw, 1.25rem);
     padding: 0 20px 20px 20px;
   }
   .title {
     margin-top: 20px;
+    padding-inline: 12px;
     font: var(--mobile_h1);
   }
   .descriptions {
@@ -113,13 +125,16 @@
     gap: clamp(0.9375rem, 0.6822rem + 1.0893vw, 1.25rem);
   }
   .description {
+    padding-left: 17px;
     font: var(--mobile_main);
   }
   .tags {
-    gap: 8px 4px;
+    padding-left: 15px;
+    gap: 8px 3px;
   }
   .tag {
-    padding: 8px 20px;
+    padding: 8px 18px;
     font: var(--mobile_button);
+    border-radius: 40px;
   }
 }
