@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { routesPaths } from "../providers/router/routesPaths";
+import { routesPaths } from "../../app/providers/router/routesPaths";
 
 const Home: React.FC = () => {
   return (
