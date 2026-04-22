@@ -1,0 +1,125 @@
+.container_mainInfo {
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  padding: 0 var(--spacing-5);
+  background-color: var(--bg_color);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  position: relative;
+}
+
+.infoBlock {
+  margin: 0 auto;
+  width: 1280px;
+  border: 2px solid rgba(193, 183, 255, 0.4);
+  border-radius: 8px;
+}
+
+.info {
+  width: 100%;
+  margin-top: 680px;
+  padding: 40px 59px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-10);
+  background-color: var(--white);
+  border-radius: var(--spacing-2);
+}
+
+.title {
+  font: var(--desktop_h2);
+  color: var(--black);
+  letter-spacing: -2%;
+}
+
+.descriptions {
+  width: 1160px;
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+}
+
+.description {
+  font: var(--desktop_main);
+  color: var(--black);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 11px 4px;
+}
+
+.tag {
+  padding: 10px 20px;
+  color: var(--ecologic);
+  font: var(--desktop_caption);
+  border: 2px solid var(--ecologic);
+  border-radius: 20px;
+}
+
+/* desktop */
+@media (min-width: 1440px) {
+}
+
+/* tablet */
+@media (min-width: 834px) and (max-width: 1439px) {
+  .infoBlock {
+    width: clamp(47.125rem, 1.8812rem + 86.7987vw, 80rem);
+  }
+  .info {
+    margin-top: clamp(25.3125rem, 1.6584rem + 45.3795vw, 42.5rem);
+    gap: clamp(1.25rem, -0.4703rem + 3.3003vw, 2.5rem);
+    padding: 33px 51px;
+  }
+  .title {
+    font: var(--tablet_h1);
+  }
+  .descriptions {
+    width: clamp(41.0625rem, -2.203rem + 83.0033vw, 72.5rem);
+    gap: clamp(1.25rem, 0.2178rem + 1.9802vw, 2rem);
+  }
+  .description {
+    font: var(--tablet_main);
+  }
+  .tags {
+    gap: 8px 4px;
+  }
+  .tag {
+    padding: 8px 20px;
+    font: var(--tablet_caption);
+  }
+}
+
+/* mobile */
+@media (max-width: 833px) {
+  .infoBlock {
+    width: clamp(20.9375rem, -0.4575rem + 91.2854vw, 47.125rem);
+  }
+  .info {
+    margin-top: clamp(20.9375rem, -0.4575rem + 91.2854vw, 47.125rem);
+    gap: clamp(0.9375rem, 0.6822rem + 1.0893vw, 1.25rem);
+    padding: 0 20px 20px 20px;
+  }
+  .title {
+    margin-top: 20px;
+    font: var(--mobile_h1);
+  }
+  .descriptions {
+    width: clamp(16.6875rem, -3.2267rem + 84.9673vw, 41.0625rem);
+    gap: clamp(0.9375rem, 0.6822rem + 1.0893vw, 1.25rem);
+  }
+  .description {
+    font: var(--mobile_main);
+  }
+  .tags {
+    gap: 8px 4px;
+  }
+  .tag {
+    padding: 8px 20px;
+    font: var(--mobile_button);
+  }
+}
