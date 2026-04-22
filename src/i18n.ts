@@ -1,8 +1,7 @@
-import ru from './locales/ru/common.json';
-import en from './locales/en/common.json';
-import srLatn from './locales/sr-Latn/common.json';
-import srCyrl from './locales/sr-Cyrl/common.json';
-
+import ru from "./locales/ru/common.json";
+import en from "./locales/en/common.json";
+import srLatn from "./locales/sr-Latn/common.json";
+import srCyrl from "./locales/sr-Cyrl/common.json";
 
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
@@ -14,7 +13,7 @@ i18n
   .init({
     debug: import.meta.env.DEV,
     fallbackLng: "ru",
-    supportedLngs: ['ru', 'en', 'sr-Latn', 'sr-Cyrl'],
+    supportedLngs: ["ru", "en", "sr-Latn", "sr-Cyrl"],
     detection: {
       order: ["localStorage", "cookie", "navigator"],
       lookupLocalStorage: "i18nextLng",
@@ -22,12 +21,12 @@ i18n
       caches: ["localStorage", "cookie"],
     },
     interpolation: { escapeValue: false },
-     resources: {
+    resources: {
       ru: { common: ru },
       en: { common: en },
-      'sr-Latn': { common: srLatn },
-      'sr-Cyrl': { common: srCyrl }
-    }
+      "sr-Latn": { common: srLatn },
+      "sr-Cyrl": { common: srCyrl },
+    },
   });
 
 export default i18n;
