@@ -59,12 +59,12 @@
 
 @media (max-width: 1023px) {
   .content {
-    gap: 45px;
+    gap: 40px;
   }
 
   .code {
     font: 400 200px/1 var(--main-font-family);
-    gap: var(--spacing-6);
+    gap: var(--spacing-5);
   }
 
   .circle {
