@@ -1,0 +1,42 @@
+.errorBoundary {
+	width: 100%;
+	min-height: 100vh;
+	display: grid;
+	place-items: center;
+	padding: var(--spacing-4);
+	font-family: var(--main-font-family);
+}
+
+.content {
+	background: var(--white);
+	border-radius: var(--spacing-6);
+	padding: var(--spacing-8);
+	max-width: 500px;
+	width: 100%;
+	text-align: center;
+	box-shadow: 0 var(--spacing-2) var(--spacing-6) rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+	font-size: 4rem;
+	margin-bottom: var(--spacing-4);
+	display: inline-block;
+}
+
+.title {
+	font: var(--desktop_h3);
+	color: var(--black);
+	margin: 0 0 var(--spacing-4) 0;
+}
+
+.description {
+	font: var(--desktop_main);
+	color: var(--black_2);
+	margin: 0 0 var(--spacing-6) 0;
+}
+
+.actions {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-4);
+}
