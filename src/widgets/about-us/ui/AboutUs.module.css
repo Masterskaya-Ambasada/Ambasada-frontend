@@ -1,0 +1,233 @@
+.about_section {
+  width: 100%;
+  min-width: var(--breakpoint_mobile);
+}
+
+.img {
+  position: absolute;
+  background:
+    linear-gradient(#c1b7ff99, #c1b7ff99),
+    url("/public/images/abouts_us_img.jpg");
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  transform: translateX(43%);
+  background-size: cover;
+  clip-path: polygon(0% 100%, 45% -25%, 100% 100%, 0 100%);
+}
+
+.container {
+  max-width: var(--breakpoint_desktop);
+  width: 100%;
+  margin: 0 auto;
+  padding: 37px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  /* Используем clamp() или vw */
+  border-width: clamp(200px, 30vw, 523px) clamp(150px, 20vw, 311px) 0 0;
+  border-color: #dad4ff transparent transparent transparent;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.content_wrapper {
+  max-width: 1280px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+.breadcrumbs {
+  display: flex;
+  gap: var(--spacing-5);
+  font: var(--desktop_main);
+  margin-bottom: var(--spacing-5);
+}
+
+.breadcrumb_link:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.title {
+  font: var(--desktop_h2);
+}
+
+.paragraphs_container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-6);
+  max-width: 828px;
+  margin: var(--spacing-10) 0;
+}
+
+.paragraphs_container .paragraph_card:first-child {
+  width: 100%;
+}
+
+.paragraphs_container .paragraph_card:nth-child(2) {
+  width: 75%;
+}
+
+.paragraph_card {
+  border: 1px solid var(--ecologic);
+  border-radius: 8px;
+  padding: var(--spacing-5) var(--spacing-8);
+  background-color: var(--white);
+  font: var(--desktop_main);
+}
+
+.first_sentence {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+}
+
+.main_text {
+  font-weight: 300;
+}
+
+.custom_button {
+  min-width: 200px;
+  max-width: 500px;
+  align-self: center;
+}
+
+.squares {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-27%, -65%);
+  display: grid;
+  grid-template-columns: repeat(4, 64px);
+  gap: 15px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.square {
+  width: 64px;
+  height: 64px;
+  background-color: #c1b7ff33;
+}
+
+@media (max-width: 834px) {
+  .container {
+    padding: var(--spacing-8) var(--spacing-10) 0;
+  }
+
+  .paragraphs_container {
+    margin: 0;
+  }
+
+  .content_wrapper {
+    max-width: 100%;
+    gap: var(--spacing-10);
+  }
+
+  .title {
+    font: var(--tablet_h2);
+  }
+
+  .paragraph_card {
+    padding: var(--spacing-5);
+    font: var(--tablet_main);
+  }
+
+  .custom_button {
+    max-width: 350px;
+    height: 48px;
+    font: var(--tablet_button);
+  }
+
+  .paragraphs_container .paragraph_card:nth-child(2) {
+    width: 100%;
+  }
+
+  .container::before {
+    border-width: clamp(150px, 35vw, 292px) clamp(100px, 25vw, 175px) 0 0;
+  }
+
+  .img {
+    clip-path: polygon(-3% 100%, 45% -23%, 100% 100%, 0 100%);
+  }
+
+  .squares {
+    display: none;
+  }
+
+  .breadcrumbs {
+    margin-bottom: var(--spacing-10);
+    font: var(--tablet_main);
+  }
+}
+
+@media (max-width: 375px) {
+  .container {
+    padding: 22px var(--spacing-5);
+  }
+
+  .breadcrumbs {
+    display: none;
+  }
+
+  .content_wrapper {
+    gap: var(--spacing-4);
+  }
+
+  .title {
+    font: var(--mobile_h2);
+  }
+
+  .paragraphs_container {
+    gap: var(--spacing-4);
+  }
+
+  .paragraph_card {
+    font: var(--mobile_main);
+  }
+
+  .custom_button {
+    display: none;
+  }
+
+  .img {
+    display: none;
+  }
+
+  .container::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent transparent #dad4ff transparent;
+    pointer-events: none;
+    z-index: -1;
+    border-width: 0 0 clamp(80px, 70vw, 252px) clamp(60px, 50vw, 162px);
+  }
+
+  .container::before {
+    border-width: clamp(120px, 70vw, 269px) clamp(80px, 41vw, 158px) 0 0;
+  }
+}
+
+.custom_button:focus-visible,
+.breadcrumb_link:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
