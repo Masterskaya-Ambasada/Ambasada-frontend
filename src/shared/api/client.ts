@@ -1,7 +1,8 @@
 import { createApiClient } from "./lib/api-client";
+import i18n from "../../i18n";
 
 const getCurrentLanguage = (): string => {
-  return "ru";
+  return i18n.language;
 };
 
 export const apiClient = createApiClient({
