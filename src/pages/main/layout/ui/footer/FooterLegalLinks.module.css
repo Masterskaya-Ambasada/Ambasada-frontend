@@ -1,0 +1,28 @@
+.legal {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.link {
+  font-family: "Rubik", sans-serif;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+/* HOVER */
+.link:hover {
+  color: #ffffff;
+}
+
+/* FOCUS ACCESSIBILITY */
+.link:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
