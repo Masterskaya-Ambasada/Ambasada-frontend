@@ -1,33 +1,12 @@
-import React from "react";
 import styles from "./AboutUs.module.css";
 import { Link } from "react-router-dom";
-import type { AboutData } from "./type";
+import type { AboutData } from "../type";
 
-export const AboutUs: React.FC = () => {
-  const [aboutData, setAboutData] = React.useState<AboutData | null>(null);
+interface AboutUsProps {
+  data: AboutData;
+}
 
-  React.useEffect(() => {
-    async function getAbout() {
-      try {
-        const res = await fetch("api/v1/about");
-
-        if (!res.ok) {
-          throw new Error(`error status: ${res.status}`);
-        }
-
-        const data = await res.json();
-        setAboutData(data.about_section);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    getAbout();
-  }, []);
-
-  if (!aboutData) {
-    return null;
-  }
-
+export const AboutUs = ({ data }: AboutUsProps) => {
   return (
     <section className={styles.about_section} aria-labelledby="about-title">
       <div className={styles.container}>
@@ -53,17 +32,17 @@ export const AboutUs: React.FC = () => {
 
         <div className={styles.content_wrapper}>
           <h1 id="about-title" className={styles.title}>
-            {aboutData.title}
+            {data.title}
           </h1>
 
           <div className={styles.paragraphs_container}>
-            {aboutData.paragraphs.map((paragraph, index) => (
+            {data.paragraphs.map((paragraph, index) => (
               <article key={index} className={styles.paragraph_card}>
                 <p className={styles.first_sentence}>
-                  {paragraph.first_sentence}
+                  {`${paragraph.first_sentence} `}
 
                   <span className={styles.main_text}>
-                    {paragraph.main_text}
+                    {`${paragraph.main_text}`}
                   </span>
                 </p>
               </article>
@@ -71,11 +50,11 @@ export const AboutUs: React.FC = () => {
           </div>
 
           <Link
-            to={aboutData.action_button.link}
+            to={data.action_button.link}
             className={`${styles.custom_button} btn btn--primary`}
-            aria-label={aboutData.action_button.text}
+            aria-label={data.action_button.text}
           >
-            {aboutData.action_button.text}
+            {data.action_button.text}
           </Link>
         </div>
       </div>
