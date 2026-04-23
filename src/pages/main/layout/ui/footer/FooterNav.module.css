@@ -1,0 +1,30 @@
+.footerNav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+  max-width: 639px;
+}
+
+.footerNavLink {
+  font-family: "Rubik", sans-serif;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 140%;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+/* HOVER STATE */
+.footerNavLink:hover {
+  color: #ffffff;
+}
+
+/* FOCUS STATE (ACCESSIBILITY CRITICAL) */
+.footerNavLink:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+  border-radius: 4px;
+}

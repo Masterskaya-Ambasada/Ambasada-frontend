@@ -14,6 +14,21 @@ export const commonHandlers = [
     return HttpResponse.json({
       status: "ok",
       timestamp: Date.now(),
+
+      socials: {
+        linkedin: "https://linkedin.com/example",
+        telegram: "https://t.me/example",
+        instagram: "https://instagram.com/example",
+        facebook: "https://facebook.com/example",
+        email: "info@example.com",
+      },
+
+      legal_links: {
+        privacy_policy: "/privacy",
+        personal_data_processing_agreement: "/personal-data-processing",
+      },
+
+      copyright: "2026 © Амбасада за Урбанизм",
     });
   }),
 
