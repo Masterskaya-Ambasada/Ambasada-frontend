@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useUrlFilters } from "./hooks/useUrlFilters";
 import { routesPaths } from "../../app/providers/router/routesPaths";
-import { ProjectsSearch } from "./projects-search/ProjectsSearch";
+import { ProjectsSearch } from "./ui/projects-search/ProjectsSearch";
 
 import styles from "./ProjectsPage.module.css";
 

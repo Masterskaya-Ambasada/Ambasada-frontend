@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { routesPaths } from "../../../app/providers/router/routesPaths";
+import { routesPaths } from "../../../../app/providers/router/routesPaths";
 
 const ProjectsList: React.FC = () => {
   return (

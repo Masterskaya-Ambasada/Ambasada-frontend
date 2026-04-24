@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { useUrlFilters } from "../hooks/useUrlFilters";
+import { useUrlFilters } from "../../hooks/useUrlFilters";
 import styles from "./ProjectsSearch.module.css";
 
 interface ProjectsSearchProps {
-  /** Если передан - компонент контролируемый, иначе использует URL фильтры */
   value?: string;
-  /** Колбэк для контролируемого режима */
   onChange?: (value: string) => void;
-  /** Задержка debounce в мс (по умолчанию 500) */
   debounceDelay?: number;
 }
 
@@ -16,13 +13,10 @@ export const ProjectsSearch: React.FC<ProjectsSearchProps> = ({
   onChange: externalOnChange,
   debounceDelay = 500,
 }) => {
-  // Определяем режим работы: контролируемый или через URL
   const isControlled = externalValue !== undefined && externalOnChange !== undefined;
   
-  // Получаем данные из URL только в неконтролируемом режиме
   const { search: urlSearch, updateFilters } = useUrlFilters();
   
-  // Текущее значение для отображения
   const [inputValue, setInputValue] = useState(
     isControlled ? externalValue : urlSearch
   );
@@ -30,7 +24,6 @@ export const ProjectsSearch: React.FC<ProjectsSearchProps> = ({
   const abortControllerRef = useRef<AbortController | null>(null);
   const MAX_LENGTH = 50;
 
-  // Синхронизация с внешним значением (только для контролируемого режима)
   useEffect(() => {
     if (isControlled) {
       setInputValue(externalValue);
@@ -79,9 +72,6 @@ export const ProjectsSearch: React.FC<ProjectsSearchProps> = ({
     
     setInputValue(newValue);
     cancelPreviousRequest();
-    
-    // TODO: Здесь можно добавить создание нового AbortController
-    // abortControllerRef.current = new AbortController();
   };
 
   // Очистка поля
