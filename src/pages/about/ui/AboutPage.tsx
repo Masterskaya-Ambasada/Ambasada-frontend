@@ -1,6 +1,6 @@
 import React from "react";
-import { AboutUs } from "./ui/aboutUs";
-import type { AboutData } from "./type";
+import { AboutUs } from "./about-us-section/AboutUs";
+import type { AboutData } from "./about-us-section/type";
 
 const AboutPage = () => {
   const [aboutData, setAboutData] = React.useState<AboutData | null>(null);

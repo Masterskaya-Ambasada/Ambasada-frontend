@@ -11,3 +11,7 @@ export type AboutData = {
     link: string;
   };
 };
+
+export interface AboutUsProps {
+  data: AboutData;
+}

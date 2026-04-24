@@ -1,10 +1,6 @@
 import styles from "./AboutUs.module.css";
 import { Link } from "react-router-dom";
-import type { AboutData } from "../type";
-
-interface AboutUsProps {
-  data: AboutData;
-}
+import type { AboutUsProps } from "./type";
 
 export const AboutUs = ({ data }: AboutUsProps) => {
   return (
