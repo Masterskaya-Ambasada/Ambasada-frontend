@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { routesPaths } from "../providers/router/routesPaths";
+import { routesPaths } from "../../app/providers/router/routesPaths";
 
-const Contacts: React.FC = () => {
+const About: React.FC = () => {
   return (
     <div>
-      <h1>Контакты</h1>
+      <h1>О нас</h1>
       <Link to={routesPaths.home}>На главную</Link>
     </div>
   );
 };
 
-export default Contacts;
+export default About;
