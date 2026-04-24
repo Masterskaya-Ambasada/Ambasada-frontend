@@ -1,7 +1,7 @@
 /*
 Как проверить компонент
 
-import { MainInfo } from "../../pages/project-details/mainInfo";
+import { MainInfo } from "../../pages/project-details/MainInfo";
 
 const mainInfo = {
     picture: ["/images/01.jpg", "/images/02.jpg", "/images/03.jpg"],
@@ -29,17 +29,17 @@ const mainInfo = {
 */
 
 import { useState, useEffect } from "react";
-import styles from "./mainInfo.module.css";
-import { PicCircle } from "./picCircle";
+import styles from "./MainInfo.module.css";
+import { PicCircle } from "./PicCircle";
 
-interface mainInfoProps {
+interface IMainInfo {
   picture: string[];
   title: string;
   description: string;
   tags: string[];
 }
 
-function MainInfo(props: mainInfoProps) {
+function MainInfo(props: IMainInfo) {
   const tags = props.tags;
   const [isMobile, setIsMobile] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -72,17 +72,22 @@ function MainInfo(props: mainInfoProps) {
           <h2 className={styles.title}>{props.title}</h2>
           <div className={styles.descriptions}>
             <p className={styles.description}>{props.description}</p>
-            <div className={styles.tags}>
+            <ul className={styles.tags}>
               {visibleTags.map((item, index) => (
-                <span
-                  className={item === "..." ? styles.tagEllipsis : styles.tag}
-                  key={index}
-                  onClick={item === "..." ? handleExpand : undefined}
-                >
-                  {item}
-                </span>
+                <li key={index}>
+                  {item === "..." ? (
+                    <button
+                      className={styles.tag}
+                      onClick={item === "..." ? handleExpand : undefined}
+                    >
+                      {item}
+                    </button>
+                  ) : (
+                    <span className={styles.tag}>{item}</span>
+                  )}
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
       </div>

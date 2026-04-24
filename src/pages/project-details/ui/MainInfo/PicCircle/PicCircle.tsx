@@ -1,12 +1,12 @@
 import { useState } from "react";
-import styles from "./picCircle.module.css";
+import styles from "./PicCircle.module.css";
 
 function PicCircle({ pictures }: { pictures: string[] }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
   if (!pictures || pictures.length === 0) {
     return null;
   }
 
-  const [currentIndex, setCurrentIndex] = useState(0);
   const prevIndex = currentIndex === 0 ? pictures.length - 1 : currentIndex - 1;
   const nextIndex = currentIndex === pictures.length - 1 ? 0 : currentIndex + 1;
   const goToSlide = (index: number) => {
@@ -29,7 +29,7 @@ function PicCircle({ pictures }: { pictures: string[] }) {
             <div className={`${styles.slide} ${styles.slidePrev}`}>
               <img
                 src={pictures[prevIndex]}
-                alt={`Previous ${prevIndex + 1}`}
+                alt={`Изображение ${prevIndex + 1}`}
                 className={styles.image}
               />
               <div className={styles.overlay}></div>
@@ -55,7 +55,7 @@ function PicCircle({ pictures }: { pictures: string[] }) {
               </button>
               <img
                 src={pictures[currentIndex]}
-                alt={`Current ${currentIndex + 1}`}
+                alt={`Изображение ${currentIndex + 1}`}
                 className={styles.image}
               />
               <button
@@ -80,7 +80,7 @@ function PicCircle({ pictures }: { pictures: string[] }) {
             <div className={`${styles.slide} ${styles.slideNext}`}>
               <img
                 src={pictures[nextIndex]}
-                alt={`Next ${nextIndex + 1}`}
+                alt={`Изображение ${nextIndex + 1}`}
                 className={styles.image}
               />
               <div className={styles.overlay}></div>
