@@ -5,7 +5,7 @@ import MainLayout from "../../../pages/main";
 
 // Lazy-импорты страниц (code splitting по роутам)
 const Home = lazy(() => import("../../../pages/home/Home"));
-const ProjectsList = lazy(() => import("../../../pages/projects/ProjectsList"));
+const ProjectsList = lazy(() => import("../../../pages/projects/projects-list/ProjectsList"));
 const ProjectDetails = lazy(() => import("../../../pages/project-details/ProjectDetails"));
 const About = lazy(() => import("../../../pages/about/About"));
 const Contacts = lazy(() => import("../../../pages/contacts/Contacts"));

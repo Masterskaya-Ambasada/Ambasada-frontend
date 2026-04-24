@@ -23,3 +23,6 @@ dist-ssr
 *.sln
 .env
 *.sw?
+
+*storybook.log
+storybook-static
