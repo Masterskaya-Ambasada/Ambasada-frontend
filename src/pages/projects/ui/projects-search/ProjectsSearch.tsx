@@ -13,22 +13,30 @@ export const ProjectsSearch: React.FC<ProjectsSearchProps> = ({
   onChange: externalOnChange,
   debounceDelay = 500,
 }) => {
-  const isControlled = externalValue !== undefined && externalOnChange !== undefined;
-  
+  console.log("ProjectsSearch rendered");
+  //компонент контролируемый ТОЛЬКО если есть И значение, И функция
+  const isControlled =
+    externalValue !== undefined && externalOnChange !== undefined;
+
+  // Получаем значение из URL, если не контролируемый, иначе используем пропсы
   const { search: urlSearch, updateFilters } = useUrlFilters();
-  
+
+  // Текущее значение для отображения в input
   const [inputValue, setInputValue] = useState(
-    isControlled ? externalValue : urlSearch
+    isControlled ? externalValue : urlSearch,
   );
-  
+
   const abortControllerRef = useRef<AbortController | null>(null);
   const MAX_LENGTH = 50;
 
+  // Одна синхронизация для обоих режимов
   useEffect(() => {
-    if (isControlled) {
-      setInputValue(externalValue);
+    const sourceValue = isControlled ? externalValue : urlSearch;
+
+    if (sourceValue !== inputValue) {
+      setInputValue(sourceValue);
     }
-  }, [externalValue, isControlled]);
+  }, [externalValue, urlSearch, isControlled]);
 
   // Функция обновления значения (работает в обоих режимах)
   const updateValue = useCallback(
@@ -39,7 +47,7 @@ export const ProjectsSearch: React.FC<ProjectsSearchProps> = ({
         updateFilters({ search: newValue });
       }
     },
-    [isControlled, externalOnChange, updateFilters]
+    [isControlled, externalOnChange, updateFilters],
   );
 
   // Debounce: обновляем с задержкой после остановки ввода
@@ -51,7 +59,7 @@ export const ProjectsSearch: React.FC<ProjectsSearchProps> = ({
     }, debounceDelay);
 
     return () => clearTimeout(timer);
-  }, [inputValue, externalValue, urlSearch, isControlled, updateValue, debounceDelay]);
+  }, [inputValue, externalValue, urlSearch, debounceDelay]);
 
   // Отмена предыдущего запроса при новом вводе
   const cancelPreviousRequest = useCallback(() => {
@@ -64,14 +72,17 @@ export const ProjectsSearch: React.FC<ProjectsSearchProps> = ({
   // Обработчик изменения ввода
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let newValue = e.target.value;
-    
+
     // Ограничение длины
     if (newValue.length > MAX_LENGTH) {
       newValue = newValue.slice(0, MAX_LENGTH);
     }
-    
+
     setInputValue(newValue);
     cancelPreviousRequest();
+
+    // Создаём новый контроллер для следующего запроса
+    abortControllerRef.current = new AbortController();
   };
 
   // Очистка поля
@@ -108,7 +119,12 @@ export const ProjectsSearch: React.FC<ProjectsSearchProps> = ({
             aria-label="Очистить"
             type="button"
           >
-            <span className={styles.clearIcon}></span>
+            <img
+              src="/cross.svg"
+              alt=""
+              className={styles.clearIcon}
+              aria-hidden="true"
+            />
           </button>
         )}
       </div>

@@ -5,8 +5,10 @@ import MainLayout from "../../../pages/main";
 
 // Lazy-импорты страниц (code splitting по роутам)
 const Home = lazy(() => import("../../../pages/home/Home"));
-const ProjectsList = lazy(() => import("../../../pages/projects/ui/projects-list/ProjectsList"));
-const ProjectDetails = lazy(() => import("../../../pages/project-details/ProjectDetails"));
+const ProjectsPage = lazy(() => import("../../../pages/projects/ProjectsPage"));
+const ProjectDetails = lazy(
+  () => import("../../../pages/project-details/ProjectDetails"),
+);
 const About = lazy(() => import("../../../pages/about/About"));
 const Contacts = lazy(() => import("../../../pages/contacts/Contacts"));
 const Policy = lazy(() => import("../../../pages/politics/Policy"));
@@ -18,7 +20,7 @@ export const AppRouter: React.FC = () => {
       <Routes>
         <Route element={<MainLayout />}>
           <Route path={routesPaths.home} element={<Home />} />
-          <Route path={routesPaths.projects} element={<ProjectsList />} />
+          <Route path={routesPaths.projects} element={<ProjectsPage />} />
           <Route
             path={routesPaths.projectDetails}
             element={<ProjectDetails />}
