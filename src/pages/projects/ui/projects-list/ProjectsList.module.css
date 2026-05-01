@@ -1,0 +1,73 @@
+.container {
+  background: #f5f5f5;  /* или цвет бэкграунда с макета */
+  padding: 24px;
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  gap: 24px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* Мобильный: 1 колонка (по умолчанию) */
+.grid {
+  grid-template-columns: 1fr;
+}
+
+/* Планшет: до 3 колонок */
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Десктоп: до 4 колонок */
+@media (min-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.image {
+  width: 100%;
+  height: 160px;       /* или как на макете */
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  color: #1a1a1a;
+}
+
+.description {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #666;
+  margin: 0;
+}
+
+.empty {
+  text-align: center;
+  padding: 48px;
+  color: #999;
+  font-size: 16px;
+}
