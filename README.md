@@ -20,6 +20,16 @@
 
 ## 🛠 Стек технологий
 
+- **React 19**
+- **TypeScript**
+- **Vite** (сборка)
+- **Feature-Sliced Design (FSD)** (архитектурная методология)
+- **ESLint** + **Prettier** (качество кода и форматирование)
+- **MSW (Mock Service Worker)** (имитация API)
+- **i18next** (интернационализация)
+
+## 🏗 Архитектура
+
 Проект построен по методологии **Feature-Sliced Design (FSD)**.
 
 ### Слои (Layers):
@@ -91,61 +101,13 @@ npm run preview
 
 ## 📋 Работа с .env файлами
 
-<<<<<<< HEAD
-
-- `.env` — персональный файл (не коммитится)
-- `.env.example` — шаблон (хранится в репозитории)
-- # Процесс настройки: копируем `.env.example` → создаём `.env` → заполняем своими значениями
 - `.env` — персональный файл (не коммитится).
 - `.env.example` — шаблон (хранится в репозитории).
 - Процесс настройки: копируем `.env.example` → создаём `.env` → заполняем своими значениями.
-  > > > > > > > 7e8219150cb7ec0fa9cf84a3500ad28d649c22a2
 
 ## 🧪 Mock API (MSW)
 
 В проекте используется Mock Service Worker (MSW) для имитации backend API в режиме разработки.
-
-<<<<<<< HEAD
-
-## 🚀 Включить моки
-
-.env:
-`VITE_USE_MSW=true`
-`VITE_API_URL=http://localhost:3000`
-
-## ❌ Отключить моки
-
-.env:
-`VITE_USE_MSW=false`
-`VITE_API_URL=http://localhost:3000`
-
-# i18n Настройка (ru, en, sr-Cyrl, sr-Latn)
-
-## Установка
-
-```bash
-npm i i18next react-i18next i18next-browser-languagedetector i18next-http-backend
-```
-
-## Поддерживаемые языки
-
-- Русский (ru) — основной
-- Английский (en)
-- Сербский кириллица (sr-Cyrl)
-- Сербский латиница (sr-Latn)
-
-## Структура файлов
-
-src/
-├──locales/
-├── ru/common.json
-├── en/common.jsongit
-├── sr-Cyrl/common.json
-└── sr-Latn/common.json
-├── i18n.ts
-├── components/LanguageSwitcher/LanguageSwitcher.tsx
-└── utils/api.ts
-=======
 
 ### Включить моки (.env):
 
@@ -179,28 +141,11 @@ src/
         └── i18n.ts     # Инициализация i18next
 ```
 
-> > > > > > > 7e8219150cb7ec0fa9cf84a3500ad28d649c22a2
-
 ## Использование
-
-<<<<<<< HEAD
 
 ```tsx
 import { useTranslation } from "react-i18next";
 
 const { t } = useTranslation("common");
-<h1>{t("title")}</h1>; // "Список проектов" / "List of projects" / "Spisak Projekata"
-```
-
-## API с языком
-
-```tsx
-import api from "./utils/api";
-
-const projects = await api.get<TProjectListItem[]>("/api/projects");
-// Accept-Language: ru
-=======
-const { t } = useTranslation('common');
-<h1>{t('title')}</h1>
->>>>>>> 7e8219150cb7ec0fa9cf84a3500ad28d649c22a2
+<h1>{t("title")}</h1>;
 ```
