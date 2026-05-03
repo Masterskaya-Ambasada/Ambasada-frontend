@@ -10,6 +10,8 @@
   --fault: #d41414;
   --gray: #bdbdbd80;
   --transparent: transparent;
+  --bg_color: #f6f6f6;
+  
 
   /*Оттенки Градиент */
   --purpure_1: #cdc5ff;
@@ -51,7 +53,7 @@
   --tablet_button: 400 20px/1 var(--button-font-family);
 
   /* Параметры шрифтов mobile */
-  --mobile_h1: 400 36px/1.4 var(--main-font-family);
+  --mobile_h1: 400 28px/1.4 var(--main-font-family);
   --mobile_h2: 400 24px/1.2 var(--main-font-family);
   --mobile_h3: 400 20px/1.4 var(--main-font-family);
   --mobile_h4: 300 24px/1.2 var(--main-font-family);
@@ -74,6 +76,7 @@
   --spacing-8: 32px;
   --spacing-10: 40px;
   --spacing-12: 48px;
+  --spacing-15: 60px;
   --spacing-16: 64px;
   --spacing-20: 80px;
   --spacing-24: 96px;
