@@ -1,14 +1,15 @@
 .container {
   background: var(--white);
   padding: 0 80px;
-  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
   box-sizing: border-box;
 }
 
 .grid {
   display: grid;
   gap: 24px;
-  max-width: 1440px;
+  width: 100%;
   margin: 0 auto;
   grid-template-columns: repeat(3, 1fr); /*декстоп 3 колонки*/
 }
