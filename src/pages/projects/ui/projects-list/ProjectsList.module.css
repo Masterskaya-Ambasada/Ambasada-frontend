@@ -22,11 +22,12 @@
   display: flex;
   flex-direction: column;
   gap: 20px; 
+  box-sizing: border-box;
 }
 
 .image {
   width: 100%;
-  min-height: 265px;     
+  height: 265px;     
   object-fit: cover;
   border-radius: 16px;
 }
@@ -35,30 +36,40 @@
   background: var(--white);
   border-radius: 16px;
   padding: 20px;
-  height: 100%;
   flex: 1;
-
   display: flex;
   flex-direction: column;
   gap: 20px; /* десктоп + планшет */
+  min-height: 0; 
+  overflow: hidden; 
 }
 
 .title {
   font: var(--desktop_h3);
   font-family: var(--main-font-family);
   color: var(--black);
-  
+  display: -webkit-box;
+  -webkit-line-clamp: 2;  /* заголовок не больше 2 строк */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .description {
   font: var(--desktop_main);
   font-family: var(--main-font-family);
   color: var(--black);
+  flex: 1;
+  min-height: 0;
   display: -webkit-box;
-  -webkit-line-clamp: 5; /* сколько строк*/
-  line-clamp: 5;
+  -webkit-line-clamp: 3; /* Уменьшим до 3 строк для надежности */
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  /* Обрезаем по высоте строго */
+  max-height: calc(1.4em * 3); /* 1.4 * 3 = 4.2em */
 }
 
 .button {
@@ -84,9 +95,14 @@
   padding: 0 40px;
   box-sizing: border-box;
 }
+
   .grid {
     grid-template-columns: repeat(2, 1fr); /*планшет 2 колонки*/
     gap: 20px;
+  }
+
+  .content {
+    height: 327px;
   }
 
   .card {
@@ -99,6 +115,10 @@
 
 .description {
   font: var(--tablet_main);
+  -webkit-line-clamp: 4; /* Уменьшим до 4 строк для надежности */
+  line-clamp: 4;
+  /* Обрезаем по высоте строго */
+  max-height: calc(1.4em * 4); /* 1.4 * 4 = 5.6em */
 }
 }
 
@@ -118,6 +138,7 @@
 
   .content {
     gap: 16px;
+    height: 295px;
   }
 
   .image {
@@ -130,6 +151,10 @@
 
 .description {
   font: var(--mobile_main);
+  -webkit-line-clamp: 2; /* Уменьшим до 2 строк для надежности */
+  line-clamp: 2;
+  /* Обрезаем по высоте строго */
+  max-height: calc(1.4em * 2); /* 1.4 * 2 = 2.8em */
 }
 
 .button {
