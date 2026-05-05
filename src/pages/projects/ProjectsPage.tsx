@@ -3,9 +3,20 @@ import { Link } from "react-router-dom";
 import { routesPaths } from "@shared/config/routesPaths.ts";
 import { useUrlFilters } from "./hooks/useUrlFilters";
 import { ProjectsSearch } from "./ui/projects-search/ProjectsSearch";
+import { ProjectsList } from "./ui/projects-list/ProjectsList";
+import projectsData from "../../mocks/fixtures/projects/projects.json";
 import styles from "./ProjectsPage.module.css";
 
 export const ProjectsPage: React.FC = () => {
+  // Преобразуем данные из JSON в нужный формат
+  const projects = projectsData.items.map((item) => ({
+  id: item.id,
+  title: item.title,
+  description: item.description,
+  image: item.image,
+  action_button: item.action_button,
+}));
+
   // Хук на уровне страницы
   // Вся магия здесь: работа с URL, debounce, запросы
   const { search: urlSearch, updateFilters } = useUrlFilters();
@@ -49,6 +60,8 @@ export const ProjectsPage: React.FC = () => {
   return (
     <div className={styles.projectsList}>
       <h1>Проекты</h1>
+      <ProjectsList projects={projects} limit={4} />
+
 
       <ProjectsSearch
         value={localSearch}
