@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./ProjectsList.module.css";
 
@@ -15,24 +15,22 @@ interface Project {
 
 interface ProjectsListProps {
   projects: Project[];
-  limit?: number;
 }
 
 export const ProjectsList: React.FC<ProjectsListProps> = ({
   projects,
-  limit,
 }) => {
-  const visibledProjects = limit ? projects.slice(0, limit) : projects;
 
   return (
     <div className={styles.container}>
-      <div className={styles.grid}>
-        {visibledProjects.map((project) => (
-          <div key={project.id} className={styles.card}>
+      <ul className={styles.grid}>
+        {projects.map((project) => (
+          <li key={project.id} className={styles.card}>
             <img
               src={project.image}
               alt={project.title}
               className={styles.image}
+              loading="lazy"
             />
 
             <div className={styles.content}>
@@ -42,6 +40,7 @@ export const ProjectsList: React.FC<ProjectsListProps> = ({
               <Link
                 to={project.action_button.link.replace("{id}", project.id)}
                 className={styles.button}
+                aria-label={project.action_button.label}
               >
                 <img
                   src="/button for cards.svg"
@@ -53,9 +52,9 @@ export const ProjectsList: React.FC<ProjectsListProps> = ({
                 </span>
               </Link>
             </div>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };
