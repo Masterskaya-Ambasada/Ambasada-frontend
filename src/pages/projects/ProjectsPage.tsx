@@ -4,6 +4,7 @@ import { routesPaths } from "@shared/config/routesPaths.ts";
 import { useUrlFilters } from "./hooks/useUrlFilters";
 import { ProjectsSearch } from "./ui/projects-search/ProjectsSearch";
 import { ProjectsList } from "./ui/projects-list/ProjectsList";
+import { TypeFilter, type Category } from "./ui/projects-filter/TypeFilter";
 import styles from "./ProjectsPage.module.css";
 import { apiClient } from "@shared/api/client";
 
@@ -14,6 +15,7 @@ type ProjectsResponse = {
     title: string;
     description: string;
     image: string;
+    type?: string;
     action_button: {
       label: string;
       link: string;
@@ -30,8 +32,9 @@ type ProjectsResponse = {
 export const ProjectsPage: React.FC = () => {
   // Состояние для данных с сервера
   const [projectsData, setProjectsData] = useState<ProjectsResponse | null>(null);
+  const [categories, setCategories] = useState<Category[]>([]); 
   const [loading, setLoading] = useState(true);
-
+  const [loadingCategories, setLoadingCategories] = useState(true);
   // Состояние для "Показать все"
   const [showAll, setShowAll] = useState(false);
 
@@ -40,14 +43,31 @@ export const ProjectsPage: React.FC = () => {
 
   // Хук на уровне страницы
   // Вся магия здесь: работа с URL, debounce, запросы
-  const { search: urlSearch, updateFilters } = useUrlFilters();
+  const { search: urlSearch,type: urlType, updateFilters } = useUrlFilters();
 
   // Локальное состояние для debounce
   const [localSearch, setLocalSearch] = useState(urlSearch);
   const debounceTimerRef = useRef<number | null>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
 
-  // Загрузка данных с сервера 
+  // Загрузка категорий 
+  useEffect(() => {
+    async function getCategories() {
+      try {
+        setLoadingCategories(true);
+        const res = await apiClient.get<Category[]>("/api/v1/projects/categories");
+        console.log("Categories data:", res);
+        setCategories(res);
+      } catch (err) {
+        console.log("Ошибка загрузки категорий:", err);
+      } finally {
+        setLoadingCategories(false);
+      }
+    }
+    getCategories();
+  }, []);
+
+  // Загрузка проектов 
   useEffect(() => {
     async function getProjects() {
       try {
@@ -63,6 +83,7 @@ export const ProjectsPage: React.FC = () => {
     }
     getProjects();
   }, []);
+  
 
   // Обновление лимита при изменении размера экрана или showAll
   useEffect(() => {
@@ -88,6 +109,37 @@ export const ProjectsPage: React.FC = () => {
     window.addEventListener('resize', updateLimit);
     return () => window.removeEventListener('resize', updateLimit);
   }, [showAll]);
+
+  // Фильтрация проектов по типу
+  const getFilteredProjects = () => {
+    if (!projectsData) return [];
+    
+    let filtered = projectsData.items;
+    
+    // Фильтр по типу
+    if (urlType && urlType !== "all") {
+      filtered = filtered.filter(
+        (project) => project.type?.toLowerCase() === urlType.toLowerCase()
+      );
+    }
+    return filtered;
+  };
+
+  // Фильтрация по поиску
+  const getSearchedProjects = () => {
+    let filtered = getFilteredProjects();
+    
+    if (urlSearch) {
+      const searchLower = urlSearch.toLowerCase();
+      filtered = filtered.filter(
+        (project) =>
+          project.title.toLowerCase().includes(searchLower) ||
+          project.description.toLowerCase().includes(searchLower)
+      );
+    }
+    
+    return filtered;
+  };
 
   // Debounce: обновляем URL после паузы ввода
   const debouncedUpdate = useCallback((value: string) => {
@@ -125,14 +177,24 @@ export const ProjectsPage: React.FC = () => {
     return null;
   }
 
- const projects = projectsData.items;
-  const totalProjects = projects.length;
+  const filteredProjects = getSearchedProjects();
+  const totalProjects = filteredProjects.length;
   const hasMoreProjects = totalProjects > limit && !showAll;
 
   return (
     <div className={styles.projectsList}>
       <h1>Проекты</h1>
-      <ProjectsList projects={projects.slice(0, limit)} />
+
+      {/* Фильтр по типу - показываем, даже если категории загружаются */}
+      {!loadingCategories && categories.length > 0 && (
+        <TypeFilter
+          categories={categories}
+          selectedType={urlType}
+          onChange={(newType) => updateFilters({ type: newType || ""})}
+        />
+      )}
+
+      <ProjectsList projects={filteredProjects.slice(0, limit)} />
 
       <ProjectsSearch
         value={localSearch}

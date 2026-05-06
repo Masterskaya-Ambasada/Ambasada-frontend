@@ -1,0 +1,50 @@
+.filterContainer {
+  width: 100%;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+}
+
+.filterButton {
+  padding: 8px 16px;
+  font: var(--desktop_main);
+  color: var(--gray-700);
+  background: var(--gray-100);
+  border: 1px solid var(--gray-200);
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filterButton:hover {
+  background: var(--gray-200);
+  border-color: var(--gray-300);
+}
+
+.filterButton.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* Адаптив */
+@media (max-width: 1023px) {
+  .filterButton {
+    padding: 6px 14px;
+    font: var(--tablet_main);
+  }
+  
+  .buttonGroup {
+    gap: var(--spacing-2);
+  }
+}
+
+@media (max-width: 833px) {
+  .filterButton {
+    padding: 5px 12px;
+    font: var(--mobile_main);
+  }
+}
