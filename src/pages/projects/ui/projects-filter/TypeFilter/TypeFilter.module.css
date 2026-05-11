@@ -1,50 +1,102 @@
-.filterContainer {
+.container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.mobileContainer {
+  display: none;
+}
+
+.button {
+  color: var(--orange_1);
+  font: var(--desktop_main);
+  cursor: pointer;
+  padding: 10px 8px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.button.active {
+  color: var(--black);
+}
+
+/* Отступ между кнопками и разделителем | */
+.button + .button {
+  padding-left: 23px;
+  
+}
+
+/* Разделитель | между кнопками */
+.button + .button::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 2px;
+  height: 20px;
+  background: var(--orange_1);
+}
+
+
+/* Планшет */
+@media (min-width: 834px) and (max-width: 1024px) {
+  .container {
+    gap: 2px;
+  }
+  .button {
+    font: var(--tablet_main);
+
+  }
+  
+  .button + .button {
+  padding-left: 9px;
+  
+}
+}
+
+/* Мобильная версия */
+@media (max-width: 833px) {
+  .container {
+    display: none;
+  }
+
+
+.mobileContainer {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
   width: 100%;
 }
 
-.buttonGroup {
+
+.filterIcon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Выпадающий список */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+
+  width: 161px;
+
+  background: white;
+  border: 2px solid #9b8cff;
+  border-radius: 8px;
+
+  padding: 20px 16px;
+
+  z-index: 1000;
+}
+
+.dropdownList {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-3);
+  flex-direction: column;
+  gap: 20px;
 }
 
-.filterButton {
-  padding: 8px 16px;
-  font: var(--desktop_main);
-  color: var(--gray-700);
-  background: var(--gray-100);
-  border: 1px solid var(--gray-200);
-  border-radius: 30px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.filterButton:hover {
-  background: var(--gray-200);
-  border-color: var(--gray-300);
-}
-
-.filterButton.active {
-  background: var(--primary);
-  color: white;
-  border-color: var(--primary);
-}
-
-/* Адаптив */
-@media (max-width: 1023px) {
-  .filterButton {
-    padding: 6px 14px;
-    font: var(--tablet_main);
-  }
-  
-  .buttonGroup {
-    gap: var(--spacing-2);
-  }
-}
-
-@media (max-width: 833px) {
-  .filterButton {
-    padding: 5px 12px;
-    font: var(--mobile_main);
-  }
 }

@@ -8,7 +8,6 @@ import { TypeFilter, type Category } from "./ui/projects-filter/TypeFilter";
 import styles from "./ProjectsPage.module.css";
 import { apiClient } from "@shared/api/client";
 
-// Тип данных с сервера
 type ProjectsResponse = {
   items: Array<{
     id: string;
@@ -22,7 +21,7 @@ type ProjectsResponse = {
     };
   }>;
   pagination: {
-    totalItems: number;// Всего проектов на сервере
+    totalItems: number;
     offset: number;
     limit: number;
     isNext: boolean;
@@ -30,25 +29,30 @@ type ProjectsResponse = {
 };
 
 export const ProjectsPage: React.FC = () => {
-  // Состояние для данных с сервера
   const [projectsData, setProjectsData] = useState<ProjectsResponse | null>(null);
   const [categories, setCategories] = useState<Category[]>([]); 
   const [loading, setLoading] = useState(true);
   const [loadingCategories, setLoadingCategories] = useState(true);
-  // Состояние для "Показать все"
-  const [showAll, setShowAll] = useState(false);
-
-  // Адаптивный лимит в зависимости от экрана и showAll
-  const [limit, setLimit] = useState(4);// По умолчанию показываем 4 для декстопа
-
-  // Хук на уровне страницы
-  // Вся магия здесь: работа с URL, debounce, запросы
-  const { search: urlSearch,type: urlType, updateFilters } = useUrlFilters();
-
-  // Локальное состояние для debounce
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(12);
+  
+  const { search: urlSearch, type: urlType, updateFilters } = useUrlFilters();
   const [localSearch, setLocalSearch] = useState(urlSearch);
   const debounceTimerRef = useRef<number | null>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
+
+  // Обновление лимита при изменении размера окна
+  useEffect(() => {
+    const updateLimit = () => {
+      const width = window.innerWidth;
+      setLimit(width >= 1024 ? 12 : 6);
+      setPage(1); // Сброс страницы при изменении лимита
+    };
+
+    updateLimit();
+    window.addEventListener("resize", updateLimit);
+    return () => window.removeEventListener("resize", updateLimit);
+  }, []);
 
   // Загрузка категорий 
   useEffect(() => {
@@ -56,7 +60,6 @@ export const ProjectsPage: React.FC = () => {
       try {
         setLoadingCategories(true);
         const res = await apiClient.get<Category[]>("/api/v1/projects/categories");
-        console.log("Categories data:", res);
         setCategories(res);
       } catch (err) {
         console.log("Ошибка загрузки категорий:", err);
@@ -67,160 +70,168 @@ export const ProjectsPage: React.FC = () => {
     getCategories();
   }, []);
 
-  // Загрузка проектов 
+  // Загрузка проектов с сервера
   useEffect(() => {
     async function getProjects() {
       try {
         setLoading(true);
-        const res = await apiClient.get<ProjectsResponse>("/api/v1/projects");
-        console.log("Projects data:", res);
+
+        if (abortControllerRef.current) {
+          abortControllerRef.current.abort();
+        }
+        
+        const controller = new AbortController();
+        abortControllerRef.current = controller;
+        
+        const offset = (page - 1) * limit;
+        const params = new URLSearchParams({
+          limit: String(limit),
+          offset: String(offset)
+        });
+
+        if (urlSearch) {
+          params.append("search", urlSearch);
+        }
+
+        if (urlType && urlType !== "all") {
+          params.append("type", urlType);
+        }
+
+        const res = await apiClient.get<ProjectsResponse>(
+          `/api/v1/projects?${params.toString()}`, 
+          { signal: controller.signal }
+        );
+        
         setProjectsData(res);
-      } catch (err) {
-        console.log("Ошибка загрузки проектов:", err);
+      } catch (err: any) {
+        if (err.name !== "AbortError") {
+          console.log("Ошибка загрузки проектов:", err);
+        }
       } finally {
         setLoading(false);
       }
     }
+
     getProjects();
-  }, []);
-  
 
-  // Обновление лимита при изменении размера экрана или showAll
-  useEffect(() => {
-    const updateLimit = () => {
-      const width = window.innerWidth;
-      
-      if (showAll) {
-        // Показываем все проекты (максимум 12)
-        setLimit(12);
-      } else {
-        // Превью режим: зависит от ширины экрана
-        if (width >= 1024) {
-          setLimit(4);  // Десктоп: 4 проекта
-        } else if (width >= 768) {
-          setLimit(3);  // Планшет: 3 проекта
-        } else {
-          setLimit(3);  // Мобильный: 3 проекта
-        }
-      }
+    return () => {
+      abortControllerRef.current?.abort();
     };
+  }, [page, limit, urlSearch, urlType]);
 
-    updateLimit();
-    window.addEventListener('resize', updateLimit);
-    return () => window.removeEventListener('resize', updateLimit);
-  }, [showAll]);
+  // Сброс страницы при изменении фильтров
+  useEffect(() => {
+    setPage(1);
+  }, [urlSearch, urlType, limit]);
 
-  // Фильтрация проектов по типу
-  const getFilteredProjects = () => {
-    if (!projectsData) return [];
-    
-    let filtered = projectsData.items;
-    
-    // Фильтр по типу
-    if (urlType && urlType !== "all") {
-      filtered = filtered.filter(
-        (project) => project.type?.toLowerCase() === urlType.toLowerCase()
-      );
-    }
-    return filtered;
-  };
-
-  // Фильтрация по поиску
-  const getSearchedProjects = () => {
-    let filtered = getFilteredProjects();
-    
-    if (urlSearch) {
-      const searchLower = urlSearch.toLowerCase();
-      filtered = filtered.filter(
-        (project) =>
-          project.title.toLowerCase().includes(searchLower) ||
-          project.description.toLowerCase().includes(searchLower)
-      );
-    }
-    
-    return filtered;
-  };
-
-  // Debounce: обновляем URL после паузы ввода
+  // Debounce поиска
   const debouncedUpdate = useCallback((value: string) => {
     if (debounceTimerRef.current) {
       clearTimeout(debounceTimerRef.current);
     }
     
-    debounceTimerRef.current = setTimeout(() => {
+    debounceTimerRef.current = window.setTimeout(() => {
       updateFilters({ search: value });
       debounceTimerRef.current = null;
     }, 500);
   }, [updateFilters]);
 
-  // Обработчик изменения поиска
+  // Обработка изменения строки поиска
   const handleSearchChange = useCallback((value: string) => {
     setLocalSearch(value);
     debouncedUpdate(value);
-    
-    // Отмена предыдущего API запроса
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort();
-    }
-    abortControllerRef.current = new AbortController();
   }, [debouncedUpdate]);
 
-  // Синхронизация с URL (когда URL меняется извне, например, кнопка "Назад")
+  // Синхронизация с URL
   useEffect(() => {
     if (urlSearch !== localSearch) {
       setLocalSearch(urlSearch);
     }
   }, [urlSearch]);
 
-  // Пока загружаются данные - ничего не рендерим 
-  if (loading || !projectsData) {
-    return null;
+  // Пагинация
+  const goToNextPage = () => {
+    if (projectsData?.pagination.isNext) {
+      setPage(prev => prev + 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  // Пагинация - назад
+  const goToPrevPage = () => {
+    if (page > 1) {
+      setPage(prev => prev - 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  if (loading && !projectsData) {
+    return <div className={styles.loader}>Загрузка...</div>;
   }
 
-  const filteredProjects = getSearchedProjects();
-  const totalProjects = filteredProjects.length;
-  const hasMoreProjects = totalProjects > limit && !showAll;
+  const totalItems = projectsData?.pagination.totalItems || 0;
+  const totalPages = Math.ceil(totalItems / limit);
 
   return (
     <div className={styles.projectsList}>
       <h1>Проекты</h1>
 
-      {/* Фильтр по типу - показываем, даже если категории загружаются */}
       {!loadingCategories && categories.length > 0 && (
         <TypeFilter
           categories={categories}
-          selectedType={urlType}
-          onChange={(newType) => updateFilters({ type: newType || ""})}
+          selectedType={urlType || null}
+          onChange={(newType) => updateFilters({ type: newType || "" })}
         />
       )}
-
-      <ProjectsList projects={filteredProjects.slice(0, limit)} />
 
       <ProjectsSearch
         value={localSearch}
         onChange={handleSearchChange}
       />
-       {/* Кнопка "Показать все" - только если есть скрытые проекты и не показаны все */}
-      {hasMoreProjects && (
-        <button 
-          onClick={() => setShowAll(true)}
-          className={styles.showAllButton}
-        >
-          Показать все проекты ({totalProjects})
-        </button>
+
+      {/* Результаты */}
+      {projectsData?.items.length === 0 ? (
+        <div className={styles.empty}>Проекты не найдены</div>
+      ) : (
+        <>
+          <div className={styles.resultsCount}>
+            Найдено проектов: {totalItems}
+          </div>
+          
+          <ProjectsList projects={projectsData?.items || []} />
+
+          {/* Пагинация */}
+          {totalPages > 1 && (
+            <div className={styles.pagination}>
+              <button
+                onClick={goToPrevPage}
+                disabled={page === 1}
+                className={styles.paginationButton}
+                aria-label="Предыдущая страница"
+              >
+                ← Назад
+              </button>
+              
+              <span className={styles.pageInfo}>
+                Страница {page} из {totalPages}
+              </span>
+              
+              <button
+                onClick={goToNextPage}
+                disabled={!projectsData?.pagination.isNext}
+                className={styles.paginationButton}
+                aria-label="Следующая страница"
+              >
+                Вперед →
+              </button>
+            </div>
+          )}
+        </>
       )}
 
-      {/* Кнопка "Свернуть" - если показаны все и проектов больше 12 (опционально) */}
-      {showAll && totalProjects > 12 && (
-        <button 
-          onClick={() => setShowAll(false)}
-          className={styles.showAllButton}
-        >
-          Свернуть
-        </button>
-      )}
-
-      <Link to={routesPaths.home}>На главную</Link>
+      <Link to={routesPaths.home} className={styles.homeLink}>
+        На главную
+      </Link>
     </div>
   );
 };
