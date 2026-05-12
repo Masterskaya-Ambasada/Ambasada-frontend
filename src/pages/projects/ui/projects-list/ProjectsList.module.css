@@ -66,7 +66,7 @@
   flex: 1;
   min-height: 0;
   display: -webkit-box;
-  -webkit-line-clamp: 5; /* Уменьшим до 5 строк*/
+  -webkit-line-clamp: 5; /* 5 строк*/
   line-clamp: 5;
   -webkit-box-orient: vertical;
   overflow: hidden;
