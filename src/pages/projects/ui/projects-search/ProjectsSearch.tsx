@@ -8,7 +8,7 @@ interface ProjectsSearchProps {
   onClear?: () => void;
   placeholder?: string;
   ariaLabel?: string;
-  disabled?: boolean;// Возможность отключить поле поиска в мобильной версии
+  disabled?: boolean; // Возможность отключить поле поиска в мобильной версии
 }
 
 export const ProjectsSearch: React.FC<ProjectsSearchProps> = ({
@@ -31,7 +31,7 @@ export const ProjectsSearch: React.FC<ProjectsSearchProps> = ({
 
   // Скрыть при клике вне поля или при очистке
   const handleBlur = () => {
-    if(!value) {
+    if (!value) {
       setIsOpen(false);
     }
   };
@@ -44,7 +44,7 @@ export const ProjectsSearch: React.FC<ProjectsSearchProps> = ({
     e.stopPropagation(); // Стоп срабатывание handleBlur
     onChange("");
     onClear?.();
-    setIsOpen(false);// Закрыть поиск при очистке
+    setIsOpen(false); // Закрыть поиск при очистке
   };
 
   return (

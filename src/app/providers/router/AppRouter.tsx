@@ -12,7 +12,6 @@ const Contacts = lazy(() => import("@pages/contacts"));
 const Policy = lazy(() => import("@pages/politics"));
 const NotFound = lazy(() => import("@pages/not-found"));
 
-
 export const AppRouter: React.FC = () => {
   return (
     <Suspense fallback={<div className="loading">Загрузка приложения...</div>}>

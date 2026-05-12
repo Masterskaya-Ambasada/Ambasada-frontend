@@ -1,6 +1,5 @@
 .about_section {
   width: 100%;
-  min-width: var(--breakpoint_mobile);
 }
 
 .img {

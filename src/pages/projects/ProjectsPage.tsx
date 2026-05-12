@@ -90,28 +90,34 @@ export const ProjectsPage: React.FC = () => {
   }, [showAll]);
 
   // Debounce: обновляем URL после паузы ввода
-  const debouncedUpdate = useCallback((value: string) => {
-    if (debounceTimerRef.current) {
-      clearTimeout(debounceTimerRef.current);
-    }
-    
-    debounceTimerRef.current = setTimeout(() => {
-      updateFilters({ search: value });
-      debounceTimerRef.current = null;
-    }, 500);
-  }, [updateFilters]);
+  const debouncedUpdate = useCallback(
+    (value: string) => {
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+      }
+
+      debounceTimerRef.current = setTimeout(() => {
+        updateFilters({ search: value });
+        debounceTimerRef.current = null;
+      }, 500);
+    },
+    [updateFilters],
+  );
 
   // Обработчик изменения поиска
-  const handleSearchChange = useCallback((value: string) => {
-    setLocalSearch(value);
-    debouncedUpdate(value);
-    
-    // Отмена предыдущего API запроса
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort();
-    }
-    abortControllerRef.current = new AbortController();
-  }, [debouncedUpdate]);
+  const handleSearchChange = useCallback(
+    (value: string) => {
+      setLocalSearch(value);
+      debouncedUpdate(value);
+
+      // Отмена предыдущего API запроса
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+      abortControllerRef.current = new AbortController();
+    },
+    [debouncedUpdate],
+  );
 
   // Синхронизация с URL (когда URL меняется извне, например, кнопка "Назад")
   useEffect(() => {
@@ -134,29 +140,7 @@ export const ProjectsPage: React.FC = () => {
       <h1>Проекты</h1>
       <ProjectsList projects={projects.slice(0, limit)} />
 
-      <ProjectsSearch
-        value={localSearch}
-        onChange={handleSearchChange}
-      />
-       {/* Кнопка "Показать все" - только если есть скрытые проекты и не показаны все */}
-      {hasMoreProjects && (
-        <button 
-          onClick={() => setShowAll(true)}
-          className={styles.showAllButton}
-        >
-          Показать все проекты ({totalProjects})
-        </button>
-      )}
-
-      {/* Кнопка "Свернуть" - если показаны все и проектов больше 12 (опционально) */}
-      {showAll && totalProjects > 12 && (
-        <button 
-          onClick={() => setShowAll(false)}
-          className={styles.showAllButton}
-        >
-          Свернуть
-        </button>
-      )}
+      <ProjectsSearch value={localSearch} onChange={handleSearchChange} />
 
       <Link to={routesPaths.home}>На главную</Link>
     </div>
