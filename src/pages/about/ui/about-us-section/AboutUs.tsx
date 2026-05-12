@@ -1,8 +1,8 @@
 import styles from "./AboutUs.module.css";
 import { Link } from "react-router-dom";
-import type { AboutUsProps } from "./type";
+import type { IAboutUsProps } from "./type";
 
-export const AboutUs = ({ data }: AboutUsProps) => {
+export const AboutUs = ({ data }: IAboutUsProps) => {
   return (
     <section className={styles.about_section} aria-labelledby="about-title">
       <div className={styles.container}>

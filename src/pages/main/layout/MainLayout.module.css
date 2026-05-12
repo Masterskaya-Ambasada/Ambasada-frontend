@@ -1,3 +1,26 @@
+.appState {
+  min-height: 100vh;
+  padding: var(--spacing-30);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-6);
+  text-align: center;
+  font: var(--desktop_main);
+  color: var(--black);
+}
+
+.errorText {
+  max-width: 520px;
+  color: var(--fault, #d41414);
+  font: var(--desktop_main);
+}
+
+.button {
+  max-width: 520px;
+}
+
 .layout {
   display: flex;
   flex-direction: column;
@@ -13,4 +36,39 @@
   max-width: var(--breakpoint_desktop);
   margin: 0 auto;
   width: 100%;
+}
+
+@media (max-width: 1023px) {
+  .appState {
+    padding: var(--spacing-6);
+    gap: var(--spacing-5);
+    font: var(--tablet_main);
+  }
+
+  .errorText {
+    max-width: 520px;
+    font: var(--tablet_main);
+  }
+
+  .button {
+    max-width: 390px;
+    font: var(--tablet_button);
+  }
+}
+
+@media (max-width: 833px) {
+  .appState {
+    gap: var(--spacing-2);
+    font: var(--mobile_main);
+  }
+
+  .errorText {
+    max-width: 350px;
+    font: var(--mobile_main);
+  }
+
+  .button {
+    max-width: 350px;
+    font: var(--mobile_button);
+  }
 }

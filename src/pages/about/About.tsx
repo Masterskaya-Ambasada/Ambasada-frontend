@@ -1,17 +1,24 @@
 import React from "react";
 import { AboutUs } from "./ui/about-us-section/AboutUs";
-import type { AboutData, AboutResponse } from "./ui/about-us-section/type";
+import { OurValues } from "./ui/our-values/OurValues";
+import type { AboutData } from "./ui/about-us-section/type";
+import type { ValuesData } from "./ui/our-values/type";
 import { apiClient } from "../../shared/api/client";
 
+type PageResponse = {
+  about_section: AboutData;
+  values: ValuesData;
+};
+
 export const About = () => {
-  const [aboutData, setAboutData] = React.useState<AboutData | null>(null);
+  const [pageData, setPageData] = React.useState<PageResponse | null>(null);
 
   React.useEffect(() => {
     async function getAbout() {
       try {
-        const res = await apiClient.get<AboutResponse>("/api/v1/about");
+        const res = await apiClient.get<PageResponse>("/api/v1/about");
 
-        setAboutData(res.about_section);
+        setPageData(res);
       } catch (err) {
         console.log(err);
       }
@@ -19,11 +26,16 @@ export const About = () => {
     getAbout();
   }, []);
 
-  if (!aboutData) {
+  if (!pageData) {
     return null;
   }
 
-  return <AboutUs data={aboutData} />;
+  return (
+    <>
+      <AboutUs data={pageData.about_section} />
+      <OurValues data={pageData.values} />
+    </>
+  );
 };
 
 export default About;

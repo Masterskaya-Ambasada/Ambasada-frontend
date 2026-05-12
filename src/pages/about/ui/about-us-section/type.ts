@@ -12,10 +12,6 @@ export type AboutData = {
   };
 };
 
-export interface AboutUsProps {
+export interface IAboutUsProps {
   data: AboutData;
 }
-
-export type AboutResponse = {
-  about_section: AboutData;
-};
