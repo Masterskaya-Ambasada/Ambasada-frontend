@@ -139,6 +139,7 @@ export const ProjectsPage: React.FC = () => {
     <div className={styles.projectsList}>
       <h1>Проекты</h1>
 
+<<<<<<< HEAD
       <ProjectsSearch
         value={localSearch}
         onChange={handleSearchChange}
@@ -173,6 +174,9 @@ export const ProjectsPage: React.FC = () => {
           )}
         
     
+=======
+      <ProjectsSearch value={localSearch} onChange={handleSearchChange} />
+>>>>>>> b1dc9deb0e89e89b486d950b1ab2aba558788d86
 
       <Link to={routesPaths.home} className={styles.homeLink}>
         На главную
