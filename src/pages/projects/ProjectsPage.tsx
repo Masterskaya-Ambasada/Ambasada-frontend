@@ -28,131 +28,112 @@ type ProjectsResponse = {
 };
 
 export const ProjectsPage: React.FC = () => {
+  // Состояния для данных, загрузки, пагинации и поиска
   const [projectsData, setProjectsData] = useState<ProjectsResponse | null>(null);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(12);
+  const [currentPage, setCurrentPage] = useState(1);// сколько проектов на странице
+  const [itemsPerPage, setItemsPerPage] = useState(12);// по умолчанию для десктопа
   
-  const { search: urlSearch, type: urlType, updateFilters } = useUrlFilters();
+  //хук для синхронизации строки поиска с URL и обновления фильтров
+  const { search: urlSearch, updateFilters } = useUrlFilters();
   const [localSearch, setLocalSearch] = useState(urlSearch);
   const debounceTimerRef = useRef<number | null>(null);
-  const abortControllerRef = useRef<AbortController | null>(null);
 
-  // Обновление лимита при изменении размера окна
+
+  // Адаптивное количество проектов на странице
   useEffect(() => {
-    const updateLimit = () => {
+    const updateItemsPerPage = () => {
       const width = window.innerWidth;
-      setLimit(width >= 1024 ? 12 : 6);
-      setPage(1); // Сброс страницы при изменении лимита
+      // На десктопе 12, на планшете и мобилке 6
+      const newItemsPerPage = width >= 834 ? 12 : 6;
+      setItemsPerPage(newItemsPerPage);
+      setCurrentPage(1); // Сброс на первую страницу при изменении
     };
 
-    updateLimit();
-    window.addEventListener("resize", updateLimit);
-    return () => window.removeEventListener("resize", updateLimit);
+    updateItemsPerPage();
+    window.addEventListener("resize", updateItemsPerPage);
+    return () => window.removeEventListener("resize", updateItemsPerPage);
   }, []);
 
-  
-  // Загрузка проектов с сервера
+  // Загрузка данных с сервера
   useEffect(() => {
     async function getProjects() {
       try {
         setLoading(true);
-
-        if (abortControllerRef.current) {
-          abortControllerRef.current.abort();
-        }
-        
-        const controller = new AbortController();
-        abortControllerRef.current = controller;
-        
-        const offset = (page - 1) * limit;
-        const params = new URLSearchParams({
-          limit: String(limit),
-          offset: String(offset)
-        });
-
-        if (urlSearch) {
-          params.append("search", urlSearch);
-        }
-
-        if (urlType && urlType !== "all") {
-          params.append("type", urlType);
-        }
-
-        const res = await apiClient.get<ProjectsResponse>(
-          `/api/v1/projects?${params.toString()}`, 
-          { signal: controller.signal }
-        );
-        
+        const res = await apiClient.get<ProjectsResponse>("/api/v1/projects");
+        console.log("Projects data:", res);
         setProjectsData(res);
-      } catch (err: any) {
-        if (err.name !== "AbortError") {
-          console.log("Ошибка загрузки проектов:", err);
-        }
+      } catch (err) {
+        console.log("Ошибка загрузки проектов:", err);
       } finally {
         setLoading(false);
       }
     }
-
     getProjects();
+  }, []);
 
-    return () => {
-      abortControllerRef.current?.abort();
-    };
-  }, [page, limit, urlSearch, urlType]);
-
-  // Сброс страницы при изменении фильтров
-  useEffect(() => {
-    setPage(1);
-  }, [urlSearch, urlType, limit]);
-
-  // Debounce поиска
-  const debouncedUpdate = useCallback((value: string) => {
+  // Debounce: обновляем URL после паузы ввода
+  const debouncedUpdate = useCallback(
+    (value: string) => {
     if (debounceTimerRef.current) {
       clearTimeout(debounceTimerRef.current);
     }
     
     debounceTimerRef.current = window.setTimeout(() => {
       updateFilters({ search: value });
+      setCurrentPage(1); // Сброс на первую страницу при поиске
       debounceTimerRef.current = null;
     }, 500);
   }, [updateFilters]);
 
   // Обработка изменения строки поиска
-  const handleSearchChange = useCallback((value: string) => {
+  const handleSearchChange = useCallback(
+    (value: string) => {
     setLocalSearch(value);
     debouncedUpdate(value);
   }, [debouncedUpdate]);
 
-  // Синхронизация с URL
+  // Синхронизация с URL (когда URL меняется извне, например, кнопка "Назад")
   useEffect(() => {
     if (urlSearch !== localSearch) {
       setLocalSearch(urlSearch);
     }
   }, [urlSearch]);
 
-  // Пагинация
+  // Получение текущих проектов для пагинации
+  const getCurrentPageItems = () => {
+    if (!projectsData?.items) return [];
+    
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return projectsData.items.slice(startIndex, endIndex);
+  };
+
+  // Пагинация - вперед
   const goToNextPage = () => {
-    if (projectsData?.pagination.isNext) {
-      setPage(prev => prev + 1);
+    const totalPages = Math.ceil((projectsData?.items.length || 0) / itemsPerPage);
+    if (currentPage < totalPages) {
+      setCurrentPage(prev => prev + 1);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   // Пагинация - назад
   const goToPrevPage = () => {
-    if (page > 1) {
-      setPage(prev => prev - 1);
+    if (currentPage > 1) {
+      setCurrentPage(prev => prev - 1);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
+   // Пока загружаются данные - ничего не рендерим 
   if (loading && !projectsData) {
     return <div className={styles.loader}>Загрузка...</div>;
   }
 
-  const totalItems = projectsData?.pagination.totalItems || 0;
-  const totalPages = Math.ceil(totalItems / limit);
+  const currentItems = getCurrentPageItems();// проекты для текущей страницы
+  const totalItems = projectsData?.items.length || 0;// общее количество проектов
+  const totalPages = Math.ceil(totalItems / itemsPerPage);// общее количество страниц
 
   return (
     <div className={styles.projectsList}>
@@ -162,24 +143,14 @@ export const ProjectsPage: React.FC = () => {
         value={localSearch}
         onChange={handleSearchChange}
       />
-
-      {/* Результаты */}
-      {projectsData?.items.length === 0 ? (
-        <div className={styles.empty}>Проекты не найдены</div>
-      ) : (
-        <>
-          <div className={styles.resultsCount}>
-            Найдено проектов: {totalItems}
-          </div>
-          
-          <ProjectsList projects={projectsData?.items || []} />
+            <ProjectsList projects={currentItems} />
 
           {/* Пагинация */}
           {totalPages > 1 && (
             <div className={styles.pagination}>
               <button
                 onClick={goToPrevPage}
-                disabled={page === 1}
+                disabled={currentPage === 1}
                 className={styles.paginationButton}
                 aria-label="Предыдущая страница"
               >
@@ -187,12 +158,12 @@ export const ProjectsPage: React.FC = () => {
               </button>
               
               <span className={styles.pageInfo}>
-                Страница {page} из {totalPages}
+                Страница {currentPage} из {totalPages}
               </span>
               
               <button
                 onClick={goToNextPage}
-                disabled={!projectsData?.pagination.isNext}
+                disabled={currentPage === totalPages}
                 className={styles.paginationButton}
                 aria-label="Следующая страница"
               >
@@ -200,8 +171,8 @@ export const ProjectsPage: React.FC = () => {
               </button>
             </div>
           )}
-        </>
-      )}
+        
+    
 
       <Link to={routesPaths.home} className={styles.homeLink}>
         На главную
