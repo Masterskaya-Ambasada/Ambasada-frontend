@@ -59,7 +59,7 @@ export const ProjectsPage: React.FC = () => {
     async function getCategories() {
       try {
         setLoadingCategories(true);
-        const res = await apiClient.get<Category[]>("/api/v1/projects/categories");
+        const res = await apiClient.get<Category[]>("/projects/categories");
         setCategories(res);
       } catch (err) {
         console.log("Ошибка загрузки категорий:", err);
@@ -98,7 +98,7 @@ export const ProjectsPage: React.FC = () => {
         }
 
         const res = await apiClient.get<ProjectsResponse>(
-          `/api/v1/projects?${params.toString()}`, 
+          `/projects?${params.toString()}`,
           { signal: controller.signal }
         );
         
