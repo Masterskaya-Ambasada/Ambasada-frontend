@@ -26,7 +26,6 @@
 /* Отступ между кнопками и разделителем | */
 .button + .button {
   padding-left: 23px;
-  
 }
 
 /* Разделитель | между кнопками */
@@ -39,7 +38,6 @@
   background: var(--orange_1);
 }
 
-
 /* Планшет */
 @media (min-width: 834px) and (max-width: 1024px) {
   .container {
@@ -47,13 +45,11 @@
   }
   .button {
     font: var(--tablet_main);
-
   }
-  
+
   .button + .button {
-  padding-left: 9px;
-  
-}
+    padding-left: 9px;
+  }
 }
 
 /* Мобильная версия */
@@ -62,41 +58,64 @@
     display: none;
   }
 
+  .mobileContainer {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
 
-.mobileContainer {
-  position: relative;
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-}
+  .filterTrigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+  }
 
+  .filterIcon {
+    width: 40px;
+    height: 40px;
+    display: block;
+  }
 
-.filterIcon {
-  width: 24px;
-  height: 24px;
-}
+  /* Выпадающий список */
+  .dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 161px;
+    min-height: 227px;
+    background: var(--white);
+    border: 2px solid var(--balance);
+    border-radius: 8px;
+    padding: 12px 0;
+    z-index: 1000;
+  }
 
-/* Выпадающий список */
-.dropdown {
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
+  .dropdownList {
+    display: flex;
+    flex-direction: column;
+  }
 
-  width: 161px;
+  .mobileItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: var(--orange_1);
+    font: var(--mobile_button);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    transition: background-color 0.2s ease;
+  }
 
-  background: white;
-  border: 2px solid #9b8cff;
-  border-radius: 8px;
-
-  padding: 20px 16px;
-
-  z-index: 1000;
-}
-
-.dropdownList {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
+  .mobileItem.active {
+    color: var(--black);
+    padding: 10px 8px;
+  }
 }

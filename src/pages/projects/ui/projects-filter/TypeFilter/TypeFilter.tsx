@@ -19,21 +19,8 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
   onChange,
 }) => {
   const { t } = useTranslation();
-  const [isMobile, setIsMobile] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  // Проверка на мобильное устройство
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 833);
-    };
-    
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => 
-      window.removeEventListener("resize", checkMobile);
-  }, []);
 
   // Закрытие дропдауна при клике вне его
   useEffect(() => {
@@ -59,7 +46,7 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
     } else {
       onChange(categoryId);
     }
-    setIsOpen(false);
+    // setIsOpen(false);// Закрываем дропдаун после выбора
   };
 
   const isActive = (categoryId: string) => {
@@ -69,28 +56,25 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
     return selectedType === categoryId;
   };
 
-  // Десктопная версия (горизонтальные кнопки с разделителем | )
-  if (!isMobile) {
     return (
-      <div className={styles.container}>
-        {categories.map((category) => (
-          <button
-            key={category.id}
-            type="button"
-            className={`${styles.button} ${
-              isActive(category.id) ? styles.active : ""
-            }`}
-            onClick={() => handleSelect(category.id)}
-          >
-            {category.name}
-          </button>
-        ))}
-      </div>
-    );
-  }
+  <>
+    {/* DESKTOP */}
+    <div className={styles.container}>
+      {categories.map((category) => (
+        <button
+          key={category.id}
+          type="button"
+          className={`${styles.button} ${
+            isActive(category.id) ? styles.active : ""
+          }`}
+          onClick={() => handleSelect(category.id)}
+        >
+          {category.name}
+        </button>
+      ))}
+    </div>
 
-  // Мобильная версия (выпадающий список справа)
-  return (
+    {/* MOBILE */}
     <div className={styles.mobileContainer} ref={dropdownRef}>
       <button
         type="button"
@@ -99,7 +83,7 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
         aria-label={t("projects.filterByType", "Фильтр по типу")}
         aria-expanded={isOpen}
       >
-        <img 
+        <img
           src="/lsicon_sort-filter-filled.svg"
           alt=""
           className={styles.filterIcon}
@@ -109,38 +93,37 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
 
       {isOpen && (
         <div className={styles.dropdown}>
-          <div className={styles.dropdownHeader}>
-            <span className={styles.dropdownTitle}>
-              {t("projects.filterByType", "Выбрать тип")}
-            </span>
+          <div className={styles.dropdownList}>
+            {/* Все проекты */}
             <button
               type="button"
-              className={styles.closeButton}
-              onClick={() => setIsOpen(false)}
-              aria-label={t("common.close", "Закрыть")}
+              className={`${styles.mobileItem} ${
+                isActive("all") ? styles.active : ""
+              }`}
+              onClick={() => handleSelect("all")}
             >
-              ✕
+              Все проекты
             </button>
-          </div>
-          <div className={styles.dropdownList}>
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                type="button"
-                className={`${styles.mobileItem} ${
-                  isActive(category.id) ? styles.active : ""
-                }`}
-                onClick={() => handleSelect(category.id)}
-              >
-                {category.name}
-                {isActive(category.id) && (
-                  <span className={styles.checkmark}>✓</span>
-                )}
-              </button>
-            ))}
+
+            {/* Остальные категории */}
+            {categories
+              .filter((category) => category.id !== "all")
+              .map((category) => (
+                <button
+                  key={category.id}
+                  type="button"
+                  className={`${styles.mobileItem} ${
+                    isActive(category.id) ? styles.active : ""
+                  }`}
+                  onClick={() => handleSelect(category.id)}
+                >
+                  {category.name}
+                </button>
+              ))}
           </div>
         </div>
       )}
     </div>
-  );
+  </>
+);
 };
