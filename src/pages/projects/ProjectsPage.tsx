@@ -4,7 +4,7 @@ import { routesPaths } from "@shared/config/routesPaths.ts";
 import { useUrlFilters } from "./hooks/useUrlFilters";
 import { ProjectsSearch } from "./ui/projects-search/ProjectsSearch";
 import { ProjectsList } from "./ui/projects-list/ProjectsList";
-import { TypeFilter, type Category } from "./ui/projects-filter/TypeFilter";
+import { TypeFilter, type Category } from "./ui/projects-filter/TypeFilter/TypeFilter";
 import styles from "./ProjectsPage.module.css";
 import { apiClient } from "@shared/api/client";
 

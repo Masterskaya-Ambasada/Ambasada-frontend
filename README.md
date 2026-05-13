@@ -33,7 +33,6 @@
 Проект построен по методологии **Feature-Sliced Design (FSD)**.
 
 ### Слои (Layers):
-
 - `app` — инициализация приложения: глобальные стили, провайдеры (роутер), точка входа (`main.tsx`).
 - `pages` — страницы приложения. Содержат композиционную логику конкретных экранов.
 - `widgets` — крупные самостоятельные блоки страниц (например, `contact-section`).
@@ -42,7 +41,6 @@
 - `shared` — переиспользуемый инфраструктурный код: API-клиент, конфигурация i18n, базовые стили.
 
 ### Проверка архитектуры:
-
 Соблюдение правил FSD контролируется с помощью `eslint-plugin-boundaries`. Правила описаны в `eslint.config.js`.
 
 ---
@@ -77,19 +75,16 @@ npm install
 ## 🚀 Запуск проекта
 
 ### Development режим
-
 ```bash
 npm run dev
 ```
 
 ### Сборка
-
 ```bash
 npm run build
 ```
 
 ### Просмотр сборки
-
 ```bash
 npm run preview
 ```
@@ -105,22 +100,47 @@ npm run preview
 - `.env.example` — шаблон (хранится в репозитории).
 - Процесс настройки: копируем `.env.example` → создаём `.env` → заполняем своими значениями.
 
+### Переменные окружения
+
+- `VITE_USE_MSW` — включает или отключает Mock Service Worker.
+- `VITE_API_URL` — базовый URL API. Значение должно включать версию API `/api/v1`.
+
+`apiClient` использует `VITE_API_URL` как `baseUrl`, поэтому в API-функциях указывается только путь конкретного endpoint без `/api/v1`.
+
+Правильно:
+```ts
+apiClient.get("/init");
+apiClient.get("/home");
+apiClient.get("/projects");
+```
+Неправильно:
+```ts
+apiClient.get("/api/v1/init");
+```
+
+Для локальной разработки с MSW используется:
+```env
+VITE_USE_MSW=true
+VITE_API_URL=/api/v1
+```
+
 ## 🧪 Mock API (MSW)
 
 В проекте используется Mock Service Worker (MSW) для имитации backend API в режиме разработки.
 
 ### Включить моки (.env):
-
 ```env
 VITE_USE_MSW=true
-VITE_API_URL=http://localhost:3000
+VITE_API_URL=/api/v1
 ```
 
 ### Отключить моки (.env):
 
+При отключенных моках `VITE_API_URL` должен указывать на реальный backend API и также включать версию `/api/v1`.
+
 ```env
 VITE_USE_MSW=false
-VITE_API_URL=http://localhost:3000
+VITE_API_URL=https://example.com/api/v1
 ```
 
 # 🌍 i18n (Интернационализация)
@@ -128,7 +148,6 @@ VITE_API_URL=http://localhost:3000
 Поддерживаемые языки: Русский (ru), Английский (en), Сербский кириллица (sr-Cyrl), Сербский латиница (sr-Latn).
 
 ## Структура файлов
-
 ```text
 src/
 ├── locales/            # Файлы переводов
@@ -142,10 +161,10 @@ src/
 ```
 
 ## Использование
-
 ```tsx
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
-const { t } = useTranslation("common");
-<h1>{t("title")}</h1>;
+const { t } = useTranslation('common');
+<h1>{t('title')}</h1>
 ```
+

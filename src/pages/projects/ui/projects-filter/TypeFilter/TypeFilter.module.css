@@ -26,6 +26,7 @@
 /* Отступ между кнопками и разделителем | */
 .button + .button {
   padding-left: 23px;
+  
 }
 
 /* Разделитель | между кнопками */
@@ -38,6 +39,7 @@
   background: var(--orange_1);
 }
 
+
 /* Планшет */
 @media (min-width: 834px) and (max-width: 1024px) {
   .container {
@@ -45,11 +47,14 @@
   }
   .button {
     font: var(--tablet_main);
+
   }
+  
 
   .button + .button {
-    padding-left: 9px;
-  }
+  padding-left: 9px;
+  
+}
 }
 
 /* Мобильная версия */

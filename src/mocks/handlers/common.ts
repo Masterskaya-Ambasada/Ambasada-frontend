@@ -12,8 +12,22 @@ export const commonHandlers = [
   // INIT
   http.get("/api/v1/init", () => {
     return HttpResponse.json({
-      status: "ok",
-      timestamp: Date.now(),
+      site_name: "Амбасада за урбанизм",
+      seo_description: "Сообщество архитекторов и урбанистов",
+      privacy_policy: "Политика конфиденциальности",
+      cookie_message: "Мы используем cookies",
+      cookie_button_text: "OK",
+      languages: [
+        { code: "ru", label: "Русский" },
+        { code: "en", label: "English" },
+        { code: "sr-Latn", label: "Srpski" },
+        { code: "sr-Cyrl", label: "Српски" },
+      ],
+      socials: [
+        { social_type: "Telegram", url: "https://t.me/example" },
+        { social_type: "Instagram", url: "https://instagram.com/example" },
+      ],
+      copyright: "© 2026 Амбасада за урбанизм",
     });
   }),
 
