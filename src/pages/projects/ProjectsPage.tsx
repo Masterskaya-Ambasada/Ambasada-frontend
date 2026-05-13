@@ -55,22 +55,23 @@ export const ProjectsPage: React.FC = () => {
     return () => window.removeEventListener("resize", updateItemsPerPage);
   }, []);
 
-  // Загрузка данных с сервера
-  useEffect(() => {
-    async function getProjects() {
-      try {
-        setLoading(true);
-        const res = await apiClient.get<ProjectsResponse>("/api/v1/projects");
-        console.log("Projects data:", res);
-        setProjectsData(res);
-      } catch (err) {
-        console.log("Ошибка загрузки проектов:", err);
-      } finally {
-        setLoading(false);
-      }
+  // Загрузка данных с сервера (простая версия)
+useEffect(() => {
+  async function getProjects() {
+    try {
+      setLoading(true);
+      const res = await apiClient.get<ProjectsResponse>("/projects");
+      console.log("Projects data:", res);
+      setProjectsData(res);
+    } catch (err) {
+      console.log("Ошибка загрузки проектов:", err);
+    } finally {
+      setLoading(false);
     }
-    getProjects();
-  }, []);
+  }
+
+  getProjects();
+}, []);
 
   // Debounce: обновляем URL после паузы ввода
   const debouncedUpdate = useCallback(
