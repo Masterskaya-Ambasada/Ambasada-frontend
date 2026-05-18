@@ -1,0 +1,36 @@
+.wrapper {
+	position: fixed;
+	top: 50%;
+	right: var(--spacing-0);
+	transform: translateY(-50%);
+	z-index: 3;
+	display: flex;
+	justify-content: center;
+}
+
+.list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-3);
+	padding: var(--spacing-0) var(--spacing-5);
+}
+
+.icon {
+	color: var(--orange_3);
+	padding: var(--spacing-1);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	transition:
+		color 0.2s ease,
+		transform 0.2s ease;
+}
+
+.icon:hover {
+	color: var(--orange_2);
+}
+
+.link:focus-visible .icon {
+	color: var(--orange_2);
+}
