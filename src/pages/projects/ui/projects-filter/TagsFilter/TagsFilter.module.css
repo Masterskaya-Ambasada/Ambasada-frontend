@@ -1,0 +1,158 @@
+.container {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+/* Кнопка-триггер для открытия дропдауна */
+.filterTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* Иконка фильтра */
+.filterIcon {
+  width: 40px;
+  height: 40px;
+}
+
+/* Выпадающий список */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  max-width: 344px;
+  background: var(--white);
+  border: 2px solid var(--ecologic);
+  border-radius: 8px;
+  z-index: 1000;
+}
+
+/* Заголовок дропдауна */
+.dropdownTitle {
+  display: block;
+  padding-top: 24px;
+  padding-left: 24px;
+  padding-bottom: 24px;
+  color: var(--black);
+  font: var(--desktop_tags);
+}
+
+/* Список тегов */
+.dropdownList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 8px;
+  padding-inline: 24px;
+}
+
+/* Десктоп - кнопки тегов в дропдауне */
+.dropdownItem {
+  display: inline-block;
+  height: 44px;
+  padding: 10px 20px;
+  background: transparent;
+  border: 2px solid var(--ecologic);
+  border-radius: 40px;
+  color: var(--ecologic);
+  font: var(--main-font-family);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.dropdownItem.active {
+  background: var(--ecologic);
+  color: var(--white);
+}
+
+/* Кнопка "Свернуть теги" */
+.collapseButton {
+  color: var(--ecologic);
+  cursor: pointer;
+  font: var(--desktop_caption);
+  padding-left: 44px;
+  padding-bottom: 40px;
+  padding-top: 16px;
+  transition: all 0.2s ease;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+.mobileScrollContainer {
+  display: none;
+}
+
+/* Планшет (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .dropdown {
+    max-width: 351px;
+  }
+
+  .dropdownTitle {
+    font: var(--tablet_main);
+  }
+
+  .dropdownItem {
+    font: var(--tablet_caption);
+    height: 40px;
+    padding: 8px 20px;
+  }
+
+  .collapseButton {
+    font: var(--tablet_caption);
+  }
+}
+
+/* Мобилка (< 768px) */
+@media (max-width: 767px) {
+  .container {
+    display: none;
+  }
+
+  .mobileScrollContainer {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-color: var(--ecologic) #D9D9D9; /* Для Firefox */
+    border-bottom: 3px solid #D9D9D9; /* Нижняя граница */
+  }
+
+  /* Горизонтальный скролл тегов */
+  .tagsScroll {
+    display: flex;
+    gap: 4px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding-bottom: 8px;
+  }
+
+  /* Мобилка - кнопки тегов */
+  .mobileTagButton {
+    display: inline-flex;
+    align-items: center;
+    justify-items: center;
+    padding: 10.5px 20px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid var(--ecologic);
+    border-radius: 40px;
+    color: var(--ecologic);
+    font: var(--mobile_button);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+
+  .mobileTagButton.active {
+    background: var(--ecologic);
+    color: var(--white);
+  }
+}
