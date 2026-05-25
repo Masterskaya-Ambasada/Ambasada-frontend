@@ -48,12 +48,38 @@ export const TagsFilter: React.FC<ITagsFilterProps> = ({
     } else {
       onChange([...selectedTags, tagId]);
     }
-    // setIsOpen(false) Не закрываем дропдаун после выбора
   };
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+
+  // Единый список тегов
+  const renderTagsList = () => (
+    <ul className={styles.tagsList}>
+      {tags.map((tag) => (
+        <li key={tag.id} className={styles.tagItem}>
+          <button
+            type="button"
+            className={`${styles.tagButton} ${
+              selectedTags.includes(tag.id) ? styles.active : ""
+            }`}
+            onClick={() => handleTagClick(tag.id)}
+            aria-pressed={selectedTags.includes(tag.id)}
+            aria-label={t(
+              "projects.filterByTag",
+              "Фильтр по тегу {{tagName}}",
+              {
+                tagName: tag.name,
+              },
+            )}
+          >
+            {tag.name}
+          </button>
+        </li>
+      ))}
+    </ul>
+  );
 
   return (
     <>
@@ -75,50 +101,38 @@ export const TagsFilter: React.FC<ITagsFilterProps> = ({
         </button>
 
         {isOpen && (
-          <div className={styles.dropdown}>
-            <span className={styles.dropdownTitle}>Сортировка по тегам:</span>
-            <div className={styles.dropdownList}>
-              {tags.map((tag) => (
-                <button
-                  key={tag.id}
-                  type="button"
-                  className={`${styles.dropdownItem} ${
-                    selectedTags.includes(tag.id) ? styles.active : ""
-                  }`}
-                  onClick={() => handleTagClick(tag.id)}
-                >
-                  {tag.name}
-                </button>
-              ))}
-            </div>
+          <div
+            className={styles.dropdown}
+            role="group"
+            aria-label={t(
+              "projects.filterTagsDialog",
+              "Выбор тегов для фильтрации",
+            )}
+          >
+            <span className={styles.dropdownTitle} id="dropdown-title">
+              {t("projects.sortByTags", "Сортировка по тегам:")}
+            </span>
+            {renderTagsList()}
             {/* Кнопка "Свернуть теги" */}
-              <button
-                type="button"
-                className={styles.collapseButton}
-                onClick={() => setIsOpen(false)}
-              >
-                Свернуть теги
-              </button>
+            <button
+              type="button"
+              className={styles.collapseButton}
+              onClick={() => setIsOpen(false)}
+              aria-label={t("projects.collapseTags", "Свернуть теги")}
+            >
+              {t("projects.collapseTags", "Свернуть теги")}
+            </button>
           </div>
         )}
       </div>
 
-      {/* МОБИЛКА - горизонтальная скролл-лента с кнопками тегов */}
-      <div className={styles.mobileScrollContainer}>
-        <div className={styles.tagsScroll}>
-          {tags.map((tag) => (
-            <button
-              key={tag.id}
-              type="button"
-              className={`${styles.mobileTagButton} ${
-                selectedTags.includes(tag.id) ? styles.active : ""
-              }`}
-              onClick={() => handleTagClick(tag.id)}
-            >
-              {tag.name}
-            </button>
-          ))}
-        </div>
+      {/* МОБИЛКА - горизонтальная скролл-лента с тегами */}
+      <div
+        className={styles.mobileScrollContainer}
+        role="region"
+        aria-label={t("projects.tagsList", "Список тегов для фильтрации")}
+      >
+        <div className={styles.tagsScroll}>{renderTagsList()}</div>
       </div>
     </>
   );

@@ -42,16 +42,20 @@
   font: var(--desktop_tags);
 }
 
-/* Список тегов */
-.dropdownList {
+/* Единый список тегов */
+.tagsList {
   display: flex;
   flex-wrap: wrap;
   gap: 12px 8px;
   padding-inline: 24px;
 }
 
+.tagItem {
+  display: inline-block;
+}
+
 /* Десктоп - кнопки тегов в дропдауне */
-.dropdownItem {
+.tagButton {
   display: inline-block;
   height: 44px;
   padding: 10px 20px;
@@ -65,7 +69,14 @@
   transition: all 0.2s ease;
 }
 
-.dropdownItem.active {
+/* Hover эффект */
+.tagButton:hover {
+  background: var(--gray);
+  color: var(--ecologic);
+  transform: translateY(-2px);
+}
+
+.tagButton.active {
   background: var(--ecologic);
   color: var(--white);
 }
@@ -98,7 +109,7 @@
     font: var(--tablet_main);
   }
 
-  .dropdownItem {
+  .tagButton {
     font: var(--tablet_caption);
     height: 40px;
     padding: 8px 20px;
@@ -128,14 +139,24 @@
   /* Горизонтальный скролл тегов */
   .tagsScroll {
     display: flex;
-    gap: 4px;
-    flex-direction: row;
-    flex-wrap: nowrap;
     padding-bottom: 8px;
+    padding-top: 2px;
+  }
+
+  /* Переопределение стилей списка для мобилки */
+  .tagsScroll .tagsList {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 4px;
+    padding-inline: 0;
+  }
+
+  .tagsScroll .tagItem {
+    flex-shrink: 0;
   }
 
   /* Мобилка - кнопки тегов */
-  .mobileTagButton {
+  .tagsScroll .tagButton {
     display: inline-flex;
     align-items: center;
     justify-items: center;
@@ -151,8 +172,14 @@
     transition: all 0.2s ease;
   }
 
-  .mobileTagButton.active {
+  .tagsScroll .tagButton.active {
     background: var(--ecologic);
     color: var(--white);
+  }
+
+  .tagsScroll .tagButton:hover {
+    background: var(--gray);
+    color: var(--ecologic);
+    transform: translateY(-2px);
   }
 }

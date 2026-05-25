@@ -54,6 +54,7 @@ export const ProjectsPage: React.FC = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(12);
 
+  // Фильтры из URL
   const {
     search: urlSearch,
     type: urlType,
@@ -65,6 +66,9 @@ export const ProjectsPage: React.FC = () => {
 
   const debounceTimerRef = useRef<number | null>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
+
+  // Объединенный loading state
+  const isPageLoading = loading || loadingTags || loadingCategories;
 
   // Обновление лимита при изменении размера окна
   useEffect(() => {
@@ -84,7 +88,8 @@ export const ProjectsPage: React.FC = () => {
     async function getCategories() {
       try {
         setLoadingCategories(true);
-        const res = await apiClient.get<Category[]>("/projects/categories");
+        const res = await apiClient.get<Category[]>(
+          "/projects/categories");
         setCategories(res);
       } catch (err) {
         console.log("Ошибка загрузки категорий:", err);
@@ -96,25 +101,26 @@ export const ProjectsPage: React.FC = () => {
   }, []);
 
   // Загрузка тегов
-useEffect(() => {
-  async function getTags() {
-    try {
-      setLoadingTags(true);
-      const res = await apiClient.get<string[]>("/projects/tags");
-      // Преобразуем массив строк в массив объектов
-      const tagsAsObjects: Tag[] = res.map((tagName: string) => ({
-        id: tagName.toLowerCase().replace(/\s+/g, '-'),
-        name: tagName
-      }));
-      setAvailableTags(tagsAsObjects);
-    } catch (err) {
-      console.log("Ошибка загрузки тегов:", err);
-    } finally {
-      setLoadingTags(false);
+  useEffect(() => {
+    async function getTags() {
+      try {
+        setLoadingTags(true);
+        const res = await apiClient.get<string[]>(
+          "/projects/tags");
+        // Преобразуем массив строк в массив объектов
+        const tagsAsObjects: Tag[] = res.map((tagName: string) => ({
+          id: tagName.toLowerCase().replace(/\s+/g, "-"),
+          name: tagName,
+        }));
+        setAvailableTags(tagsAsObjects);
+      } catch (err) {
+        console.log("Ошибка загрузки тегов:", err);
+      } finally {
+        setLoadingTags(false);
+      }
     }
-  }
-  getTags();
-}, []);
+    getTags();
+  }, []);
 
   // Загрузка проектов с сервера
   useEffect(() => {
@@ -151,9 +157,10 @@ useEffect(() => {
           params.append("tags", urlTags.join(","));
         }
 
+        // Добавляем параметры к URL запроса
+        const url = `/projects?${params.toString()}`;
         const res = await apiClient.get<ProjectsResponse>(
-          "/projects");
-        console.log("Projects data:", res);
+          url);
         setProjectsData(res);
       } catch (err: any) {
         if (err.name !== "AbortError") {
@@ -174,7 +181,7 @@ useEffect(() => {
   // Сброс страницы при изменении фильтров
   useEffect(() => {
     setPage(1);
-  }, [urlSearch, urlType, limit]);
+  }, [urlSearch, urlType, limit, urlTags]);
 
   // Debounce поиска
   const debouncedUpdate = useCallback(
@@ -213,7 +220,7 @@ useEffect(() => {
     if (urlSearch !== localSearch) {
       setLocalSearch(urlSearch);
     }
-  }, [urlSearch]);
+  }, [urlSearch, localSearch]);
 
   // Пагинация
   const goToNextPage = () => {
@@ -231,17 +238,27 @@ useEffect(() => {
     }
   };
 
-  if (loading && !projectsData) {
-    return <div className={styles.loader}>Загрузка...</div>;
+  // Единый loader для всех состояний загрузки
+  if (isPageLoading && !projectsData) {
+    return (
+      <div className={styles.loader} role="status" aria-live="polite">
+        Загрузка...
+      </div>
+    );
   }
+
 
   const totalItems = projectsData?.pagination.totalItems || 0;
   const totalPages = Math.ceil(totalItems / limit);
 
+  // Проверка на пустые результаты после загрузки
+  const isEmpty = !isPageLoading && projectsData?.items.length === 0;
+  
   return (
     <div className={styles.projectsList}>
       <h1>Проекты</h1>
 
+      {/* Фильтры отображаются только после загрузки данных */}
       {!loadingTags && availableTags.length > 0 && (
         <TagsFilter
           tags={availableTags}
@@ -261,29 +278,29 @@ useEffect(() => {
       <ProjectsSearch value={localSearch} onChange={handleSearchChange} />
 
       {/* Результаты */}
-      {projectsData?.items.length === 0 ? (
-        <div className={styles.empty}>Проекты не найдены</div>
+      {isEmpty ? (
+        <div className={styles.empty} role="status" aria-live="polite">
+          Проекты не найдены
+        </div>
       ) : (
         <>
-          <div className={styles.resultsCount}>
-            Найдено проектов: {totalItems}
-          </div>
 
           <ProjectsList projects={projectsData?.items || []} />
 
           {/* Пагинация */}
           {totalPages > 1 && (
-            <div className={styles.pagination}>
+            <nav className={styles.pagination} aria-label="Пагинация проектов">
               <button
                 onClick={goToPrevPage}
                 disabled={page === 1}
                 className={styles.paginationButton}
                 aria-label="Предыдущая страница"
+                aria-disabled={page === 1}
               >
                 ← Назад
               </button>
 
-              <span className={styles.pageInfo}>
+              <span className={styles.pageInfo} aria-current="page">
                 Страница {page} из {totalPages}
               </span>
 
@@ -292,10 +309,11 @@ useEffect(() => {
                 disabled={!projectsData?.pagination.isNext}
                 className={styles.paginationButton}
                 aria-label="Следующая страница"
+                aria-disabled={!projectsData?.pagination.isNext}
               >
                 Вперед →
               </button>
-            </div>
+            </nav>
           )}
         </>
       )}

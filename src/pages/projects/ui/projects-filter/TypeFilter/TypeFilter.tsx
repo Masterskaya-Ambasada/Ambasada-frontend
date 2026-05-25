@@ -55,7 +55,7 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
     return selectedType === categoryId;
   };
 
-  return (  // <-- ВОТ ЭТОТ RETURN БЫЛ ПРОПУЩЕН!
+  return ( 
     <>
       {/* DESKTOP */}
       <div className={styles.container}>
