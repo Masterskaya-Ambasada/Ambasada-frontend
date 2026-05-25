@@ -49,13 +49,61 @@
   },
 
   "team": {
-    "title": "Наша команда",
+    "title": "Команда",
     "members": [
       {
         "id": 101,
+        "name": "Анна Соколова",
+        "role": "Архитектор",
+        "photo": "/images/test2.png"
+      },
+      {
+        "id": 102,
+        "name": "Федор Докунин",
+        "role": "Cоциолог",
+        "photo": "/images/test.png"
+      },
+      {
+        "id": 103,
+        "name": "Алексей Радченко",
+        "role": "Основатель сообщества",
+        "photo": "/images/test3.png"
+      },
+      {
+        "id": 104,
         "name": "Имя Фамилия",
         "role": "Архитектор, основатель",
-        "photo": "https://cdn.../photo1.webp"
+        "photo": "/images/test.png"
+      },
+      {
+        "id": 105,
+        "name": "Имя Фамилия",
+        "role": "Архитектор, основатель",
+        "photo": "/images/test.png"
+      },
+      {
+        "id": 106,
+        "name": "Имя Фамилия",
+        "role": "Архитектор, основатель",
+        "photo": "/images/test.png"
+      },
+      {
+        "id": 107,
+        "name": "Имя Фамилия",
+        "role": "Архитектор, основатель",
+        "photo": "/images/test.png"
+      },
+      {
+        "id": 108,
+        "name": "Имя Фамилия",
+        "role": "Архитектор, основатель",
+        "photo": "/images/test.png"
+      },
+      {
+        "id": 109,
+        "name": "Имя Фамилия",
+        "role": "Архитектор, основатель",
+        "photo": "/images/test.png"
       }
     ],
     "action_button": {

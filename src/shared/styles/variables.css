@@ -11,7 +11,6 @@
   --gray: #bdbdbd80;
   --transparent: transparent;
   --bg_color: #f6f6f6;
-  
 
   /*Оттенки Градиент */
   --purpure_1: #cdc5ff;
@@ -50,7 +49,7 @@
   --tablet_h4: 300 28px/1.2 var(--main-font-family);
   --tablet_main: 300 20px/1.4 var(--main-font-family);
   --tablet_caption: 400 20px/1 var(--main-font-family);
-  --tablet_button: 400 20px/1 var(--button-font-family);
+  --tablet_button: 400 20px/1 var(--main-font-family);
 
   /* Параметры шрифтов mobile */
   --mobile_h1: 400 28px/1.4 var(--main-font-family);
@@ -59,7 +58,7 @@
   --mobile_h4: 300 24px/1.2 var(--main-font-family);
   --mobile_main: 300 16px/1.4 var(--main-font-family);
   --mobile_caption: 400 12px/1 var(--main-font-family);
-  --mobile_button: 400 16px/1.2 var(--button-font-family);
+  --mobile_button: 400 16px/1.2 var(--main-font-family);
 
   /* breackpoints */
   --breakpoint_desktop: 1440px;

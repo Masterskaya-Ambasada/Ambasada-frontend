@@ -17,4 +17,5 @@ export type InitResponse = {
   languages: Language[];
   socials: Social[];
   copyright: string;
+  legal_links: Record<string, string>;
 };

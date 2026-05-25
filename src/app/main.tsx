@@ -6,25 +6,36 @@ import "../shared/styles/reset.css";
 import "../shared/styles/commonStyles.css";
 import App from "./App";
 
-// функция включения моков
 async function enableMocking() {
-  const shouldMock =
-    import.meta.env.DEV && import.meta.env.VITE_USE_MSW === "true";
+  console.log("[MSW] init check...");
 
-  if (!shouldMock) return;
+  if (!import.meta.env.DEV || import.meta.env.VITE_USE_MSW !== "true") {
+  console.log("[MSW] skipped by env");
+  return;
+  }
 
   const { worker } = await import("../mocks/browser");
 
-  return worker.start({
+  console.log("[MSW] starting worker...");
+
+  await worker.start({
+    serviceWorker: {
+      url: "/mockServiceWorker.js",
+    },
     onUnhandledRequest: "bypass",
   });
+
+  console.log("[MSW] worker started");
 }
 
-// ждём инициализацию MSW, потом рендерим приложение
-enableMocking().then(() => {
+(async () => {
+  await enableMocking();
+
+  console.log("[APP] render");
+
   createRoot(document.getElementById("root")!).render(
     <StrictMode>
       <App />
     </StrictMode>,
   );
-});
+})();

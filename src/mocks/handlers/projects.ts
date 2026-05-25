@@ -2,6 +2,7 @@ import { http, HttpResponse } from "msw";
 import projects from "../fixtures/projects/projects.json";
 import categories from "../fixtures/projects/categories.json";
 import tags from "../fixtures/projects/tags.json";
+import project from "../fixtures/common/project.json";
 
 export const projectHandlers = [
   // GET /projects (фильтрацией и пагинацией)
@@ -68,9 +69,7 @@ export const projectHandlers = [
   }),
 
   // GET /projects/:id
-  http.get("/api/v1/projects/:id", ({ params }) => {
-    const project = projects.items.find((p) => p.id === params.id);
-
+  http.get("/api/v1/projects/:id", () => {
     if (!project) {
       return HttpResponse.json(
         { message: "Project not found" },

@@ -1,4 +1,4 @@
-import { http, HttpResponse } from "msw";
+import { http, HttpResponse} from "msw";
 import home from "../fixtures/common/home.json";
 import about from "../fixtures/common/about.json";
 
@@ -9,12 +9,23 @@ type ContactRequest = {
 };
 
 export const commonHandlers = [
+  http.get("/", () => {
+    return; // важно: ничего не возвращаем (undefined)
+  }),
+  
   // INIT
+  // http.get("/api/v1/init", () => {
+  //   return HttpResponse.json({
+  //     status: "ok",
+  //     timestamp: Date.now(),
+  //   });
+  // }),
+  http.get("/", () => {
+    return new HttpResponse(null, { status: 200 });
+  }),
   http.get("/api/v1/init", () => {
     return HttpResponse.json({
-      site_name: "Амбасада за урбанизм",
       seo_description: "Сообщество архитекторов и урбанистов",
-      privacy_policy: "Политика конфиденциальности",
       cookie_message: "Мы используем cookies",
       cookie_button_text: "OK",
       languages: [
@@ -23,11 +34,22 @@ export const commonHandlers = [
         { code: "sr-Latn", label: "Srpski" },
         { code: "sr-Cyrl", label: "Српски" },
       ],
+      site_name: "Амбасада за Урбанизам",
+
       socials: [
+        { social_type: "LinkedIn", url: "https://linkedin.com/example" },
         { social_type: "Telegram", url: "https://t.me/example" },
         { social_type: "Instagram", url: "https://instagram.com/example" },
+        { social_type: "Facebook", url: "https://facebook.com/example" },
+        { social_type: "Email", url: "info@example.com" },
       ],
-      copyright: "© 2026 Амбасада за урбанизм",
+
+      legal_links: {
+        privacy_policy: "/privacy",
+        personal_data_processing_agreement: "/personal-data-processing",
+      },
+
+      copyright: "2026 © Амбасада за Урбанизам",
     });
   }),
 

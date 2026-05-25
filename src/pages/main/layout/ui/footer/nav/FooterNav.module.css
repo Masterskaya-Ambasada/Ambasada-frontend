@@ -1,0 +1,59 @@
+.footerNav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 40px;                  /* desktop */
+  width: 100%;
+  transform: translateX(2px);
+}
+
+.footerNavLink {
+  font-family: "Rubik", sans-serif;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 140%;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.footerNavLink:hover {
+  color: var(--white);
+}
+
+.footerNavLink:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .footerNav {
+    gap: 24px;
+    transform: translate(19px, 1px);
+  }
+
+  .footerNavLink {
+    font-size: 20px;          /* tablet размер */
+    line-height: 140%;        /* 28px */
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .footerNav {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    transform: translateX(-2px);
+    width: 138px;                 /* точная ширина меню из Figma */
+  }
+  .footerNavLink {
+    font-size: 16px;
+    line-height: 140%;
+    text-align: right;
+    white-space: normal;
+  }
+}

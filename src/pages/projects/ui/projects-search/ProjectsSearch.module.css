@@ -10,7 +10,7 @@
   height: 46px;
   padding-left: 31px;
   padding-right: 16px;
-  gap: 26px;       
+  gap: 26px;
   border: 1px solid var(--black_2);
   border-radius: 30px;
   background-color: var(--white);
@@ -123,5 +123,4 @@
   .searchInput::placeholder {
     font: var(--mobile_main);
   }
-
 }

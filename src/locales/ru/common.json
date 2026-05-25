@@ -1,11 +1,43 @@
 {
   "test": "Вывод строки для тестовой проверки перевода",
   "toggle": "Переключить язык",
+  "header": {
+    "ariaLabel1": "На главную",
+    "ariaLabel2": "Главное меню",
+    "ariaLabel3": "Выбор языка",
+    "ariaLabel4": "Закрыть меню",
+    "ariaLabel5": "Открыть меню",
+    "menu": {
+      "projects_desktop": "Каталог проектов",
+      "projects_tablet": "Проекты",
+      "about": "О сообществе",
+      "contacts": "Связаться с нами"
+    }
+  },
+
   "language": {
     "ru": "Русский",
     "en": "Английский",
     "sr-Latn": "Сербский",
     "sr-Cyrl": "Сербский"
+  },
+  "footer": {
+    "site_name": "Амбасада за урбанизам",
+
+    "aria": {
+      "home": "На главную"
+    },
+
+    "nav": {
+      "catalog": "Каталог проектов",
+      "about": "О сообществе",
+      "contacts": "Связаться с нами"
+    },
+
+    "legal": {
+      "privacy_policy": "Политика конфиденциальности",
+      "personal_data_processing_agreement": "Согласие на обработку персональных данных"
+    }
   },
   "search": {
     "placeholder": "Поиск",
@@ -16,5 +48,11 @@
     "title": "Кажется, вы свернули не туда",
     "buttonDesktop": "Вернуться на Главную",
     "buttonMobile": "Перейти на Главную"
+  },
+  "projectDetails": {
+    "textButtonDesktop": "Назад в каталог",
+    "textButtonTablet": "В каталог",
+    "mainPage": "Главная",
+    "catalogProject": "Каталог проектов"
   }
 }
