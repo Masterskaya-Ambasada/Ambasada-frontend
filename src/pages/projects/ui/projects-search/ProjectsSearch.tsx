@@ -9,6 +9,7 @@ interface ProjectsSearchProps {
   placeholder?: string;
   ariaLabel?: string;
   disabled?: boolean; // Возможность отключить поле поиска в мобильной версии
+  className?: string; // Дополнительный класс для стилизации
 }
 
 export const ProjectsSearch: React.FC<ProjectsSearchProps> = ({

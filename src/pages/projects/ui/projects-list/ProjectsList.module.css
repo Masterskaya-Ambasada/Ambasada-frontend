@@ -1,6 +1,5 @@
 .container {
   background: var(--white);
-  padding: 0 clamp(20px, 5vw, 80px);
   max-width: 1440px;
   margin: 0 auto;
   box-sizing: border-box;

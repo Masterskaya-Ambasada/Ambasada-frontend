@@ -1,0 +1,95 @@
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding-inline: 80px;
+  padding-top: 40px;
+}
+
+.breadcrumbs {
+  display: flex;
+  gap: 20px;
+  font: var(--desktop_main);
+  color: var(--black);
+}
+
+.breadcrumbLink {
+  color: var(--black);
+}
+
+.breadcrumbLink:hover,
+.breadcrumbLink:focus {
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-underline-offset: 25%;
+  text-decoration-thickness: 0%; 
+  text-decoration-skip-ink: auto;
+}
+
+.breadcrumbSeparator {
+  color: var(--black);
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: 24px;
+}
+
+.title {
+  font: var(--desktop_h2);
+  letter-spacing: -2%;
+}
+
+.search {
+  min-width: 408px;
+}
+
+.filtersRow {
+  display: flex;
+  flex-direction: column; 
+  gap: 36px;              
+  width: 100%;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  
+}
+
+.loader,
+.empty {
+  font: var(--desktop_h2);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 120px;
+  
+}
+
+/* .pageNumber {
+  font:var(--desktop_main);
+} */
+
+.paginationButton {
+  color: var(--black);
+  font: var(--desktop_main);
+}
+
+.paginationButton.active {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var( --ecologic);
+  color: var(--white);
+}
+
+.paginationButton:hover,
+.paginationButton:focus {
+  background: #e0e0e0;
+}
+
+

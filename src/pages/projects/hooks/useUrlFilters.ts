@@ -1,15 +1,23 @@
 import { useSearchParams } from "react-router-dom";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 
 export const useUrlFilters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const search = searchParams.get("search") || "";
   const type = searchParams.get("type") || "";
-  const tags = searchParams.get("tags")?.split(",")?.filter(Boolean) || [];
+
+  const tags = useMemo(
+    () => searchParams.get("tags")?.split(",").filter(Boolean) || [],
+    [searchParams],
+  );
 
   const updateFilters = useCallback(
-    (updates: { search?: string; type?: string; tags?: string[] }) => {
+    (updates: {
+      search?: string;
+      type?: string;
+      tags?: string[];
+    }) => {
       setSearchParams((prev) => {
         const newParams = new URLSearchParams(prev);
 
@@ -24,9 +32,11 @@ export const useUrlFilters = () => {
         }
 
         if (updates.tags !== undefined) {
-          if (updates.tags.length)
+          if (updates.tags.length) {
             newParams.set("tags", updates.tags.join(","));
-          else newParams.delete("tags");
+          } else {
+            newParams.delete("tags");
+          }
         }
 
         return newParams;

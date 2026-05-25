@@ -1,0 +1,133 @@
+.container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.mobileContainer {
+  display: none;
+}
+
+.button {
+  color: var(--orange_1);
+  font: var(--desktop_main);
+  cursor: pointer;
+  padding: 10px 8px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.button.active {
+  color: var(--black);
+}
+
+/* Отступ между кнопками и разделителем | */
+.button + .button {
+  padding-left: 23px;
+}
+
+/* Разделитель | между кнопками */
+.button + .button::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 2px;
+  height: 20px;
+  background: var(--orange_1);
+}
+
+/* Планшет */
+@media (min-width: 834px) and (max-width: 1024px) {
+  .container {
+    gap: 2px;
+  }
+  .button {
+    font: var(--tablet_main);
+  }
+
+  .button + .button {
+    padding-left: 9px;
+  }
+}
+
+/* Мобильная версия */
+@media (max-width: 833px) {
+  .container {
+    display: none;
+  }
+
+  .mobileContainer {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .filterTrigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .filterIcon {
+    width: 40px;
+    height: 40px;
+    display: block;
+  }
+
+  /* Выпадающий список */
+  .dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 161px;
+    min-height: 227px;
+    background: var(--white);
+    border: 2px solid var(--balance);
+    border-radius: 8px;
+    padding: 12px 0;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  .dropdownOpen {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .dropdownList {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mobileItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: var(--orange_1);
+    font: var(--mobile_button);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    transition: background-color 0.2s ease;
+  }
+
+  .mobileItem.active {
+    color: var(--black);
+    padding: 10px 8px;
+  }
+}
