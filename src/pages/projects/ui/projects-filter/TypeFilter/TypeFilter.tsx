@@ -25,8 +25,10 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
   // Закрытие дропдауна при клике вне его
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current 
-        && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -34,8 +36,7 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
     if (isOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
-    return () => 
-      document.removeEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
 
   // При клике на пункт (как в мобильной, так и в десктопной версии)
@@ -55,7 +56,8 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
     return selectedType === categoryId;
   };
 
-  return (  // <-- ВОТ ЭТОТ RETURN БЫЛ ПРОПУЩЕН!
+  return (
+    // <-- ВОТ ЭТОТ RETURN БЫЛ ПРОПУЩЕН!
     <>
       {/* DESKTOP */}
       <div className={styles.container}>
@@ -90,38 +92,39 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
           />
         </button>
 
-        {isOpen && (
-          <div className={styles.dropdown}>
-            <div className={styles.dropdownList}>
-              {/* Все проекты */}
-              <button
-                type="button"
-                className={`${styles.mobileItem} ${
-                  isActive("all") ? styles.active : ""
-                }`}
-                onClick={() => handleSelect("all")}
-              >
-                Все проекты
-              </button>
+        <div
+          className={`${styles.dropdown} ${
+            isOpen ? styles.dropdownOpen : ""}`}
+        >
+          <div className={styles.dropdownList}>
+            {/* Все проекты */}
+            <button
+              type="button"
+              className={`${styles.mobileItem} ${
+                isActive("all") ? styles.active : ""
+              }`}
+              onClick={() => handleSelect("all")}
+            >
+              Все проекты
+            </button>
 
-              {/* Остальные категории */}
-              {categories
-                .filter((category) => category.id !== "all")
-                .map((category) => (
-                  <button
-                    key={category.id}
-                    type="button"
-                    className={`${styles.mobileItem} ${
-                      isActive(category.id) ? styles.active : ""
-                    }`}
-                    onClick={() => handleSelect(category.id)}
-                  >
-                    {category.name}
-                  </button>
-                ))}
-            </div>
+            {/* Остальные категории */}
+            {categories
+              .filter((category) => category.id !== "all")
+              .map((category) => (
+                <button
+                  key={category.id}
+                  type="button"
+                  className={`${styles.mobileItem} ${
+                    isActive(category.id) ? styles.active : ""
+                  }`}
+                  onClick={() => handleSelect(category.id)}
+                >
+                  {category.name}
+                </button>
+              ))}
           </div>
-        )}
+        </div>
       </div>
     </>
   );

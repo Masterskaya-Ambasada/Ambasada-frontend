@@ -26,7 +26,6 @@
 /* Отступ между кнопками и разделителем | */
 .button + .button {
   padding-left: 23px;
-  
 }
 
 /* Разделитель | между кнопками */
@@ -39,7 +38,6 @@
   background: var(--orange_1);
 }
 
-
 /* Планшет */
 @media (min-width: 834px) and (max-width: 1024px) {
   .container {
@@ -47,14 +45,11 @@
   }
   .button {
     font: var(--tablet_main);
-
   }
-  
 
   .button + .button {
-  padding-left: 9px;
-  
-}
+    padding-left: 9px;
+  }
 }
 
 /* Мобильная версия */
@@ -98,6 +93,18 @@
     border-radius: 8px;
     padding: 12px 0;
     z-index: 1000;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  .dropdownOpen {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
   }
 
   .dropdownList {
