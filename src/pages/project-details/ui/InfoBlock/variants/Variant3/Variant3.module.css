@@ -81,6 +81,7 @@
   }
   .notAccentedText {
     margin-bottom: var(--spacing-6);
+    margin-left: clamp(8.5rem, -14.724rem + 44.5545vw, 25.375rem);
     line-height: 1.4;
   }
 

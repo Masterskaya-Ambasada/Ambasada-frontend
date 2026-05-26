@@ -1,0 +1,27 @@
+.mainContainer {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 80px;
+  background-color: var(--white);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 120px;          /* вертикальный отступ между секциями (desktop) */
+}
+
+/* Планшет (834px) */
+@media (max-width: 834px) {
+  .mainContainer {
+    padding: 0 40px;   /* tablet-макет: отступы по бокам */
+    gap: 100px;         /* tablet: отступы между секциями */
+  }
+}
+
+/* Мобильные (375px) */
+@media (max-width: 375px) {
+  .mainContainer {
+    padding: 0 20px;   /* mobile-макет: отступы по бокам */
+    gap: 80px;         /* mobile: отступы между секциями */
+  }
+}

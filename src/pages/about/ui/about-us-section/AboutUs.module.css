@@ -167,7 +167,7 @@
 
 @media (max-width: 833px) {
   .container {
-    padding: var(--spacing-5);
+    padding: var(--spacing-5) var(--spacing-5) var(--spacing-0) var(--spacing-5);
   }
 
   .breadcrumbs {
@@ -175,7 +175,7 @@
   }
 
   .content_wrapper {
-    gap: var(--spacing-4);
+    gap: var(--spacing-5);
   }
 
   .title {
@@ -191,7 +191,9 @@
   }
 
   .custom_button {
-    display: none;
+    max-width: 255px;
+    height: 36px;
+    font: var(--tablet_button);
   }
 
   .img {

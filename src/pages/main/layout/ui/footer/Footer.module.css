@@ -1,0 +1,976 @@
+/* FOOTER WRAPPER */
+.footer {
+  width: 100%;
+  background: var(--ecologic);
+  border-radius: 0 0 8px 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* CONTENT CONTAINER */
+.content {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0;
+  z-index: 1;
+  box-sizing: border-box;
+  height: 298px;
+  position: relative;           /* для абсолютного позиционирования паттерна */
+}
+
+/* TOP ROW */
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 80px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 400px;
+  max-height: 110px;
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.logoImage {
+  width: 110px;
+  height: auto;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* основной контейнер текста */
+.logoText {
+  display: flex;
+  flex-direction: column;
+  font-size: 40px;
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  color: var(--black);
+  min-width: 0;
+}
+
+/* первая строка — крупная */
+.logoTextMain {
+  font-size: 39.9px;
+  font-weight: 700;
+  letter-spacing: 3.5px;
+  transform: translate(13px, -5px);
+}
+
+/* вторая строка — меньше */
+.logoTextSub {
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  transform: translate(13px, 1px);
+}
+
+/* fallback перенос (страховка) */
+.logoText,
+.logoTextMain,
+.logoTextSub {
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+/* ПРАВЫЙ БЛОК (nav + соцсети) */
+.rightBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 40px;
+  width: 639px;
+  max-width: 100%;
+}
+
+/* BOTTOM ROW */
+.bottomRow {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 80px;
+  gap: 101px;
+  width: 100%;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 3;
+}
+
+/* Скрываем правовые ссылки (в макете их нет) */
+.bottomRow > *:last-child {
+  display: none;
+}
+
+/* ФОКУС */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.topRow,
+.bottomRow {
+  position: relative;
+  z-index: 3;
+}
+
+/* ========== ДЕКОРАТИВНЫЙ ПАТТЕРН ========== */
+.pattern {
+  position: absolute;
+  right: 0;                  /* прижат к правому краю контента */
+  top: -32px;
+  width: 592px;
+  height: 362px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Все прямоугольники — абсолютное позиционирование */
+.pattern div {
+  position: absolute;
+  box-sizing: border-box;
+  border: none;
+}
+
+/* ===== ПРАВАЯ ЧАСТЬ (основная группа) ===== */
+.rect138 {
+  width: 287.68px;
+  height: 284.53px;
+  left: 302.79px;            /* 1150.79 - 848 */
+  top: 0;
+  border: 1px solid rgba(26, 26, 26, 0.15);
+}
+.rect139 {
+  width: 62.64px;
+  height: 62.12px;
+  left: 302.79px;
+  top: 0;
+  background: rgba(26, 26, 26, 0.05);
+}
+.rect140 {
+  width: 62.64px;
+  height: 62.38px;
+  left: 302.79px;
+  top: 74.22px;               /* 42.22 + 32 (смещение top) */
+  /* без фона */
+}
+.rect143 {
+  width: 62.38px;
+  height: 62.38px;
+  left: 378.07px;            /* 1226.07 - 848 */
+  top: 74.22px;
+  background: rgba(26, 26, 26, 0.05);
+}
+.rect146 {
+  width: 62.38px;
+  height: 62.12px;
+  left: 378.07px;
+  top: 0;
+  background: rgba(26, 26, 26, 0.05);
+}
+.rect147 {
+  width: 62.38px;
+  height: 62.12px;
+  left: 453.34px;
+  top: 0;
+  background: rgba(26, 26, 26, 0.05);
+}
+.rect148 {
+  width: 62.38px;
+  height: 62.12px;
+  left: 528.62px;
+  top: 0;
+  /* без фона */
+}
+.rect149 {
+  width: 62.38px;
+  height: 62.38px;
+  left: 528.62px;
+  top: 74.22px;
+  background: rgba(26, 26, 26, 0.05);
+}
+.rect150 {
+  width: 62.38px;
+  height: 62.38px;
+  left: 453.34px;
+  top: 74.22px;
+  background: rgba(26, 26, 26, 0.05);
+}
+.rect151 {
+  width: 62.38px;
+  height: 62.38px;
+  left: 453.34px;
+  top: 150.03px;             /* 118.03 + 32 */
+  /* без фона */
+}
+.rect153 {
+  width: 62.38px;
+  height: 62.38px;
+  left: 529.67px;
+  top: 150.03px;
+  background: rgba(26, 26, 26, 0.05);
+}
+.rect144 {
+  width: 62.38px;
+  height: 62.38px;
+  left: 378.07px;
+  top: 150.03px;
+  background: rgba(26, 26, 26, 0.05);
+}
+.rect141 {
+  width: 62.38px;
+  height: 62.38px;
+  left: 302px;
+  top: 148.45px;
+  background: rgba(26, 26, 26, 0.05);
+}
+.rect145 {
+  width: 62.38px;
+  height: 62.64px;
+  left: 377.54px;
+  top: 223.46px;
+  background: rgba(26, 26, 26, 0.05);
+}
+.rect152 {
+  width: 62.38px;
+  height: 62.64px;
+  left: 452.82px;
+  top: 223.46px;
+  background: rgba(26, 26, 26, 0.05);
+}
+.rect154 {
+  width: 62.38px;
+  height: 62.64px;
+  left: 528.1px;
+  top: 223.46px;
+  background: rgba(26, 26, 26, 0.05);
+}
+.rect142 {
+  width: 62.64px;
+  height: 62.64px;
+  left: 302.26px;
+  top: 223.46px;
+  background: rgba(26, 26, 26, 0.05);
+}
+
+/* ===== ЛЕВАЯ ЧАСТЬ (смещена на -848px и ниже) ===== */
+.rect138b {
+  width: 287.68px;
+  height: 284.53px;
+  left: 0.79px;              /* 848.79 - 848 */
+  top: 76.11px;              /* 44.11 + 32 */
+  border: 1px solid rgba(26, 26, 26, 0.15);
+}
+.rect139b {
+  width: 62.64px;
+  height: 62.12px;
+  left: 0.79px;
+  top: 76.11px;
+  background: rgba(26, 26, 26, 0.05);
+}
+.rect140b {
+  width: 62.64px;
+  height: 62.38px;
+  left: 0.79px;
+  top: 150.33px;
+}
+.rect143b {
+  width: 62.38px;
+  height: 62.38px;
+  left: 76.07px;
+  top: 150.33px;
+  background: rgba(26, 26, 26, 0.05);
+}
+.rect146b {
+  width: 62.38px;
+  height: 62.12px;
+  left: 76.07px;
+  top: 76.11px;
+  background: rgba(26, 26, 26, 0.05);
+}
+.rect147b {
+  width: 62.38px;
+  height: 62.12px;
+  left: 151.34px;
+  top: 76.11px;
+  background: rgba(26, 26, 26, 0.05);
+}
+.rect148b {
+  width: 62.38px;
+  height: 62.12px;
+  left: 226.62px;
+  top: 76.11px;
+}
+.rect149b {
+  width: 62.38px;
+  height: 62.38px;
+  left: 226.62px;
+  top: 150.33px;
+  background: rgba(26, 26, 26, 0.05);
+}
+.rect150b {
+  width: 62.38px;
+  height: 62.38px;
+  left: 151.34px;
+  top: 150.33px;
+  background: rgba(26, 26, 26, 0.05);
+}
+.rect151b {
+  width: 62.38px;
+  height: 62.38px;
+  left: 151.34px;
+  top: 226.13px;
+}
+.rect153b {
+  width: 62.38px;
+  height: 62.38px;
+  left: 227.67px;
+  top: 226.13px;
+  background: rgba(26, 26, 26, 0.05);
+}
+.rect144b {
+  width: 62.38px;
+  height: 62.38px;
+  left: 76.07px;
+  top: 226.13px;
+  background: rgba(26, 26, 26, 0.05);
+}
+.rect141b {
+  width: 62.38px;
+  height: 62.38px;
+  left: 0;
+  top: 224.55px;
+  background: rgba(26, 26, 26, 0.05);
+}
+.rect145b {
+  width: 62.38px;
+  height: 62.64px;
+  left: 75.54px;
+  top: 299.57px;
+  background: rgba(26, 26, 26, 0.05);
+}
+.rect152b {
+  width: 62.38px;
+  height: 62.64px;
+  left: 150.82px;
+  top: 299.57px;
+  background: rgba(26, 26, 26, 0.05);
+}
+.rect154b {
+  width: 62.38px;
+  height: 62.64px;
+  left: 226.09px;
+  top: 299.57px;
+  background: rgba(26, 26, 26, 0.05);
+}
+.rect142b {
+  width: 62.64px;
+  height: 62.64px;
+  left: 0.26px;
+  top: 299.57px;
+  background: rgba(26, 26, 26, 0.05);
+}
+
+@media (max-width: 1300px) and (min-width: 1025px) {
+  
+  .topRow {
+    padding: 0 40px;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .logoLink {
+    max-width: 280px;
+    gap: 12px;
+  }
+
+  .logoImage {
+    width: 80px;
+  }
+
+  .logoTextMain {
+    font-size: 27px;
+  }
+
+  .logoTextSub {
+    font-size: 20px;
+  }
+
+  .rightBlock {
+    width: auto;
+    max-width: 420px;
+    gap: 20px;
+    align-items: flex-end;
+  }
+
+  .bottomRow {
+    padding: 0 40px;
+    gap: 60px;
+    justify-content: space-between;
+  }
+}
+
+/* ========== TABLET (≤1024px) ========== */
+@media (max-width: 1024px) {
+  .content {
+    padding: 20px 0;
+    gap: 24px;
+    height: 163px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+
+  .topRow {
+    align-items: center;
+    padding: 0 40px;
+  }
+
+  .logoLink {
+    width: 240px;
+    height: 66px;
+    gap: 10px;
+  }
+
+  .logoImage{
+    width: 66px;
+    transform: translateY(7px);
+  }
+
+  .logoText {
+    font-size: 26px;
+    line-height: 1;
+  }
+
+  /* первая строка */
+  .logoTextMain {
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transform: translate(7px, 2px);
+  }
+
+  /* вторая строка */
+  .logoTextSub {
+    font-size: 18px;
+    font-weight: 540;
+    letter-spacing: 1.5px;
+    transform: translate(7px, 7.8px);
+  }
+
+  .rightBlock {
+    width: 419px;
+    gap: 20px;
+  }
+
+  .bottomRow {
+    padding: 0 40px;
+    gap: 180px;
+    flex-wrap: wrap;
+  }
+
+  .pattern {
+    position: absolute;
+
+    /* прижимаем к правому краю */
+    right: -59px;
+    left: auto;
+
+    top: 0;
+
+    width: 460px;
+    height: 260px;
+  }
+
+  /* Правая группа */
+  .rect138 {
+    left: 235.26px;
+    top: 0;
+    width: 223.52px;
+    height: 205.13px;
+    border: 1px solid rgba(26, 26, 26, 0.15);
+  }
+
+  .rect139 {
+    left: 235.26px;
+    top: 0;
+    width: 48.67px;
+    height: 44.78px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+
+  .rect140 {
+    left: 235.25px;
+    top: 53.51px;
+    width: 48.67px;
+    height: 44.97px;
+  }
+
+  .rect143 {
+    left: 293.74px;
+    top: 53.51px;
+    width: 48.47px;
+    height: 44.97px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+
+  .rect146 {
+    left: 293.74px;
+    top: 0;
+    width: 48.47px;
+    height: 44.78px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+
+  .rect147 {
+    left: 352.23px;
+    top: 0;
+    width: 48.47px;
+    height: 44.78px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+
+  .rect148 {
+    left: 410.71px;
+    top: 0;
+    width: 48.47px;
+    height: 44.78px;
+  }
+
+  .rect149 {
+    left: 410.71px;
+    top: 53.51px;
+    width: 48.47px;
+    height: 44.97px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+
+  .rect150 {
+    left: 352.23px;
+    top: 53.51px;
+    width: 48.47px;
+    height: 44.97px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+
+  .rect151 {
+    left: 352.23px;
+    top: 108.16px;
+    width: 48.47px;
+    height: 44.97px;
+  }
+
+  .rect153 {
+    left: 411.53px;
+    top: 108.16px;
+    width: 48.47px;
+    height: 44.97px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+
+  .rect144 {
+    left: 293.74px;
+    top: 108.16px;
+    width: 48.47px;
+    height: 44.97px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+
+  .rect141 {
+    left: 234.64px;
+    top: 107.02px;
+    width: 48.47px;
+    height: 44.97px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+
+  .rect145 {
+    left: 293.33px;
+    top: 161.11px;
+    width: 48.47px;
+    height: 45.16px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+
+  .rect152 {
+    left: 351.82px;
+    top: 161.11px;
+    width: 48.47px;
+    height: 45.16px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+
+  .rect154 {
+    left: 410.31px;
+    top: 161.11px;
+    width: 48.47px;
+    height: 45.16px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+
+  .rect142 {
+    left: 234.85px;
+    top: 161.11px;
+    width: 48.67px;
+    height: 45.16px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+
+  /* Левая группа */
+  .rect138b {
+    left: 0.62px;
+    top: 54.87px;
+    width: 223.52px;
+    height: 205.13px;
+    border: 1px solid rgba(26, 26, 26, 0.15);
+  }
+
+  .rect139b {
+    left: 0.61px;
+    top: 54.87px;
+    width: 48.67px;
+    height: 44.78px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+
+  .rect140b {
+    left: 0.62px;
+    top: 108.38px;
+    width: 48.67px;
+    height: 44.97px;
+  }
+
+  .rect143b {
+    left: 59.1px;
+    top: 108.38px;
+    width: 48.47px;
+    height: 44.97px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+
+  .rect146b {
+    left: 59.1px;
+    top: 54.87px;
+    width: 48.47px;
+    height: 44.78px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+
+  .rect147b {
+    left: 117.59px;
+    top: 54.87px;
+    width: 48.47px;
+    height: 44.78px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+
+  .rect148b {
+    left: 176.07px;
+    top: 54.87px;
+    width: 48.47px;
+    height: 44.78px;
+  }
+
+  .rect149b {
+    left: 176.07px;
+    top: 108.38px;
+    width: 48.47px;
+    height: 44.97px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+
+  .rect150b {
+    left: 117.59px;
+    top: 108.38px;
+    width: 48.47px;
+    height: 44.97px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+
+  .rect151b {
+    left: 117.59px;
+    top: 163.03px;
+    width: 48.47px;
+    height: 44.97px;
+  }
+
+  .rect153b {
+    left: 176.89px;
+    top: 163.03px;
+    width: 48.47px;
+    height: 44.97px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+
+  .rect144b {
+    left: 59.1px;
+    top: 163.03px;
+    width: 48.47px;
+    height: 44.97px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+
+  .rect141b {
+    left: 0;
+    top: 161.89px;
+    width: 48.47px;
+    height: 44.97px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+}
+
+/* ========== MOBILE (≤768px) ========== */
+@media (max-width: 768px) {
+  .content {
+    padding: 20px 0;
+    gap: 24px;
+    height: 215px;
+  }
+
+  .topRow {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 20px;
+    gap: 0;
+    min-height: 138px;
+  }
+
+  .logoLink {
+    width: 72px;
+    height: 72px;
+    gap: 0;
+  }
+
+  .logoImage {
+    width: 72px;
+    height: 72px;
+    transform: none;
+  }
+
+  .logoText {
+    display: none;
+  }
+
+  .rightBlock {
+    width: 201px;
+    height: 138px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 0px;
+  }
+
+  .bottomRow {
+    flex-wrap: wrap;
+    padding: 0 20px;
+    gap: 10px;
+  }
+
+  .pattern {
+    display: block;
+    position: absolute;
+    right: auto;
+    left: 169px;
+    top: 3px;
+    width: 296.71px;
+    height: 218px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* Скрываем все левые прямоугольники, кроме rect153b */
+  .rect138b, .rect139b, .rect140b, .rect143b, .rect146b, .rect147b, .rect148b,
+  .rect149b, .rect150b, .rect151b, .rect144b, .rect141b, .rect145b, .rect152b,
+  .rect154b, .rect142b {
+    display: none;
+  }
+
+  /* Переопределяем правые прямоугольники + rect153b для мобильной версии */
+  .rect138 {
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 234.26px;
+    height: 214.99px;
+    left: 61.16px;   /* 229.54 - 168.38 */
+    top: 0;          /* 3 - 3 */
+    border: 1px solid rgba(26, 26, 26, 0.15);
+    background: transparent;
+  }
+  .rect139 {
+    display: block;
+    position: absolute;
+    width: 51.01px;
+    height: 46.93px;
+    left: 61.16px;
+    top: 0;
+    background: rgba(26, 26, 26, 0.05);
+  }
+  .rect140 {
+    display: block;
+    position: absolute;
+    width: 51.01px;
+    height: 47.13px;
+    left: 61.16px;
+    top: 56.08px;   /* 59.08 - 3 */
+    background: transparent;
+  }
+  .rect143 {
+    display: block;
+    position: absolute;
+    width: 50.8px;
+    height: 47.13px;
+    left: 122.46px;  /* 290.84 - 168.38 */
+    top: 56.08px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+  .rect146 {
+    display: block;
+    position: absolute;
+    width: 50.8px;
+    height: 46.93px;
+    left: 122.46px;
+    top: 0;
+    background: rgba(26, 26, 26, 0.05);
+  }
+  .rect147 {
+    display: block;
+    position: absolute;
+    width: 50.8px;
+    height: 46.93px;
+    left: 183.76px;  /* 352.14 - 168.38 */
+    top: 0;
+    background: rgba(26, 26, 26, 0.05);
+  }
+  .rect148 {
+    display: block;
+    position: absolute;
+    width: 50.8px;
+    height: 46.93px;
+    left: 245.06px;  /* 413.44 - 168.38 */
+    top: 0;
+    background: transparent;
+  }
+  .rect149 {
+    display: block;
+    position: absolute;
+    width: 50.8px;
+    height: 47.13px;
+    left: 245.06px;
+    top: 56.08px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+  .rect150 {
+    display: block;
+    position: absolute;
+    width: 50.8px;
+    height: 47.13px;
+    left: 183.76px;
+    top: 56.08px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+  .rect151 {
+    display: block;
+    position: absolute;
+    width: 50.8px;
+    height: 47.13px;
+    left: 183.76px;
+    top: 113.36px;  /* 116.36 - 3 */
+    background: transparent;
+  }
+  .rect153 {
+    display: block;
+    position: absolute;
+    width: 50.8px;
+    height: 47.13px;
+    left: 245.91px;  /* 414.29 - 168.38 */
+    top: 113.36px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+  .rect144 {
+    display: block;
+    position: absolute;
+    width: 50.8px;
+    height: 47.13px;
+    left: 122.46px;
+    top: 113.36px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+  .rect141 {
+    display: block;
+    position: absolute;
+    width: 50.8px;
+    height: 47.13px;
+    left: 60.52px;   /* 228.9 - 168.38 */
+    top: 112.17px;   /* 115.17 - 3 */
+    background: rgba(26, 26, 26, 0.05);
+  }
+  .rect145 {
+    display: block;
+    position: absolute;
+    width: 50.8px;
+    height: 47.33px;
+    left: 122.03px;  /* 290.41 - 168.38 */
+    top: 168.85px;   /* 171.85 - 3 */
+    background: rgba(26, 26, 26, 0.05);
+  }
+  .rect152 {
+    display: block;
+    position: absolute;
+    width: 50.8px;
+    height: 47.33px;
+    left: 183.33px;  /* 351.71 - 168.38 */
+    top: 168.85px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+  .rect154 {
+    display: block;
+    position: absolute;
+    width: 50.8px;
+    height: 47.33px;
+    left: 244.63px;  /* 413.01 - 168.38 */
+    top: 168.85px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+  .rect142 {
+    display: block;
+    position: absolute;
+    width: 51.01px;
+    height: 47.33px;
+    left: 60.74px;   /* 229.12 - 168.38 */
+    top: 168.85px;
+    background: rgba(26, 26, 26, 0.05);
+  }
+  /* 18-й прямоугольник (второй Rectangle 153) */
+  .rect153b {
+    display: block;
+    position: absolute;
+    width: 50.8px;
+    height: 47.13px;
+    left: 0;          /* 168.38 - 168.38 */
+    top: 170.87px;    /* 173.87 - 3 */
+    background: rgba(26, 26, 26, 0.05);
+  }
+}

@@ -1,0 +1,33 @@
+.copyright {
+  font-family: "Rubik", sans-serif;  /* main font, overridden for tablet */
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 24px;
+  color: rgba(255, 255, 255, 0.5);
+  transform: translateY(80px);
+  white-space: nowrap;               /* desktop: одна строка */
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .copyright {
+    font-family: "Inter", sans-serif;  /* Figma tablet: Inter */
+    font-size: 12px;
+    line-height: 15px;
+    color: rgba(255, 255, 255, 0.8);
+    transform: translateY(5px);
+    white-space: normal;               /* разрешаем перенос */
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .copyright {
+    font-family: "Rubik", sans-serif;  /* Figma mobile: Rubik */
+    font-size: 12px;
+    line-height: 130%;                 /* ~16px */
+    color: rgba(255, 255, 255, 0.8);
+    transform: translateY(2px);
+    white-space: normal;
+  }
+}

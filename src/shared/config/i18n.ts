@@ -13,6 +13,8 @@ i18n
   .init({
     debug: import.meta.env.DEV,
     fallbackLng: "ru",
+    ns: ["translation"],
+    defaultNS: "translation",
     supportedLngs: ["ru", "en", "sr-Latn", "sr-Cyrl"],
     detection: {
       order: ["localStorage", "cookie", "navigator"],
