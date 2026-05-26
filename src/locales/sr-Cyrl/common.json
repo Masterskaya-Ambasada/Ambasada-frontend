@@ -16,5 +16,14 @@
     "title": "Изгледа да сте скренули погрешно",
     "buttonDesktop": "Врати се на почетну",
     "buttonMobile": "Иди на почетну"
+  },
+  "projects": {
+    "filterByTags": "Филтрирај по ознакама",
+    "filterByType": "Филтрирај по типу",
+    "tagsList": "Список ознака за филтрирање",
+    "filterByTag": "Филтрирај по ознаци {{tagName}}",
+    "filterTagsDialog": "Изаберите ознаке за филтрирање",
+    "sortByTags": "Сортирај по ознакама:",
+    "collapseTags": "Сакриј ознаке"
   }
 }

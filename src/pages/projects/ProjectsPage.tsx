@@ -108,10 +108,10 @@ export const ProjectsPage: React.FC = () => {
         const res = await apiClient.get<string[]>(
           "/projects/tags");
         // Преобразуем массив строк в массив объектов
-        const tagsAsObjects: Tag[] = res.map((tagName: string) => ({
-          id: tagName.toLowerCase().replace(/\s+/g, "-"),
-          name: tagName,
-        }));
+        const tagsAsObjects: Tag[] = res.map((tagName: string, index: number) => ({
+        id: `${index}-${tagName.toLowerCase().replace(/\s+/g, "-")}`,
+        name: tagName,
+      }));
         setAvailableTags(tagsAsObjects);
       } catch (err) {
         console.log("Ошибка загрузки тегов:", err);

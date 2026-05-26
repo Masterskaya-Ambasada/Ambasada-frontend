@@ -16,5 +16,14 @@
     "title": "Looks like you took a wrong turn",
     "buttonDesktop": "Back to Home",
     "buttonMobile": "Go to Home"
+  },
+  "projects": {
+    "filterByTags": "Filter by tags",
+    "filterByType": "Filter by type",
+    "tagsList": "List of tags for filtering",
+    "filterByTag": "Filter by tag {{tagName}}",
+    "filterTagsDialog": "Select tags for filtering",
+    "sortByTags": "Sort by tags:",
+    "collapseTags": "Collapse tags"
   }
 }

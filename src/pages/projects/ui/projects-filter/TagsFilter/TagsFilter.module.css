@@ -27,7 +27,7 @@
   top: calc(100% + 8px);
   max-width: 344px;
   background: var(--white);
-  border: 2px solid var(--ecologic);
+  border: 2px solid var(--balance);
   border-radius: 8px;
   z-index: 1000;
 }
@@ -69,8 +69,14 @@
   transition: all 0.2s ease;
 }
 
-.tagButton:hover,
-.tagButton:focus {
+.tagButton:focus-visible {
+  background: var(--gray);
+  color: var(--ecologic);
+  transform: translateY(-2px);
+  outline: 2px solid var(--ecologic); 
+}
+
+.tagButton:hover {
   background: var(--gray);
   color: var(--ecologic);
   transform: translateY(-2px);
@@ -80,6 +86,7 @@
   background: var(--ecologic);
   color: var(--white);
 }
+
 
 /* Кнопка "Свернуть теги" */
 .collapseButton {
@@ -177,10 +184,4 @@
     color: var(--white);
   }
 
-  .tagsScroll .tagButton:hover,
-  .tagsScroll .tagButton:focus {
-    background: var(--gray);
-    color: var(--ecologic);
-    transform: translateY(-2px);
-  }
 }

@@ -16,5 +16,14 @@
     "title": "Кажется, вы свернули не туда",
     "buttonDesktop": "Вернуться на Главную",
     "buttonMobile": "Перейти на Главную"
+  },
+  "projects": {
+    "filterByTags": "Фильтр по тегам",
+    "filterByType": "Фильтр по типу",
+    "tagsList": "Список тегов для фильтрации",
+    "filterByTag": "Фильтр по тегу {{tagName}}",
+    "filterTagsDialog": "Выбор тегов для фильтрации",
+    "sortByTags": "Сортировка по тегам:",
+    "collapseTags": "Свернуть теги"
   }
 }

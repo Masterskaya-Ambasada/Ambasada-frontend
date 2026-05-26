@@ -18,7 +18,7 @@ export const TagsFilter: React.FC<ITagsFilterProps> = ({
   selectedTags,
   onChange,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
