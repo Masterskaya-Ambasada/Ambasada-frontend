@@ -1,11 +1,27 @@
 {
   "test": "Izlaz niza za probnu proveru prevoda",
   "toggle": "Promeni jezik",
+  "header": {
+    "ariaLabel1": "Idite na početnu stranicu",
+    "ariaLabel2": "Glavni meni",
+    "ariaLabel3": "Izbor jezika",
+    "ariaLabel4": "Zatvori meni",
+    "ariaLabel5": "Otvori meni",
+    "menu": {
+      "projects_desktop": "Katalog projekata",
+      "projects_tablet": "Projekti",
+      "about": "O zajednici",
+      "contacts": "Kontaktirajte nas"
+    }
+  },
   "language": {
     "ru": "Ruski",
     "en": "Engleski",
     "sr-Latn": "Srpski",
     "sr-Cyrl": "Srpski"
+  },
+  "footer": {
+    "site_name": "Ambasada za urbanizam"
   },
   "search": {
     "placeholder": "Pretraga",
@@ -18,12 +34,36 @@
     "buttonMobile": "Idi na početnu"
   },
   "projects": {
+    "title": "Projekti",
+    "loading": "Učitavanje...",
+    "notFound": "Projekti nisu pronađeni",
     "filterByTags": "Filtriraj po oznakama",
     "filterByType": "Filtriraj po tipu",
     "tagsList": "Spisak oznaka za filtriranje",
     "filterByTag": "Filtriraj po oznaci {{tagName}}",
     "filterTagsDialog": "Izaberite oznake za filtriranje",
     "sortByTags": "Sortiraj po oznakama:",
-    "collapseTags": "Sakrij oznake"
+    "collapseTags": "Sakrij oznake",
+    "allProjects": "Svi projekti"
+  },
+  "projectDetails": {
+    "textButtonDesktop": "Povratak u katalog",
+    "textButtonTablet": "U katalog",
+    "mainPage": "Početna",
+    "catalogProject": "Katalog projekata"
+  },
+  "pagination": {
+    "label": "Paginacija projekata",
+    "previous": "Prethodna stranica",
+    "next": "Sledeća stranica",
+    "page": "Stranica {{page}}",
+    "of": "od",
+    "back": "Nazad",
+    "forward": "Napred"
+  },
+  "navigation": {
+    "home": "Početna",
+    "projectsCatalog": "Katalog projekata",
+    "breadcrumbs": "Navigacija"
   }
 }

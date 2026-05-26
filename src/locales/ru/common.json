@@ -1,11 +1,27 @@
 {
   "test": "Вывод строки для тестовой проверки перевода",
   "toggle": "Переключить язык",
+  "header": {
+    "ariaLabel1": "Перейти на главную страницу",
+    "ariaLabel2": "Главное меню",
+    "ariaLabel3": "Выбор языка",
+    "ariaLabel4": "Закрыть меню",
+    "ariaLabel5": "Открыть меню",
+    "menu": {
+      "projects_desktop": "Каталог проектов",
+      "projects_tablet": "Проекты",
+      "about": "О сообществе",
+      "contacts": "Контакты"
+    }
+  },
   "language": {
     "ru": "Русский",
     "en": "Английский",
     "sr-Latn": "Сербский",
     "sr-Cyrl": "Сербский"
+  },
+  "footer": {
+    "site_name": "Ambasada za urbanizam"
   },
   "search": {
     "placeholder": "Поиск",
@@ -18,12 +34,36 @@
     "buttonMobile": "Перейти на Главную"
   },
   "projects": {
+    "title": "Проекты",
+    "loading": "Загрузка...",
+    "notFound": "Проекты не найдены",
     "filterByTags": "Фильтр по тегам",
     "filterByType": "Фильтр по типу",
     "tagsList": "Список тегов для фильтрации",
     "filterByTag": "Фильтр по тегу {{tagName}}",
     "filterTagsDialog": "Выбор тегов для фильтрации",
     "sortByTags": "Сортировка по тегам:",
-    "collapseTags": "Свернуть теги"
+    "collapseTags": "Свернуть теги",
+    "allProjects": "Все проекты"
+  },
+  "projectDetails": {
+    "textButtonDesktop": "Вернуться к каталогу",
+    "textButtonTablet": "В каталог",
+    "mainPage": "Главная",
+    "catalogProject": "Каталог проектов"
+  },
+  "pagination": {
+    "label": "Пагинация проектов",
+    "previous": "Предыдущая страница",
+    "next": "Следующая страница",
+    "page": "Страница {{page}}",
+    "of": "из",
+    "back": "Назад",
+    "forward": "Вперед"
+  },
+  "navigation": {
+    "home": "Главная",
+    "projectsCatalog": "Каталог проектов",
+    "breadcrumbs": "Навигация"
   }
 }
