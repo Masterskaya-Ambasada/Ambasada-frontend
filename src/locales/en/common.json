@@ -33,6 +33,12 @@
     "buttonDesktop": "Back to Home",
     "buttonMobile": "Go to Home"
   },
+  "projectDetails": {
+    "textButtonDesktop": "Back to catalog",
+    "textButtonTablet": "To catalog",
+    "mainPage": "Home",
+    "catalogProject": "Projects catalog"
+  },
   "projects": {
     "title": "Projects",
     "loading": "Loading...",
@@ -45,12 +51,6 @@
     "sortByTags": "Sort by tags:",
     "collapseTags": "Collapse tags",
     "allProjects": "All projects"
-  },
-  "projectDetails": {
-    "textButtonDesktop": "Back to catalog",
-    "textButtonTablet": "To catalog",
-    "mainPage": "Home",
-    "catalogProject": "Projects catalog"
   },
   "pagination": {
     "label": "Projects pagination",

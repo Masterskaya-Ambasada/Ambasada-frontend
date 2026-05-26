@@ -2,7 +2,7 @@
   "test": "Izlaz niza za probnu proveru prevoda",
   "toggle": "Promeni jezik",
   "header": {
-    "ariaLabel1": "Idite na početnu stranicu",
+    "ariaLabel1": "Na glavnu",
     "ariaLabel2": "Glavni meni",
     "ariaLabel3": "Izbor jezika",
     "ariaLabel4": "Zatvori meni",
@@ -33,6 +33,12 @@
     "buttonDesktop": "Vrati se na početnu",
     "buttonMobile": "Idi na početnu"
   },
+  "projectDetails": {
+    "textButtonDesktop": "Nazad u katalog",
+    "textButtonTablet": "U katalog",
+    "mainPage": "Početna",
+    "catalogProject": "Katalog projekata"
+  },
   "projects": {
     "title": "Projekti",
     "loading": "Učitavanje...",
@@ -45,12 +51,6 @@
     "sortByTags": "Sortiraj po oznakama:",
     "collapseTags": "Sakrij oznake",
     "allProjects": "Svi projekti"
-  },
-  "projectDetails": {
-    "textButtonDesktop": "Povratak u katalog",
-    "textButtonTablet": "U katalog",
-    "mainPage": "Početna",
-    "catalogProject": "Katalog projekata"
   },
   "pagination": {
     "label": "Paginacija projekata",
