@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { routesPaths } from "@shared/config/routesPaths.ts";
 import { useUrlFilters } from "./hooks/useUrlFilters";
 import { useViewportWidth } from "@shared/lib/useWidthViewPort";
+import { useTranslation } from "react-i18next";
 import { ProjectsSearch } from "./ui/projects-search/ProjectsSearch";
 import { ProjectsList } from "./ui/projects-list/ProjectsList";
 import {
@@ -37,6 +38,7 @@ type ProjectsResponse = {
 };
 
 export const ProjectsPage: React.FC = () => {
+  const { t } = useTranslation();
   // Данные проектов
   const [projectsData, setProjectsData] = useState<ProjectsResponse | null>(
     null,
@@ -234,7 +236,7 @@ export const ProjectsPage: React.FC = () => {
   if (isPageLoading && !projectsData) {
     return (
       <div className={styles.loader} role="status" aria-live="polite">
-        Загрузка...
+        {t("projects.loading", "Загрузка...")}
       </div>
     );
   }
@@ -250,16 +252,18 @@ export const ProjectsPage: React.FC = () => {
       {/* Хлебные крошки */}
       <nav className={styles.breadcrumbs} aria-label="Навигация">
         <Link to={routesPaths.home} className={styles.breadcrumbLink}>
-          Главная
+          {t("navigation.home", "Главная")}
         </Link>
         <span className={styles.breadcrumbSeparator}> {">"} </span>
         <Link to={routesPaths.projects} className={styles.breadcrumbLink}>
-          Каталог проектов
+          {t("navigation.projects", "Каталог проектов")}
         </Link>
       </nav>
 
       <div className={styles.headerRow}>
-        <h1 className={styles.title}>Проекты</h1>
+        <h1 className={styles.title}>
+          {t("projects.title", "Проекты")}
+          </h1>
         <ProjectsSearch value={localSearch} onChange={handleSearchChange} />
       </div>
 
@@ -285,7 +289,7 @@ export const ProjectsPage: React.FC = () => {
       {/* Результаты */}
       {isEmpty ? (
         <div className={styles.empty} role="status" aria-live="polite">
-          Проекты не найдены
+          {t("projects.empty", "Проекты не найдены")}
         </div>
       ) : (
         <>
@@ -293,12 +297,13 @@ export const ProjectsPage: React.FC = () => {
 
           {/* Пагинация */}
           {totalPages > 1 && (
-            <nav className={styles.pagination} aria-label="Пагинация проектов">
+            <nav className={styles.pagination} 
+            aria-label={t("pagination.label", "Пагинация проектов")}>
               <button
                 onClick={() => goToPage(page - 1)}
                 disabled={page === 1}
                 className={styles.paginationButton}
-                aria-label="Предыдущая страница"
+                aria-label={t("pagination.previous", "Предыдущая страница")}
                 aria-disabled={page === 1}
               >
                 {"<"}
@@ -317,7 +322,7 @@ export const ProjectsPage: React.FC = () => {
                     className={`${styles.paginationButton} ${
                       pageNum === page ? styles.active : ""
                     }`}
-                    aria-label={`Страница ${pageNum}`}
+                    aria-label={t("pagination.page", "Страница {{page}}", { page: pageNum })}
                     aria-current={pageNum === page ? "page" : undefined}
                   >
                     {pageNum}
@@ -329,7 +334,7 @@ export const ProjectsPage: React.FC = () => {
                 onClick={() => goToPage(page + 1)}
                 disabled={!projectsData?.pagination.isNext}
                 className={styles.paginationButton}
-                aria-label="Следующая страница"
+                aria-label={t("pagination.next", "Следующая страница")}
                 aria-disabled={!projectsData?.pagination.isNext}
               >
                 {">"}
