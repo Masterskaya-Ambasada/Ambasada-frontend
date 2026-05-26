@@ -1,5 +1,5 @@
 .searchContainer {
-  max-width: 408px;
+  width: 408px;
 }
 
 .searchWrapper {
@@ -93,19 +93,38 @@
     width: 100%;
   }
 
-  .searchWrapper {
-    transition: all 0.3s ease;
+  /* Закрытое состояние – только иконка справа */
+  .searchWrapper:not(.open) {
+    padding: 0;               
+    justify-content: flex-end; 
+    gap: 0;
     border: none;
-    overflow: hidden;
+    padding-right: 10px; 
   }
 
+  /* Поле ввода и крестик скрываем, когда поиск закрыт */
+  .searchWrapper:not(.open) .searchInput,
+  .searchWrapper:not(.open) .searchClear {
+    display: none;
+  }
+
+  /* Открытое состояние – показываем поле, возвращаем отступы */
   .searchWrapper.open {
-    width: 100%;
-    max-width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+    justify-content: flex-start;
     gap: 8px;
-    height: 40px;
     border: 1px solid var(--black_2);
-    /* padding-right: 16px; */
+  }
+
+  .searchWrapper.open .searchInput {
+    display: flex;
+  }
+
+  .searchIcon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;  
   }
 
   .searchInput {

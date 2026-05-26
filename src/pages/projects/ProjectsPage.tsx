@@ -223,12 +223,12 @@ export const ProjectsPage: React.FC = () => {
   }, [urlSearch, localSearch]);
 
   // Универсальная функция пагинации
-const goToPage = (newPage: number) => {
-  if (newPage >= 1 && newPage <= totalPages) {
-    setPage(newPage);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-};
+  const goToPage = (newPage: number) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setPage(newPage);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
 
   // Единый loader для всех состояний загрузки
   if (isPageLoading && !projectsData) {
@@ -260,11 +260,7 @@ const goToPage = (newPage: number) => {
 
       <div className={styles.headerRow}>
         <h1 className={styles.title}>Проекты</h1>
-        <ProjectsSearch
-          value={localSearch}
-          onChange={handleSearchChange}
-          className={styles.search}
-        />
+        <ProjectsSearch value={localSearch} onChange={handleSearchChange} />
       </div>
 
       <div className={styles.filtersRow}>
@@ -297,9 +293,7 @@ const goToPage = (newPage: number) => {
 
           {/* Пагинация */}
           {totalPages > 1 && (
-            <nav 
-            className={styles.pagination} 
-            aria-label="Пагинация проектов">
+            <nav className={styles.pagination} aria-label="Пагинация проектов">
               <button
                 onClick={() => goToPage(page - 1)}
                 disabled={page === 1}
@@ -311,19 +305,24 @@ const goToPage = (newPage: number) => {
               </button>
 
               <div className={styles.pageNumbers}>
-                {Array.from({ length: Math.min(4, totalPages) }, (_, i) => i + 1).map(
-                  (pageNum) => (
-                    <button
-                      key={pageNum}
-                      onClick={() => goToPage(pageNum)}
-                      className={`${styles.paginationButton} ${pageNum === page ? styles.active : ""}`}
-                      aria-label={`Страница ${pageNum}`}
-                      aria-current={pageNum === page ? "page" : undefined}
-                    >
-                      {pageNum}
-                    </button>
-                  ),
-                )}
+                {Array.from(
+                  {
+                    length: Math.min(4, totalPages - page + 1),
+                  },
+                  (_, i) => page + i,
+                ).map((pageNum) => (
+                  <button
+                    key={pageNum}
+                    onClick={() => goToPage(pageNum)}
+                    className={`${styles.paginationButton} ${
+                      pageNum === page ? styles.active : ""
+                    }`}
+                    aria-label={`Страница ${pageNum}`}
+                    aria-current={pageNum === page ? "page" : undefined}
+                  >
+                    {pageNum}
+                  </button>
+                ))}
               </div>
 
               <button

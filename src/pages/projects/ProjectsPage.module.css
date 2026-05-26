@@ -41,10 +41,6 @@
   letter-spacing: -2%;
 }
 
-.search {
-  min-width: 408px;
-}
-
 .filtersRow {
   display: flex;
   flex-direction: column; 
@@ -70,26 +66,118 @@
   
 }
 
-/* .pageNumber {
-  font:var(--desktop_main);
-} */
-
-.paginationButton {
-  color: var(--black);
-  font: var(--desktop_main);
+.pageNumbers {
+  display: flex;
+  gap: 16px;
+  align-items: center;
 }
 
-.paginationButton.active {
+.paginationButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 32px;
   height: 32px;
+
+  color: var(--black);
+  font: var(--desktop_main);
+
   border-radius: 50%;
-  background: var( --ecologic);
+  transition: 0.2s;
+}
+
+.active {
+  background: var(--ecologic);
   color: var(--white);
 }
 
-.paginationButton:hover,
-.paginationButton:focus {
-  background: #e0e0e0;
+.paginationButton:not(.active):hover,
+.paginationButton:not(.active):focus {
+  background: var(--gray);
 }
 
+/* Адаптив */
+@media (min-width: 834px) and (max-width: 1023px) {
+  .container {
+    padding-inline: 40px;
+    padding-top: 39px;
+  }
 
+  .breadcrumbs {
+    font: var(--tablet_main);
+  }
+
+  .headerRow {
+  padding-block: 28px;
+}
+
+  .title {
+  font: var(--tablet_h2);
+  letter-spacing: -2%;
+}
+
+.filtersRow {
+  padding-bottom: 20px;
+}
+
+.loader,
+.empty {
+  font: var(--tablet_h2);
+}
+
+.pagination {
+  padding-top: 20px;
+  padding-bottom: 100px;
+  
+}
+
+.paginationButton {
+  font: var(--tablet_main);
+}
+}
+
+@media (max-width: 833px) {
+  .container {
+    padding-inline: 20px;
+    padding-top: 0;
+  }
+
+  .breadcrumbs {
+    display: none;
+  }
+
+  .headerRow {
+    padding-block: 22px;
+  }
+
+  .title {
+    font: var(--mobile_h2);
+    letter-spacing: -2%;
+  }
+
+   .filtersRow {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 32px;              
+    padding-top: 2px;
+    padding-bottom: 20px;
+  }
+
+  .loader,
+  .empty {
+    font: var(--mobile_h2);
+  } 
+
+  .pagination {
+  padding-top: 24px;
+  padding-bottom: 106px;
+}
+
+.paginationButton {
+  font: var(--mobile_main);
+  width: 24px;
+  height: 24px;
+}
+
+}
