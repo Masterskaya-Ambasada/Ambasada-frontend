@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { routesPaths } from "@shared/config/routesPaths.ts";
 import { useUrlFilters } from "./hooks/useUrlFilters";
@@ -10,10 +11,7 @@ import {
   TypeFilter,
   type Category,
 } from "./ui/projects-filter/TypeFilter/TypeFilter";
-import {
-  TagsFilter,
-  type Tag,
-} from "./ui/projects-filter/TagsFilter/TagsFilter";
+import { TagsFilter } from "./ui/projects-filter/TagsFilter/TagsFilter";
 import styles from "./ProjectsPage.module.css";
 import { apiClient } from "@shared/api/client";
 
@@ -39,25 +37,10 @@ type ProjectsResponse = {
 
 export const ProjectsPage: React.FC = () => {
   const { t } = useTranslation();
-  // Данные проектов
-  const [projectsData, setProjectsData] = useState<ProjectsResponse | null>(
-    null,
-  );
-  const [loading, setLoading] = useState(true);
 
-  // Категории для фильтрации
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [loadingCategories, setLoadingCategories] = useState(true);
-
-  // Теги для фильтрации
-  const [availableTags, setAvailableTags] = useState<Tag[]>([]);
-  const [loadingTags, setLoadingTags] = useState(true);
-
-  // Параметры пагинации
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(12);
 
-  // Фильтры из URL
   const {
     search: urlSearch,
     type: urlType,
@@ -67,149 +50,103 @@ export const ProjectsPage: React.FC = () => {
 
   const [localSearch, setLocalSearch] = useState(urlSearch);
 
-  // Определение типа устройства
   const { isMobile, isTablet } = useViewportWidth();
-  const prevIsMobileOrTablet = useRef<boolean>(false);
 
-  // Обновление лимита в зависимости от устройства
+  // адаптивное количество проектов на странице
   useEffect(() => {
     const isMobileOrTablet = isMobile || isTablet;
-    const newLimit = isMobileOrTablet ? 6 : 12;
-    if (prevIsMobileOrTablet.current !== isMobileOrTablet) {
-      setLimit(newLimit);
-      setPage(1); // сброс страницы при смене количества элементов на странице
-      prevIsMobileOrTablet.current = isMobileOrTablet;
-    }
+
+    setLimit(isMobileOrTablet ? 6 : 12);
+    setPage(1);
   }, [isMobile, isTablet]);
 
-  const debounceTimerRef = useRef<number | null>(null);
-  const abortControllerRef = useRef<AbortController | null>(null);
+  // Категории для фильтрации
+  const {
+    data: categories = [],
+    isLoading: loadingCategories,
+  } = useQuery({
+    queryKey: ["projects-categories"],
+    queryFn: () => apiClient.get<Category[]>("/projects/categories"),
+  });
 
-  // Объединенный loading state
-  const isPageLoading = loading || loadingTags || loadingCategories;
+  // Теги для фильтрации
+  const {
+    data: availableTags = [],
+    isLoading: loadingTags,
+  } = useQuery({
+    queryKey: ["projects-tags"],
+    queryFn: async () => {
+      const res = await apiClient.get<string[]>("/projects/tags");
 
-  // Загрузка категорий
-  useEffect(() => {
-    async function getCategories() {
-      try {
-        setLoadingCategories(true);
-        const res = await apiClient.get<Category[]>("/projects/categories");
-        setCategories(res);
-      } catch (err) {
-        console.log("Ошибка загрузки категорий:", err);
-      } finally {
-        setLoadingCategories(false);
+      return res.map((tagName: string, index: number) => ({
+        id: `${index}-${tagName.toLowerCase().replace(/\s+/g, "-")}`,
+        name: tagName,
+      }));
+    },
+  });
+
+  // Получение проектов с учетом фильтров и пагинации
+  const {
+    data: projectsData,
+    isLoading: loadingProjects,
+    isFetching,
+  } = useQuery({
+    queryKey: [
+      "projects",
+      page,
+      limit,
+      urlSearch,
+      urlType,
+      urlTags,
+    ],
+    queryFn: async () => {
+      const offset = (page - 1) * limit;
+
+      const params = new URLSearchParams({
+        limit: String(limit),
+        offset: String(offset),
+      });
+
+      if (urlSearch) {
+        params.append("search", urlSearch);
       }
-    }
-    getCategories();
-  }, []);
 
-  // Загрузка тегов
-  useEffect(() => {
-    async function getTags() {
-      try {
-        setLoadingTags(true);
-        const res = await apiClient.get<string[]>("/projects/tags");
-        // Преобразуем массив строк в массив объектов
-        const tagsAsObjects: Tag[] = res.map((tagName: string, index: number) => ({
-          id: `${index}-${tagName.toLowerCase().replace(/\s+/g, "-")}`,
-          name: tagName,
-        }));
-        setAvailableTags(tagsAsObjects);
-      } catch (err) {
-        console.log("Ошибка загрузки тегов:", err);
-      } finally {
-        setLoadingTags(false);
+      if (urlType && urlType !== "all") {
+        params.append("type", urlType);
       }
-    }
-    getTags();
-  }, []);
 
-  // Загрузка проектов с сервера
-  useEffect(() => {
-    async function getProjects() {
-      try {
-        setLoading(true);
-
-        // Отмена предыдущего запроса, если он еще выполняется
-        if (abortControllerRef.current) {
-          abortControllerRef.current.abort();
-        }
-
-        // Новый контроллер для текущего запроса
-        const controller = new AbortController();
-        abortControllerRef.current = controller;
-
-        // Формирование параметров запроса
-        const offset = (page - 1) * limit;
-        // Добавляем параметры пагинации и фильтров в URL
-        const params = new URLSearchParams({
-          limit: String(limit),
-          offset: String(offset),
-        });
-
-        if (urlSearch) {
-          params.append("search", urlSearch);
-        }
-
-        if (urlType && urlType !== "all") {
-          params.append("type", urlType);
-        }
-
-        if (urlTags.length > 0) {
-          params.append("tags", urlTags.join(","));
-        }
-
-        // Добавляем параметры к URL запроса
-        const res = await apiClient.get<ProjectsResponse>(
-          `/projects?${params.toString()}`,
-        );
-        setProjectsData(res);
-      } catch (err: any) {
-        if (err.name !== "AbortError")
-          console.error("Ошибка загрузки проектов:", err);
-      } finally {
-        setLoading(false);
+      if (urlTags.length > 0) {
+        params.append("tags", urlTags.join(","));
       }
-    }
 
-    getProjects();
+      return apiClient.get<ProjectsResponse>(
+        `/projects?${params.toString()}`,
+      );
+    },
+    placeholderData: (prev) => prev,
+  });
 
-    return () => {
-      abortControllerRef.current?.abort();
-    };
-  }, [page, limit, urlSearch, urlType, urlTags]);
-
-  // Сброс страницы при изменении фильтров
+  // сброс страницы при изменении фильтров
   useEffect(() => {
     setPage(1);
-  }, [urlSearch, urlType, limit, urlTags]);
+  }, [urlSearch, urlType, urlTags, limit]);
 
-  // Debounce поиска
-  const debouncedUpdate = useCallback(
-    (value: string) => {
-      if (debounceTimerRef.current) {
-        clearTimeout(debounceTimerRef.current);
-      }
+  //  debounce для локального поиска
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      updateFilters({ search: localSearch });
+    }, 500);
 
-      debounceTimerRef.current = window.setTimeout(() => {
-        updateFilters({ search: value });
-        debounceTimerRef.current = null;
-      }, 500);
-    },
-    [updateFilters],
-  );
+    return () => clearTimeout(timer);
+  }, [localSearch, updateFilters]);
 
-  // Обработка изменения строки поиска
-  const handleSearchChange = useCallback(
-    (value: string) => {
-      setLocalSearch(value);
-      debouncedUpdate(value);
-    },
-    [debouncedUpdate],
-  );
+  //  синхронизация URL и локального поиска
+  useEffect(() => {
+    if (urlSearch !== localSearch) {
+      setLocalSearch(urlSearch);
+    }
+  }, [urlSearch]);
 
-  // Обработчик выбора тегов
   const handleTagsChange = useCallback(
     (newTags: string[]) => {
       updateFilters({ tags: newTags });
@@ -217,45 +154,58 @@ export const ProjectsPage: React.FC = () => {
     [updateFilters],
   );
 
-  // Синхронизация с URL
-  useEffect(() => {
-    if (urlSearch !== localSearch) {
-      setLocalSearch(urlSearch);
-    }
-  }, [urlSearch, localSearch]);
+  const totalItems = projectsData?.pagination.totalItems || 0;
+  const totalPages = Math.ceil(totalItems / limit);
 
   // Универсальная функция пагинации
   const goToPage = (newPage: number) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setPage(newPage);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     }
   };
 
-  // Единый loader для всех состояний загрузки
+  const isPageLoading =
+    loadingProjects || loadingCategories || loadingTags;
+
+   // Единый loader для всех состояний загрузки
   if (isPageLoading && !projectsData) {
     return (
-      <div className={styles.loader} role="status" aria-live="polite">
+      <div className={styles.loader}role="status" aria-live="polite">
         {t("projects.loading", "Загрузка...")}
       </div>
     );
   }
 
-  const totalItems = projectsData?.pagination.totalItems || 0;
-  const totalPages = Math.ceil(totalItems / limit);
-
   // Проверка на пустые результаты после загрузки
-  const isEmpty = !isPageLoading && projectsData?.items.length === 0;
+  const isEmpty =
+    !isPageLoading && projectsData?.items.length === 0;
 
   return (
     <div className={styles.container}>
-      {/* Хлебные крошки */}
-      <nav className={styles.breadcrumbs} aria-label="Навигация">
-        <Link to={routesPaths.home} className={styles.breadcrumbLink}>
+      <nav
+        className={styles.breadcrumbs}
+        aria-label="Навигация"
+      >
+        <Link
+          to={routesPaths.home}
+          className={styles.breadcrumbLink}
+        >
           {t("navigation.home", "Главная")}
         </Link>
-        <span className={styles.breadcrumbSeparator}> {">"} </span>
-        <Link to={routesPaths.projects} className={styles.breadcrumbLink}>
+
+        <span className={styles.breadcrumbSeparator}>
+          {" > "}
+        </span>
+
+        <Link
+          to={routesPaths.projects}
+          className={styles.breadcrumbLink}
+        >
           {t("navigation.projects", "Каталог проектов")}
         </Link>
       </nav>
@@ -263,17 +213,25 @@ export const ProjectsPage: React.FC = () => {
       <div className={styles.headerRow}>
         <h1 className={styles.title}>
           {t("projects.title", "Проекты")}
-          </h1>
-        <ProjectsSearch value={localSearch} onChange={handleSearchChange} />
+        </h1>
+
+        <ProjectsSearch
+          value={localSearch}
+          onChange={setLocalSearch}
+        />
       </div>
 
       <div className={styles.filtersRow}>
-        {/* Фильтры отображаются только после загрузки данных */}
+         {/* Фильтры отображаются только после загрузки данных */}
         {!loadingCategories && categories.length > 0 && (
           <TypeFilter
             categories={categories}
             selectedType={urlType || null}
-            onChange={(newType) => updateFilters({ type: newType || "" })}
+            onChange={(newType) =>
+              updateFilters({
+                type: newType || "",
+              })
+            }
           />
         )}
 
@@ -286,19 +244,37 @@ export const ProjectsPage: React.FC = () => {
         )}
       </div>
 
-      {/* Результаты */}
+       {/* Результаты */}
+      {isFetching && (
+        <div className={styles.fetching} 
+        role="status" aria-live="polite">
+          {t("projects.loading", "Обновление...")}
+        </div>
+      )}
+
       {isEmpty ? (
-        <div className={styles.empty} role="status" aria-live="polite">
-          {t("projects.empty", "Проекты не найдены")}
+        <div className={styles.empty}
+        role="status" aria-live="polite">
+          {t(
+            "projects.empty",
+            "Проекты не найдены",
+          )}
         </div>
       ) : (
         <>
-          <ProjectsList projects={projectsData?.items || []} />
+          <ProjectsList
+            projects={projectsData?.items || []}
+          />
 
           {/* Пагинация */}
           {totalPages > 1 && (
-            <nav className={styles.pagination} 
-            aria-label={t("pagination.label", "Пагинация проектов")}>
+            <nav
+              className={styles.pagination}
+              aria-label={t(
+                "pagination.label",
+                "Пагинация проектов",
+              )}
+            >
               <button
                 onClick={() => goToPage(page - 1)}
                 disabled={page === 1}
@@ -312,7 +288,10 @@ export const ProjectsPage: React.FC = () => {
               <div className={styles.pageNumbers}>
                 {Array.from(
                   {
-                    length: Math.min(4, totalPages - page + 1),
+                    length: Math.min(
+                      4,
+                      totalPages - page + 1,
+                    ),
                   },
                   (_, i) => page + i,
                 ).map((pageNum) => (
@@ -320,7 +299,9 @@ export const ProjectsPage: React.FC = () => {
                     key={pageNum}
                     onClick={() => goToPage(pageNum)}
                     className={`${styles.paginationButton} ${
-                      pageNum === page ? styles.active : ""
+                      pageNum === page
+                        ? styles.active
+                        : ""
                     }`}
                     aria-label={t("pagination.page", "Страница {{page}}", { page: pageNum })}
                     aria-current={pageNum === page ? "page" : undefined}
@@ -332,7 +313,9 @@ export const ProjectsPage: React.FC = () => {
 
               <button
                 onClick={() => goToPage(page + 1)}
-                disabled={!projectsData?.pagination.isNext}
+                disabled={
+                  !projectsData?.pagination.isNext
+                }
                 className={styles.paginationButton}
                 aria-label={t("pagination.next", "Следующая страница")}
                 aria-disabled={!projectsData?.pagination.isNext}

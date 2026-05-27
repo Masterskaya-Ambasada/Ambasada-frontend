@@ -51,6 +51,7 @@
   
 }
 
+.fetching,
 .loader,
 .empty {
   font: var(--desktop_h2);
@@ -164,6 +165,7 @@
     padding-bottom: 20px;
   }
 
+  .fetching,
   .loader,
   .empty {
     font: var(--mobile_h2);
