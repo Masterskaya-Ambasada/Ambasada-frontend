@@ -259,7 +259,7 @@ export const ProjectsPage: React.FC = () => {
       <h1>Проекты</h1>
 
       {/* Фильтры отображаются только после загрузки данных */}
-      {!loadingTags && availableTags.length > 0 && (
+      {!loadingTags && availableTags?.length > 0 && (
         <TagsFilter
           tags={availableTags}
           selectedTags={urlTags}
