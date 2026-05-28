@@ -38,5 +38,9 @@
     "textButtonTablet": "To catalog",
     "mainPage": "Home",
     "catalogProject": "Projects catalog"
+  },
+  "projects": {
+    "allProjects": "All projects",
+    "filterByType": "Filter by type"
   }
 }

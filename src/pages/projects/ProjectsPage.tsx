@@ -176,7 +176,7 @@ export const ProjectsPage: React.FC = () => {
     <div className={styles.projectsList}>
       <h1>Проекты</h1>
 
-      {!loadingCategories && categories.length > 0 && (
+      {!loadingCategories && categories?.length > 0 && (
         <TypeFilter
           categories={categories}
           selectedType={urlType || null}

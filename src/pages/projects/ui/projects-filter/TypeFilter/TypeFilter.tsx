@@ -13,6 +13,8 @@ interface ITypeFilterProps {
   onChange: (typeId: string | null) => void;
 }
 
+const ALL_ID = "all";
+
 export const TypeFilter: React.FC<ITypeFilterProps> = ({
   categories,
   selectedType,
@@ -41,46 +43,59 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
 
   // При клике на пункт (как в мобильной, так и в десктопной версии)
   const handleSelect = (categoryId: string) => {
-    if (categoryId === "all") {
+    if (categoryId === ALL_ID) {
       onChange(null);
     } else {
       onChange(categoryId);
     }
-    // setIsOpen(false); // Закрываем дропдаун после выбора (раскомментировать если нужно)
+    setIsOpen(false);
   };
 
   const isActive = (categoryId: string) => {
-    if (categoryId === "all") {
+    if (categoryId === ALL_ID) {
       return !selectedType;
     }
     return selectedType === categoryId;
   };
 
   return (
-    // <-- ВОТ ЭТОТ RETURN БЫЛ ПРОПУЩЕН!
     <>
       {/* DESKTOP */}
       <div className={styles.container}>
-        {categories.map((category) => (
+        {/*Все проекты*/}
           <button
-            key={category.id}
+            key={ALL_ID}
             type="button"
             className={`${styles.button} ${
-              isActive(category.id) ? styles.active : ""
+              isActive(ALL_ID) ? styles.active : ""
             }`}
-            onClick={() => handleSelect(category.id)}
+            onClick={() => handleSelect(ALL_ID)}
           >
-            {category.name}
+            {t("projects.allProjects", "Все проекты")}
           </button>
-        ))}
+        {/* Остальные категории */}
+        {categories.map((category) => (
+            <button
+              key={category.id}
+              type="button"
+              className={`${styles.button} ${
+                isActive(category.id) ? styles.active : ""
+              }`}
+              onClick={() => handleSelect(category.id)}
+            >
+              {category.name}
+            </button>
+          ))}
       </div>
 
       {/* MOBILE */}
-      <div className={styles.mobileContainer} ref={dropdownRef}>
+      <div 
+      className={styles.mobileContainer} 
+      ref={dropdownRef}>
         <button
           type="button"
           className={styles.filterTrigger}
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => setIsOpen((prev) => !prev)}
           aria-label={t("projects.filterByType", "Фильтр по типу")}
           aria-expanded={isOpen}
         >
@@ -101,17 +116,15 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
             <button
               type="button"
               className={`${styles.mobileItem} ${
-                isActive("all") ? styles.active : ""
+                isActive("ALL_ID") ? styles.active : ""
               }`}
-              onClick={() => handleSelect("all")}
+              onClick={() => handleSelect("ALL_ID")}
             >
-              Все проекты
+              {t("projects.allProjects", "Все проекты")}
             </button>
 
             {/* Остальные категории */}
-            {categories
-              .filter((category) => category.id !== "all")
-              .map((category) => (
+            {categories.map((category) => (
                 <button
                   key={category.id}
                   type="button"

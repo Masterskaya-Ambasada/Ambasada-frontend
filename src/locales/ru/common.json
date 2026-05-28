@@ -54,5 +54,9 @@
     "textButtonTablet": "В каталог",
     "mainPage": "Главная",
     "catalogProject": "Каталог проектов"
+  },
+   "projects": {
+    "allProjects": "Все проекты",
+    "filterByType": "Фильтр по типу"
   }
 }

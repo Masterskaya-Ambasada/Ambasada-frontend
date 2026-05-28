@@ -38,5 +38,9 @@
     "textButtonTablet": "U katalog",
     "mainPage": "Početna",
     "catalogProject": "Katalog projekata"
+  },
+    "projects": {
+      "allProjects": "Svi projekti",
+      "filterByType": "Filtriraj po tipu"
   }
 }
