@@ -55,9 +55,11 @@
     "mainPage": "Главная",
     "catalogProject": "Каталог проектов"
   },
-   "projects": {
+
+  "projects": {
     "allProjects": "Все проекты",
     "filterByType": "Фильтр по типу"
+  },
   "gallery": {
     "previous": "Предыдущий слайд",
     "next": "Следующий слайд"

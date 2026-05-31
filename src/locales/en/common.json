@@ -42,8 +42,10 @@
   "projects": {
     "allProjects": "All projects",
     "filterByType": "Filter by type"
+  },
   "gallery": {
     "previous": "Previous slide",
     "next": "Next slide"
+
   }
 }
