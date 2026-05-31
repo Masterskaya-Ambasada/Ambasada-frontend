@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { routesPaths } from "@shared/config/routesPaths.ts";
 import { useUrlFilters } from "./hooks/useUrlFilters";
@@ -7,33 +6,15 @@ import { useViewportWidth } from "@shared/lib/useWidthViewPort";
 import { useTranslation } from "react-i18next";
 import { ProjectsSearch } from "./ui/projects-search/ProjectsSearch";
 import { ProjectsList } from "./ui/projects-list/ProjectsList";
-import {
-  TypeFilter,
-  type Category,
-} from "./ui/projects-filter/TypeFilter/TypeFilter";
+import { TypeFilter } from "./ui/projects-filter/TypeFilter/TypeFilter";
 import { TagsFilter } from "./ui/projects-filter/TagsFilter/TagsFilter";
 import styles from "./ProjectsPage.module.css";
-import { apiClient } from "@shared/api/client";
+import { useProjectsQuery } from "@entities/project/model/useProjectsQuery";
+import { useCategoriesQuery } from "@entities/project/model/useCategoriesQuery";
+import { useTagsQuery } from "@entities/project/model/useTagsQuery";
 
-type ProjectsResponse = {
-  items: Array<{
-    id: string;
-    title: string;
-    description: string;
-    image: string;
-    type?: string;
-    action_button: {
-      label: string;
-      link: string;
-    };
-  }>;
-  pagination: {
-    totalItems: number;
-    offset: number;
-    limit: number;
-    isNext: boolean;
-  };
-};
+
+
 
 export const ProjectsPage: React.FC = () => {
   const { t } = useTranslation();
@@ -64,66 +45,28 @@ export const ProjectsPage: React.FC = () => {
   const {
     data: categories = [],
     isLoading: loadingCategories,
-  } = useQuery({
-    queryKey: ["projects-categories"],
-    queryFn: () => apiClient.get<Category[]>("/projects/categories"),
-  });
+    error: categoriesError,
+  } = useCategoriesQuery();
 
   // Теги для фильтрации
   const {
     data: availableTags = [],
     isLoading: loadingTags,
-  } = useQuery({
-    queryKey: ["projects-tags"],
-    queryFn: async () => {
-      const res = await apiClient.get<string[]>("/projects/tags");
-
-      return res.map((tagName: string, index: number) => ({
-        id: `${index}-${tagName.toLowerCase().replace(/\s+/g, "-")}`,
-        name: tagName,
-      }));
-    },
-  });
+    error: tagsError,
+  } = useTagsQuery();
 
   // Получение проектов с учетом фильтров и пагинации
   const {
     data: projectsData,
     isLoading: loadingProjects,
     isFetching,
-  } = useQuery({
-    queryKey: [
-      "projects",
-      page,
-      limit,
-      urlSearch,
-      urlType,
-      urlTags,
-    ],
-    queryFn: async () => {
-      const offset = (page - 1) * limit;
-
-      const params = new URLSearchParams({
-        limit: String(limit),
-        offset: String(offset),
-      });
-
-      if (urlSearch) {
-        params.append("search", urlSearch);
-      }
-
-      if (urlType && urlType !== "all") {
-        params.append("type", urlType);
-      }
-
-      if (urlTags.length > 0) {
-        params.append("tags", urlTags.join(","));
-      }
-
-      return apiClient.get<ProjectsResponse>(
-        `/projects?${params.toString()}`,
-      );
-    },
-    placeholderData: (prev) => prev,
+    error: projectsError,
+  } = useProjectsQuery({
+    limit,
+    offset: (page - 1) * limit,
+    search: urlSearch,
+    type: urlType,
+    tags: urlTags,
   });
 
   // сброс страницы при изменении фильтров
@@ -171,6 +114,15 @@ export const ProjectsPage: React.FC = () => {
 
   const isPageLoading =
     loadingProjects || loadingCategories || loadingTags;
+
+    // Обработка ошибок
+  if (categoriesError || tagsError || projectsError) {
+    return (
+      <div className={styles.error} role="alert" aria-live="assertive">
+        {t("projects.error", "Произошла ошибка при загрузке данных")}
+      </div>
+    );
+  }
 
    // Единый loader для всех состояний загрузки
   if (isPageLoading && !projectsData) {

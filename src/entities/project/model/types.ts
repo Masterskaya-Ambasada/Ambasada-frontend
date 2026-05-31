@@ -1,10 +1,9 @@
 export type Category = {
   id: string;
   name: string;
-  slug?: string;
 };
 
-export type ProjectTag = {
+export type Tag = {
   id: string;
   name: string;
 };
@@ -31,10 +30,10 @@ export type ProjectsResponse = {
   };
 };
 
-export type ProjectsFilters = {
+export type GetProjectsParams = {
+  limit: number;
+  offset: number;
   search?: string;
   type?: string;
   tags?: string[];
-  limit?: number;
-  offset?: number;
 };

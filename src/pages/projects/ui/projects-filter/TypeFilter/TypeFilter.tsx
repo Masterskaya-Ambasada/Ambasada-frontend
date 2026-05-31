@@ -1,11 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import type { Category } from "@entities/project/model/types";
 import styles from "./TypeFilter.module.css";
-
-export type Category = {
-  id: string;
-  name: string;
-};
 
 interface ITypeFilterProps {
   categories: Category[];
