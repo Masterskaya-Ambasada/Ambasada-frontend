@@ -13,20 +13,24 @@ interface ITypeFilterProps {
   onChange: (typeId: string | null) => void;
 }
 
+const ALL_ID = "all";
+
 export const TypeFilter: React.FC<ITypeFilterProps> = ({
   categories,
   selectedType,
   onChange,
 }) => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Закрытие дропдауна при клике вне его
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current 
-        && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -34,51 +38,64 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
     if (isOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
-    return () => 
-      document.removeEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
 
   // При клике на пункт (как в мобильной, так и в десктопной версии)
   const handleSelect = (categoryId: string) => {
-    if (categoryId === "all") {
+    if (categoryId === ALL_ID) {
       onChange(null);
     } else {
       onChange(categoryId);
     }
-    // setIsOpen(false); // Закрываем дропдаун после выбора (раскомментировать если нужно)
+    setIsOpen(false);
   };
 
   const isActive = (categoryId: string) => {
-    if (categoryId === "all") {
+    if (categoryId === ALL_ID) {
       return !selectedType;
     }
     return selectedType === categoryId;
   };
 
-  return ( 
+  return (
     <>
       {/* DESKTOP */}
       <div className={styles.container}>
-        {categories.map((category) => (
+        {/*Все проекты*/}
           <button
-            key={category.id}
+            key={ALL_ID}
             type="button"
             className={`${styles.button} ${
-              isActive(category.id) ? styles.active : ""
+              isActive(ALL_ID) ? styles.active : ""
             }`}
-            onClick={() => handleSelect(category.id)}
+            onClick={() => handleSelect(ALL_ID)}
           >
-            {category.name}
+            {t("projects.allProjects", "Все проекты")}
           </button>
-        ))}
+        {/* Остальные категории */}
+        {categories.map((category) => (
+            <button
+              key={category.id}
+              type="button"
+              className={`${styles.button} ${
+                isActive(category.id) ? styles.active : ""
+              }`}
+              onClick={() => handleSelect(category.id)}
+            >
+              {category.name}
+            </button>
+          ))}
       </div>
 
       {/* MOBILE */}
-      <div className={styles.mobileContainer} ref={dropdownRef}>
+      <div 
+      className={styles.mobileContainer} 
+      ref={dropdownRef}>
         <button
           type="button"
           className={styles.filterTrigger}
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => setIsOpen((prev) => !prev)}
           aria-label={t("projects.filterByType", "Фильтр по типу")}
           aria-expanded={isOpen}
         >
@@ -90,38 +107,37 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
           />
         </button>
 
-        {isOpen && (
-          <div className={styles.dropdown}>
-            <div className={styles.dropdownList}>
-              {/* Все проекты */}
-              <button
-                type="button"
-                className={`${styles.mobileItem} ${
-                  isActive("all") ? styles.active : ""
-                }`}
-                onClick={() => handleSelect("all")}
-              >
-                Все проекты
-              </button>
+        <div
+          className={`${styles.dropdown} ${
+            isOpen ? styles.dropdownOpen : ""}`}
+        >
+          <div className={styles.dropdownList}>
+            {/* Все проекты */}
+            <button
+              type="button"
+              className={`${styles.mobileItem} ${
+                isActive("ALL_ID") ? styles.active : ""
+              }`}
+              onClick={() => handleSelect("ALL_ID")}
+            >
+              {t("projects.allProjects", "Все проекты")}
+            </button>
 
-              {/* Остальные категории */}
-              {categories
-                .filter((category) => category.id !== "all")
-                .map((category) => (
-                  <button
-                    key={category.id}
-                    type="button"
-                    className={`${styles.mobileItem} ${
-                      isActive(category.id) ? styles.active : ""
-                    }`}
-                    onClick={() => handleSelect(category.id)}
-                  >
-                    {category.name}
-                  </button>
-                ))}
-            </div>
+            {/* Остальные категории */}
+            {categories.map((category) => (
+                <button
+                  key={category.id}
+                  type="button"
+                  className={`${styles.mobileItem} ${
+                    isActive(category.id) ? styles.active : ""
+                  }`}
+                  onClick={() => handleSelect(category.id)}
+                >
+                  {category.name}
+                </button>
+              ))}
           </div>
-        )}
+        </div>
       </div>
     </>
   );
