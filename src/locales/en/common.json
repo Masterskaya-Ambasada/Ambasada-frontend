@@ -39,14 +39,11 @@
     "mainPage": "Home",
     "catalogProject": "Projects catalog"
   },
-<<<<<<< HEAD
   "projects": {
     "allProjects": "All projects",
     "filterByType": "Filter by type"
-=======
   "gallery": {
     "previous": "Previous slide",
     "next": "Next slide"
->>>>>>> develop
   }
 }

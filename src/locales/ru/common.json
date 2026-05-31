@@ -55,14 +55,11 @@
     "mainPage": "Главная",
     "catalogProject": "Каталог проектов"
   },
-<<<<<<< HEAD
    "projects": {
     "allProjects": "Все проекты",
     "filterByType": "Фильтр по типу"
-=======
   "gallery": {
     "previous": "Предыдущий слайд",
     "next": "Следующий слайд"
->>>>>>> develop
   }
 }

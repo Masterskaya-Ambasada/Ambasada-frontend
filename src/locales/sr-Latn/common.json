@@ -39,14 +39,11 @@
     "mainPage": "Početna",
     "catalogProject": "Katalog projekata"
   },
-<<<<<<< HEAD
     "projects": {
       "allProjects": "Svi projekti",
       "filterByType": "Filtriraj po tipu"
-=======
   "gallery": {
     "previous": "Prethodni slajd",
     "next": "Sledeći slajd"
->>>>>>> develop
   }
 }

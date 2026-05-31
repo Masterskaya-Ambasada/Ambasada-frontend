@@ -39,15 +39,12 @@
     "mainPage": "Почетна",
     "catalogProject": "Каталог пројеката"
   },
-<<<<<<< HEAD
     "projects": {
       "allProjects": "Сви пројекти",
       "filterByType": "Филтрирај по типу"
     }
-=======
   "gallery": {
     "previous": "Претходни слајд",
     "next": "Следећи слајд"
   }
->>>>>>> develop
 }
