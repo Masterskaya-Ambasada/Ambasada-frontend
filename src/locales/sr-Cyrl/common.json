@@ -39,8 +39,15 @@
     "mainPage": "Почетна",
     "catalogProject": "Каталог пројеката"
   },
+
     "projects": {
       "allProjects": "Сви пројекти",
       "filterByType": "Филтрирај по типу"
     }
+
+  "gallery": {
+    "previous": "Претходни слајд",
+    "next": "Следећи слајд"
+  }
+
 }

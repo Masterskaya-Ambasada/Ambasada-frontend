@@ -1,5 +1,5 @@
 import styles from "./OurValues.module.css";
-import type { IOurValuesProps } from "./type";
+import type { IOurValuesProps } from "@/entities/about/model/types";
 
 export const OurValues = ({ data }: IOurValuesProps) => {
   return (

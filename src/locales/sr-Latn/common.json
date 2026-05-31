@@ -39,8 +39,14 @@
     "mainPage": "Početna",
     "catalogProject": "Katalog projekata"
   },
+
     "projects": {
       "allProjects": "Svi projekti",
       "filterByType": "Filtriraj po tipu"
+
+  "gallery": {
+    "previous": "Prethodni slajd",
+    "next": "Sledeći slajd"
+
   }
 }

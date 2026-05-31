@@ -1,40 +1,31 @@
-import React from "react";
-import { AboutUs, type AboutData } from "./ui/about-us-section";
-import { OurValues, type ValuesData } from "./ui/our-values";
-import { OurTeam, type TeamData } from "./ui/our-team";
-import { apiClient } from "../../shared/api/client";
-
-type PageResponse = {
-  about_section: AboutData;
-  values: ValuesData;
-  team: TeamData;
-};
+import { useAboutQuery } from "@/entities/about/model/useAboutQuery";
+import { QueryStateFallback } from "@/shared/ui/QueryStateFallback";
+import { AboutUs } from "./ui/about-us-section";
+import { OurValues } from "./ui/our-values";
+import { OurTeam } from "./ui/our-team";
+import { Gallery } from "./ui/our-gallery";
 
 export const About = () => {
-  const [pageData, setPageData] = React.useState<PageResponse | null>(null);
+  const { data, isLoading, isError, error } = useAboutQuery();
 
-  React.useEffect(() => {
-    async function getAbout() {
-      try {
-        const res = await apiClient.get<PageResponse>("/about");
-
-        setPageData(res);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    getAbout();
-  }, []);
-
-  if (!pageData) {
-    return null;
+  if (isLoading || isError) {
+    return (
+      <QueryStateFallback
+        isLoading={isLoading}
+        isError={isError}
+        error={error}
+      />
+    );
   }
+
+  if (!data) return null;
 
   return (
     <>
-      <AboutUs data={pageData.about_section} />
-      <OurValues data={pageData.values} />
-      <OurTeam data={pageData.team} />
+      <AboutUs data={data.about_section} />
+      <OurValues data={data.values} />
+      <OurTeam data={data.team} />
+      <Gallery data={data.gallery_carousel} />
     </>
   );
 };

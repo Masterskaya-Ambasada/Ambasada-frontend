@@ -1,6 +1,6 @@
 import styles from "./AboutUs.module.css";
 import { Link } from "react-router-dom";
-import type { IAboutUsProps } from "./type";
+import type { IAboutUsProps } from "@/entities/about/model/types";
 
 export const AboutUs = ({ data }: IAboutUsProps) => {
   return (
