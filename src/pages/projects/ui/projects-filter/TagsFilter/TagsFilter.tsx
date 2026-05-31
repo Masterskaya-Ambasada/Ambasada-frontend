@@ -18,7 +18,7 @@ export const TagsFilter: React.FC<ITagsFilterProps> = ({
   selectedTags,
   onChange,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -57,27 +57,30 @@ export const TagsFilter: React.FC<ITagsFilterProps> = ({
   // Единый список тегов
   const renderTagsList = () => (
     <ul className={styles.tagsList}>
-      {tags.map((tag) => (
-        <li key={tag.id} className={styles.tagItem}>
-          <button
-            type="button"
-            className={`${styles.tagButton} ${
-              selectedTags.includes(tag.id) ? styles.active : ""
-            }`}
-            onClick={() => handleTagClick(tag.id)}
-            aria-pressed={selectedTags.includes(tag.id)}
-            aria-label={t(
-              "projects.filterByTag",
-              "Фильтр по тегу {{tagName}}",
-              {
-                tagName: tag.name,
-              },
-            )}
-          >
-            {tag.name}
-          </button>
-        </li>
-      ))}
+      {tags.map((tag) => {
+        const isSelected = selectedTags.includes(tag.id);
+        return (
+          <li key={tag.id} className={styles.tagItem}>
+            <button
+              type="button"
+              className={`${styles.tagButton} ${
+                isSelected ? styles.active : ""
+              }`}
+              onClick={() => handleTagClick(tag.id)}
+              aria-pressed={isSelected}
+              aria-label={t(
+                "projects.filterByTag",
+                "Фильтр по тегу {{tagName}}",
+                {
+                  tagName: tag.name,
+                },
+              )}
+            >
+              {tag.name}
+            </button>
+          </li>
+        );
+      })}
     </ul>
   );
 
@@ -115,7 +118,7 @@ export const TagsFilter: React.FC<ITagsFilterProps> = ({
             {renderTagsList()}
             {/* Кнопка "Свернуть теги" */}
             <button
-            type="button"
+              type="button"
               className={styles.collapseButton}
               onClick={() => setIsOpen(false)}
               aria-label={t("projects.collapseTags", "Свернуть теги")}

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./OurTeam.module.css";
-import type { ITeamProps } from "./type";
+import type { ITeamProps } from "@/entities/about/model/types";
 
 export const OurTeam = ({ data }: ITeamProps) => {
   return (

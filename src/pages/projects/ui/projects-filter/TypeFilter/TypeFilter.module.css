@@ -19,6 +19,15 @@
   align-items: center;
 }
 
+.button:hover,
+.button.focus {
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-underline-offset: 25%;
+  text-decoration-thickness: 0%; 
+  text-decoration-skip-ink: auto;
+}
+
 .button.active {
   color: var(--black);
 }
@@ -125,6 +134,15 @@
     padding: 10px 16px;
     transition: background-color 0.2s ease;
   }
+
+  .mobileItem:hover,
+  .mobileItem.focus {
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-underline-offset: 25%;
+  text-decoration-thickness: 0%; 
+  text-decoration-skip-ink: auto;
+}
 
   .mobileItem.active {
     color: var(--black);

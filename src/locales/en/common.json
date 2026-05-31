@@ -38,5 +38,32 @@
     "textButtonTablet": "To catalog",
     "mainPage": "Home",
     "catalogProject": "Projects catalog"
+  },
+  "projects": {
+    "title": "Projects",
+    "loading": "Loading...",
+    "notFound": "Projects not found",
+    "filterByTags": "Filter by tags",
+    "filterByType": "Filter by type",
+    "tagsList": "List of tags for filtering",
+    "filterByTag": "Filter by tag {{tagName}}",
+    "filterTagsDialog": "Select tags for filtering",
+    "sortByTags": "Sort by tags:",
+    "collapseTags": "Collapse tags",
+    "allProjects": "All projects"
+  },
+  "pagination": {
+    "label": "Projects pagination",
+    "previous": "Previous page",
+    "next": "Next page",
+    "page": "Page {{page}}",
+    "of": "of",
+    "back": "Back",
+    "forward": "Forward"
+  },
+  "navigation": {
+    "home": "Home",
+    "projectsCatalog": "Projects catalog",
+    "breadcrumbs": "Navigation"
   }
 }

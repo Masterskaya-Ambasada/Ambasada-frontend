@@ -38,5 +38,32 @@
     "textButtonTablet": "У каталог",
     "mainPage": "Почетна",
     "catalogProject": "Каталог пројеката"
+  },
+  "projects": {
+    "title": "Пројекти",
+    "loading": "Учитавање...",
+    "notFound": "Пројекти нису пронађени",
+    "filterByTags": "Филтрирај по ознакама",
+    "filterByType": "Филтрирај по типу",
+    "tagsList": "Списак ознака за филтрирање",
+    "filterByTag": "Филтрирај по ознаци {{tagName}}",
+    "filterTagsDialog": "Изаберите ознаке за филтрирање",
+    "sortByTags": "Сортирај по ознакама:",
+    "collapseTags": "Сакриј ознаке",
+    "allProjects": "Сви пројекти"
+  },
+  "pagination": {
+    "label": "Пагинација пројеката",
+    "previous": "Претходна страница",
+    "next": "Следећа страница",
+    "page": "Страница {{page}}",
+    "of": "од",
+    "back": "Назад",
+    "forward": "Напред"
+  },
+  "navigation": {
+    "home": "Почетна",
+    "projectsCatalog": "Каталог пројеката",
+    "breadcrumbs": "Навигација"
   }
 }
