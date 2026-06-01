@@ -20,7 +20,9 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   // Фильтруем категории, убирая "Все" если она есть в массиве
-  const filteredCategories = categories.filter(cat => cat.id !== ALL_ID && cat.name !== "Все");
+  const filteredCategories = categories.filter(
+    (cat) => cat.id !== ALL_ID && cat.name !== "Все",
+  );
 
   // Закрытие дропдауна при клике вне его
   useEffect(() => {
