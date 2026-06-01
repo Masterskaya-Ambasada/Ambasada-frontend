@@ -59,35 +59,33 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
       {/* DESKTOP */}
       <div className={styles.container}>
         {/*Все проекты*/}
-          <button
-            key={ALL_ID}
-            type="button"
-            className={`${styles.button} ${
-              isActive(ALL_ID) ? styles.active : ""
-            }`}
-            onClick={() => handleSelect(ALL_ID)}
-          >
-            {t("projects.allProjects", "Все проекты")}
-          </button>
+        <button
+          key={ALL_ID}
+          type="button"
+          className={`${styles.button} ${
+            isActive(ALL_ID) ? styles.active : ""
+          }`}
+          onClick={() => handleSelect(ALL_ID)}
+        >
+          {t("projects.allProjects", "Все проекты")}
+        </button>
         {/* Остальные категории */}
         {categories.map((category) => (
-            <button
-              key={category.id}
-              type="button"
-              className={`${styles.button} ${
-                isActive(category.id) ? styles.active : ""
-              }`}
-              onClick={() => handleSelect(category.id)}
-            >
-              {category.name}
-            </button>
-          ))}
+          <button
+            key={category.id}
+            type="button"
+            className={`${styles.button} ${
+              isActive(category.id) ? styles.active : ""
+            }`}
+            onClick={() => handleSelect(category.id)}
+          >
+            {category.name}
+          </button>
+        ))}
       </div>
 
       {/* MOBILE */}
-      <div 
-      className={styles.mobileContainer} 
-      ref={dropdownRef}>
+      <div className={styles.mobileContainer} ref={dropdownRef}>
         <button
           type="button"
           className={styles.filterTrigger}
@@ -104,8 +102,7 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
         </button>
 
         <div
-          className={`${styles.dropdown} ${
-            isOpen ? styles.dropdownOpen : ""}`}
+          className={`${styles.dropdown} ${isOpen ? styles.dropdownOpen : ""}`}
         >
           <div className={styles.dropdownList}>
             {/* Все проекты */}
@@ -121,17 +118,17 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
 
             {/* Остальные категории */}
             {categories.map((category) => (
-                <button
-                  key={category.id}
-                  type="button"
-                  className={`${styles.mobileItem} ${
-                    isActive(category.id) ? styles.active : ""
-                  }`}
-                  onClick={() => handleSelect(category.id)}
-                >
-                  {category.name}
-                </button>
-              ))}
+              <button
+                key={category.id}
+                type="button"
+                className={`${styles.mobileItem} ${
+                  isActive(category.id) ? styles.active : ""
+                }`}
+                onClick={() => handleSelect(category.id)}
+              >
+                {category.name}
+              </button>
+            ))}
           </div>
         </div>
       </div>

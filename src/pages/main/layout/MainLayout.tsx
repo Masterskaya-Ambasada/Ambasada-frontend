@@ -17,7 +17,7 @@ const MainLayout = () => {
 
   useInitSeo(initData);
 
-   if (isLoading) {
+  if (isLoading) {
     return (
       <div className={styles.appState}>
         <p>Загрузка сайта...</p>
@@ -70,7 +70,7 @@ const MainLayout = () => {
   return (
     <div className={styles.layout}>
       {/* TODO: передать initData в Header, когда компонент будет готов */}
-      <Header data = {initData}></Header>
+      <Header data={initData}></Header>
       <main className={styles.main}>
         <div className={styles.mainInner}>
           <Outlet /> {/* Здесь подставляется содержимое страниц */}

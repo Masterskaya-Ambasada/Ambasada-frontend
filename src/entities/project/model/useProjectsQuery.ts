@@ -6,7 +6,7 @@ const INIT_STALE_TIME = 5 * 60 * 1000; // 5 минут
 const INIT_GC_TIME = 10 * 60 * 1000; // 10 минут
 
 export function useProjectsQuery(
-  params: GetProjectsParams
+  params: GetProjectsParams,
 ): UseQueryResult<ProjectsResponse> {
   return useQuery({
     queryKey: ["projects", params],

@@ -13,11 +13,7 @@ export const useUrlFilters = () => {
   );
 
   const updateFilters = useCallback(
-    (updates: {
-      search?: string;
-      type?: string;
-      tags?: string[];
-    }) => {
+    (updates: { search?: string; type?: string; tags?: string[] }) => {
       setSearchParams((prev) => {
         const newParams = new URLSearchParams(prev);
 

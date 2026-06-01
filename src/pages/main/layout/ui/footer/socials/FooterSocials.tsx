@@ -9,9 +9,7 @@ export const FooterSocials = ({ socials }: Props) => {
   if (!socials?.length) {
     return (
       <div className={styles.socials}>
-        <span style={{ opacity: 0.5 }}>
-          No socials available
-        </span>
+        <span style={{ opacity: 0.5 }}>No socials available</span>
       </div>
     );
   }

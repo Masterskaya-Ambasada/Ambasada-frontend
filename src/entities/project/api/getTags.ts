@@ -6,6 +6,6 @@ export function getTags(signal?: AbortSignal): Promise<Tag[]> {
     tags.map((tagName: string, index: number) => ({
       id: `${index}-${tagName.toLowerCase().replace(/\s+/g, "-")}`,
       name: tagName,
-    }))
+    })),
   );
 }

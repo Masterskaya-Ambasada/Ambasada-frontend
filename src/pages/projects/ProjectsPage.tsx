@@ -13,9 +13,6 @@ import { useProjectsQuery } from "@entities/project/model/useProjectsQuery";
 import { useCategoriesQuery } from "@entities/project/model/useCategoriesQuery";
 import { useTagsQuery } from "@entities/project/model/useTagsQuery";
 
-
-
-
 export const ProjectsPage: React.FC = () => {
   const { t } = useTranslation();
 
@@ -34,12 +31,15 @@ export const ProjectsPage: React.FC = () => {
   const { isMobile, isTablet } = useViewportWidth();
 
   // адаптивное количество проектов на странице
-  useEffect(() => {
-    const isMobileOrTablet = isMobile || isTablet;
+  const isMobileOrTablet = isMobile || isTablet;
 
-    setLimit(isMobileOrTablet ? 6 : 12);
-    setPage(1);
-  }, [isMobile, isTablet]);
+  useEffect(() => {
+    const newLimit = isMobileOrTablet ? 6 : 12;
+    if (newLimit !== limit) {
+      setLimit(newLimit);
+      setPage(1);
+    }
+  }, [isMobileOrTablet, limit]);
 
   // Категории для фильтрации
   const {
@@ -85,9 +85,7 @@ export const ProjectsPage: React.FC = () => {
 
   //  синхронизация URL и локального поиска
   useEffect(() => {
-    if (urlSearch !== localSearch) {
-      setLocalSearch(urlSearch);
-    }
+    setLocalSearch(urlSearch);
   }, [urlSearch]);
 
   const handleTagsChange = useCallback(
@@ -112,10 +110,9 @@ export const ProjectsPage: React.FC = () => {
     }
   };
 
-  const isPageLoading =
-    loadingProjects || loadingCategories || loadingTags;
+  const isPageLoading = loadingProjects || loadingCategories || loadingTags;
 
-    // Обработка ошибок
+  // Обработка ошибок
   if (categoriesError || tagsError || projectsError) {
     return (
       <div className={styles.error} role="alert" aria-live="assertive">
@@ -124,57 +121,74 @@ export const ProjectsPage: React.FC = () => {
     );
   }
 
-   // Единый loader для всех состояний загрузки
+  // Единый loader для всех состояний загрузки
   if (isPageLoading && !projectsData) {
     return (
-      <div className={styles.loader}role="status" aria-live="polite">
+      <div className={styles.loader} role="status" aria-live="polite">
         {t("projects.loading", "Загрузка...")}
       </div>
     );
   }
 
   // Проверка на пустые результаты после загрузки
-  const isEmpty =
-    !isPageLoading && projectsData?.items.length === 0;
+  const isEmpty = !isPageLoading && projectsData?.items.length === 0;
+
+  // Логика отображения номеров страниц для пагинации
+  const visiblePages: (number | string)[] = [];
+
+  if (totalPages <= 4) {
+    visiblePages.push(...Array.from({ length: totalPages }, (_, i) => i + 1));
+  } else {
+    const pages = [page, page + 1, page + 2].filter((p) => p <= totalPages);
+
+    // первая страница
+    visiblePages.push(1);
+
+    // многоточие после первой
+    if (pages[0] > 2) {
+      visiblePages.push("...");
+    }
+
+    // текущая и две следующие
+    pages.forEach((p) => {
+      if (p !== 1 && p !== totalPages) {
+        visiblePages.push(p);
+      }
+    });
+
+    // многоточие перед последней
+    const lastVisiblePage = pages[pages.length - 1];
+
+    if (lastVisiblePage < totalPages - 1) {
+      visiblePages.push("...");
+    }
+
+    // последняя страница
+    visiblePages.push(totalPages);
+  }
 
   return (
     <div className={styles.container}>
-      <nav
-        className={styles.breadcrumbs}
-        aria-label="Навигация"
-      >
-        <Link
-          to={routesPaths.home}
-          className={styles.breadcrumbLink}
-        >
+      <nav className={styles.breadcrumbs} aria-label="Навигация">
+        <Link to={routesPaths.home} className={styles.breadcrumbLink}>
           {t("navigation.home", "Главная")}
         </Link>
 
-        <span className={styles.breadcrumbSeparator}>
-          {" > "}
-        </span>
+        <span className={styles.breadcrumbSeparator}>{" > "}</span>
 
-        <Link
-          to={routesPaths.projects}
-          className={styles.breadcrumbLink}
-        >
+        <Link to={routesPaths.projects} className={styles.breadcrumbLink}>
           {t("navigation.projects", "Каталог проектов")}
         </Link>
       </nav>
 
       <div className={styles.headerRow}>
-        <h1 className={styles.title}>
-          {t("projects.title", "Проекты")}
-        </h1>
+        <h1 className={styles.title}>{t("projects.title", "Проекты")}</h1>
 
-        <ProjectsSearch
-          value={localSearch}
-          onChange={setLocalSearch}
-        />
+        <ProjectsSearch value={localSearch} onChange={setLocalSearch} />
       </div>
 
       <div className={styles.filtersRow}>
-         {/* Фильтры отображаются только после загрузки данных */}
+        {/* Фильтры отображаются только после загрузки данных */}
         {!loadingCategories && categories.length > 0 && (
           <TypeFilter
             categories={categories}
@@ -196,36 +210,26 @@ export const ProjectsPage: React.FC = () => {
         )}
       </div>
 
-       {/* Результаты */}
+      {/* Результаты */}
       {isFetching && (
-        <div className={styles.fetching} 
-        role="status" aria-live="polite">
+        <div className={styles.fetching} role="status" aria-live="polite">
           {t("projects.loading", "Обновление...")}
         </div>
       )}
 
       {isEmpty ? (
-        <div className={styles.empty}
-        role="status" aria-live="polite">
-          {t(
-            "projects.empty",
-            "Проекты не найдены",
-          )}
+        <div className={styles.empty} role="status" aria-live="polite">
+          {t("projects.empty", "Проекты не найдены")}
         </div>
       ) : (
         <>
-          <ProjectsList
-            projects={projectsData?.items || []}
-          />
+          <ProjectsList projects={projectsData?.items || []} />
 
           {/* Пагинация */}
           {totalPages > 1 && (
             <nav
               className={styles.pagination}
-              aria-label={t(
-                "pagination.label",
-                "Пагинация проектов",
-              )}
+              aria-label={t("pagination.label", "Пагинация проектов")}
             >
               <button
                 onClick={() => goToPage(page - 1)}
@@ -238,36 +242,32 @@ export const ProjectsPage: React.FC = () => {
               </button>
 
               <div className={styles.pageNumbers}>
-                {Array.from(
-                  {
-                    length: Math.min(
-                      4,
-                      totalPages - page + 1,
-                    ),
-                  },
-                  (_, i) => page + i,
-                ).map((pageNum) => (
-                  <button
-                    key={pageNum}
-                    onClick={() => goToPage(pageNum)}
-                    className={`${styles.paginationButton} ${
-                      pageNum === page
-                        ? styles.active
-                        : ""
-                    }`}
-                    aria-label={t("pagination.page", "Страница {{page}}", { page: pageNum })}
-                    aria-current={pageNum === page ? "page" : undefined}
-                  >
-                    {pageNum}
-                  </button>
-                ))}
+                {visiblePages.map((item, index) =>
+                  item === "..." ? (
+                    <span key={`ellipsis-${index}`} className={styles.ellipsis}>
+                      ...
+                    </span>
+                  ) : (
+                    <button
+                      key={item}
+                      onClick={() => goToPage(item as number)}
+                      className={`${styles.paginationButton} ${
+                        item === page ? styles.active : ""
+                      }`}
+                      aria-label={t("pagination.page", "Страница {{page}}", {
+                        page: item,
+                      })}
+                      aria-current={item === page ? "page" : undefined}
+                    >
+                      {item}
+                    </button>
+                  ),
+                )}
               </div>
 
               <button
                 onClick={() => goToPage(page + 1)}
-                disabled={
-                  !projectsData?.pagination.isNext
-                }
+                disabled={!projectsData?.pagination.isNext}
                 className={styles.paginationButton}
                 aria-label={t("pagination.next", "Следующая страница")}
                 aria-disabled={!projectsData?.pagination.isNext}

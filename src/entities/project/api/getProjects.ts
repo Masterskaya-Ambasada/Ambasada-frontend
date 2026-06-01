@@ -22,8 +22,7 @@ export function getProjects(
     urlParams.append("tags", params.tags.join(","));
   }
 
-  return apiClient.get<ProjectsResponse>(
-    `/projects?${urlParams.toString()}`,
-    { signal }
-  );
+  return apiClient.get<ProjectsResponse>(`/projects?${urlParams.toString()}`, {
+    signal,
+  });
 }

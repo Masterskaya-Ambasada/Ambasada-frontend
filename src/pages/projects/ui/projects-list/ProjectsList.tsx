@@ -17,10 +17,7 @@ interface ProjectsListProps {
   projects: Project[];
 }
 
-export const ProjectsList: React.FC<ProjectsListProps> = ({
-  projects,
-}) => {
-
+export const ProjectsList: React.FC<ProjectsListProps> = ({ projects }) => {
   return (
     <div className={styles.container}>
       <ul className={styles.grid}>

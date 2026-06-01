@@ -46,5 +46,3 @@ export const FooterNav = () => {
     </nav>
   );
 };
-
-

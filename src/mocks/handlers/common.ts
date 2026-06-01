@@ -1,4 +1,4 @@
-import { http, HttpResponse} from "msw";
+import { http, HttpResponse } from "msw";
 import home from "../fixtures/common/home.json";
 import about from "../fixtures/common/about.json";
 
@@ -12,7 +12,7 @@ export const commonHandlers = [
   http.get("/", () => {
     return; // важно: ничего не возвращаем (undefined)
   }),
-  
+
   // INIT
   // http.get("/api/v1/init", () => {
   //   return HttpResponse.json({

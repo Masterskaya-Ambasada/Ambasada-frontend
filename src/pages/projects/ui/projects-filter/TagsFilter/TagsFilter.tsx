@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import type { Tag } from "@entities/project/model/types";
 import styles from "./TagsFilter.module.css";
 
-
 interface ITagsFilterProps {
   tags: Tag[];
   selectedTags: string[];

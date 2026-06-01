@@ -10,8 +10,8 @@ async function enableMocking() {
   console.log("[MSW] init check...");
 
   if (!import.meta.env.DEV || import.meta.env.VITE_USE_MSW !== "true") {
-  console.log("[MSW] skipped by env");
-  return;
+    console.log("[MSW] skipped by env");
+    return;
   }
 
   const { worker } = await import("../mocks/browser");
