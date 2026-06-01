@@ -50,7 +50,8 @@
     "filterTagsDialog": "Select tags for filtering",
     "sortByTags": "Sort by tags:",
     "collapseTags": "Collapse tags",
-    "allProjects": "All projects"
+    "allProjects": "All projects",
+    "all": "All"
   },
   "pagination": {
     "label": "Projects pagination",

@@ -19,6 +19,8 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  // Фильтруем категории, убирая "Все" если она есть в массиве
+  const filteredCategories = categories.filter(cat => cat.id !== ALL_ID && cat.name !== "Все");
 
   // Закрытие дропдауна при клике вне его
   useEffect(() => {
@@ -56,9 +58,9 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
 
   return (
     <>
-      {/* DESKTOP */}
+      {/* DESKTOP & TABLET */}
       <div className={styles.container}>
-        {/*Все проекты*/}
+        {/*Все */}
         <button
           key={ALL_ID}
           type="button"
@@ -67,10 +69,10 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
           }`}
           onClick={() => handleSelect(ALL_ID)}
         >
-          {t("projects.allProjects", "Все проекты")}
+          {t("projects.allProjects", "Все")}
         </button>
         {/* Остальные категории */}
-        {categories.map((category) => (
+        {filteredCategories.map((category) => (
           <button
             key={category.id}
             type="button"
@@ -109,15 +111,15 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
             <button
               type="button"
               className={`${styles.mobileItem} ${
-                isActive("ALL_ID") ? styles.active : ""
+                isActive(ALL_ID) ? styles.active : ""
               }`}
-              onClick={() => handleSelect("ALL_ID")}
+              onClick={() => handleSelect(ALL_ID)}
             >
               {t("projects.allProjects", "Все проекты")}
             </button>
 
             {/* Остальные категории */}
-            {categories.map((category) => (
+            {filteredCategories.map((category) => (
               <button
                 key={category.id}
                 type="button"

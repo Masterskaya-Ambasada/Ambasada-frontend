@@ -50,7 +50,8 @@
     "filterTagsDialog": "Izaberite oznake za filtriranje",
     "sortByTags": "Sortiraj po oznakama:",
     "collapseTags": "Sakrij oznake",
-    "allProjects": "Svi projekti"
+    "allProjects": "Svi projekti",
+    "all": "Svi"
   },
   "pagination": {
     "label": "Paginacija projekata",

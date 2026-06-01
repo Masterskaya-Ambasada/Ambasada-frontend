@@ -66,7 +66,8 @@
     "filterTagsDialog": "Выбор тегов для фильтрации",
     "sortByTags": "Сортировка по тегам:",
     "collapseTags": "Свернуть теги",
-    "allProjects": "Все проекты"
+    "allProjects": "Все проекты",
+    "all": "Все"
   },
   "pagination": {
     "label": "Пагинация проектов",

@@ -50,7 +50,8 @@
     "filterTagsDialog": "Изаберите ознаке за филтрирање",
     "sortByTags": "Сортирај по ознакама:",
     "collapseTags": "Сакриј ознаке",
-    "allProjects": "Сви пројекти"
+    "allProjects": "Сви пројекти",
+    "all": "Сви"
   },
   "pagination": {
     "label": "Пагинација пројеката",
