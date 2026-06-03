@@ -8,6 +8,7 @@ import { ProjectsSearch } from "./ui/projects-search/ProjectsSearch";
 import { ProjectsList } from "./ui/projects-list/ProjectsList";
 import { TypeFilter } from "./ui/projects-filter/TypeFilter/TypeFilter";
 import { TagsFilter } from "./ui/projects-filter/TagsFilter/TagsFilter";
+import { ContactSection } from "@widgets/contact-section";
 import styles from "./ProjectsPage.module.css";
 import { useProjectsQuery } from "@entities/project/model/useProjectsQuery";
 import { useCategoriesQuery } from "@entities/project/model/useCategoriesQuery";
@@ -168,6 +169,7 @@ export const ProjectsPage: React.FC = () => {
   }
 
   return (
+    <div>
     <div className={styles.container}>
       <nav className={styles.breadcrumbs} aria-label="Навигация">
         <Link to={routesPaths.home} className={styles.breadcrumbLink}>
@@ -276,8 +278,11 @@ export const ProjectsPage: React.FC = () => {
               </button>
             </nav>
           )}
+          
         </>
       )}
+      </div>
+      <ContactSection />
     </div>
   );
 };
