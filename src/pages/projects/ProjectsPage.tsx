@@ -14,7 +14,7 @@ import { useCategoriesQuery } from "@entities/project/model/useCategoriesQuery";
 import { useTagsQuery } from "@entities/project/model/useTagsQuery";
 
 export const ProjectsPage: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
 
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(12);
@@ -213,7 +213,7 @@ export const ProjectsPage: React.FC = () => {
       {/* Результаты */}
       {isFetching && (
         <div className={styles.fetching} role="status" aria-live="polite">
-          {t("projects.loading", "Обновление...")}
+          {t("projects.loading", "Загрузка...")}
         </div>
       )}
 

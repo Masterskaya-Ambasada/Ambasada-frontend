@@ -42,7 +42,8 @@
   "projects": {
     "title": "Projects",
     "loading": "Loading...",
-    "notFound": "Projects not found",
+    "error": "An error occurred while loading data",
+    "empty": "No projects found",
     "filterByTags": "Filter by tags",
     "filterByType": "Filter by type",
     "tagsList": "List of tags for filtering",
@@ -64,7 +65,7 @@
   },
   "navigation": {
     "home": "Home",
-    "projectsCatalog": "Projects catalog",
-    "breadcrumbs": "Navigation"
+    "projects": "Project Catalog",
+    "breadcrumbs": "Breadcrumbs"
   }
 }

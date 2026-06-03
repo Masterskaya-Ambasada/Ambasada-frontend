@@ -42,7 +42,8 @@
   "projects": {
     "title": "Projekti",
     "loading": "Učitavanje...",
-    "notFound": "Projekti nisu pronađeni",
+    "error": "Desila se greška prilikom učitavanja podataka",
+    "empty": "Projekti nisu pronađeni",
     "filterByTags": "Filtriraj po oznakama",
     "filterByType": "Filtriraj po tipu",
     "tagsList": "Spisak oznaka za filtriranje",
@@ -64,7 +65,7 @@
   },
   "navigation": {
     "home": "Početna",
-    "projectsCatalog": "Katalog projekata",
+    "projects": "Katalog projekata",
     "breadcrumbs": "Navigacija"
   }
 }

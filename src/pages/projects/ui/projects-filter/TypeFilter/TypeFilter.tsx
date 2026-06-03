@@ -16,7 +16,7 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
   selectedType,
   onChange,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   // Фильтруем категории, убирая "Все" если она есть в массиве

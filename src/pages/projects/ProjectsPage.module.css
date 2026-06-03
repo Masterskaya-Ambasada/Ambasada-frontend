@@ -98,6 +98,17 @@
   background: var(--gray);
 }
 
+.paginationButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.paginationButton:not(:disabled):not(.active):hover,
+.paginationButton:not(:disabled):not(.active):focus {
+  background: var(--gray);
+}
+
 /* Адаптив */
 @media (min-width: 834px) and (max-width: 1023px) {
   .container {
