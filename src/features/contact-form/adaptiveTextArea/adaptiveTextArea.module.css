@@ -1,0 +1,36 @@
+.textarea {
+  box-sizing: border-box;
+  position: relative;
+  user-select: text;
+  -webkit-user-select: text;
+  caret-color: var(--black);
+  width: 100%;
+  border: 2px solid var(--balance);
+  border-radius: 8px;
+  background-color: var(--politic_white);
+  color: var(--black);
+  font: var(--desktop_main);
+  font-family: var(--main-font-family);
+  padding: var(--spacing-4) var(--spacing-5);
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.textarea::placeholder {
+  color: var(--black_2);
+}
+
+@media (min-width: 834px) and (max-width: 1439px) {
+  .textarea {
+    font: var(--tablet_main);
+  }
+}
+
+@media (max-width: 833px) {
+  .textarea {
+    font: var(--mobile_main);
+  }
+}

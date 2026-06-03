@@ -80,7 +80,6 @@ ghost - светло-серая с серыми буквами
 /* Ссылки политики безопасности формы */
 .linkForm {
   color: var(--politic_black);
-  opacity: 0.5;
   text-decoration: underline;
   transition: all 0.3s ease;
 }

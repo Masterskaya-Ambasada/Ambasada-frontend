@@ -8,7 +8,7 @@ const Home = lazy(() => import("@pages/home"));
 const ProjectsPage = lazy(() => import("@pages/projects"));
 const ProjectDetails = lazy(() => import("@pages/project-details"));
 const About = lazy(() => import("@pages/about"));
-const Contacts = lazy(() => import("@pages/contacts"));
+const Contacts = lazy(() => import("@/pages/contacts/ui"));
 const Policy = lazy(() => import("@pages/politics"));
 const NotFound = lazy(() => import("@pages/not-found"));
 

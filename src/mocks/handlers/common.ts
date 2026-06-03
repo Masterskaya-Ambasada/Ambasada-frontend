@@ -26,6 +26,8 @@ export const commonHandlers = [
   http.get("/api/v1/init", () => {
     return HttpResponse.json({
       seo_description: "Сообщество архитекторов и урбанистов",
+      privacy_policy:
+        "<p>Нажимая Отправить, я подтверждаю ознакомление с <a href='/politics'>Политикой конфиденциальности</a> и даю согласие на обработку моих данных для обработки моего запроса и связи со мной</p>",
       cookie_message: "Мы используем cookies",
       cookie_button_text: "OK",
       languages: [
@@ -43,12 +45,6 @@ export const commonHandlers = [
         { social_type: "Facebook", url: "https://facebook.com/example" },
         { social_type: "Email", url: "info@example.com" },
       ],
-
-      legal_links: {
-        privacy_policy: "/privacy",
-        personal_data_processing_agreement: "/personal-data-processing",
-      },
-
       copyright: "2026 © Амбасада за Урбанизам",
     });
   }),
@@ -88,7 +84,7 @@ export const commonHandlers = [
 
     return HttpResponse.json(
       {
-        message: "Message sent successfully",
+        detail: "Message sent successfully",
       },
       { status: 201 },
     );

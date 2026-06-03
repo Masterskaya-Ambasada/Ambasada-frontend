@@ -18,6 +18,7 @@ img {
 
 button,
 input,
+textarea,
 a {
   color: inherit;
   background-color: transparent;
@@ -29,6 +30,7 @@ a {
 }
 
 input:focus,
+textarea:focus,
 button:focus,
 a:focus {
   outline: none;

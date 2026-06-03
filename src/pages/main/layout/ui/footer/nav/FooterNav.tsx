@@ -1,6 +1,7 @@
 import styles from "./FooterNav.module.css";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
+import { routesPaths } from "@shared/config/routesPaths";
 
 export const FooterNav = () => {
   const { t } = useTranslation("common");
@@ -19,9 +20,9 @@ export const FooterNav = () => {
   }, []);
 
   const NAV_ITEMS = [
-    { key: "catalog", href: "/catalog" },
-    { key: "about", href: "/about" },
-    { key: "contacts", href: "/contacts" },
+    { key: "catalog", href: routesPaths.projects },
+    { key: "about", href: routesPaths.about },
+    { key: "contacts", href: routesPaths.contacts },
   ];
 
   return (

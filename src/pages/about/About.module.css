@@ -1,0 +1,9 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(var(--spacing-20), 12vw, var(--spacing-30));
+}
+
+.container > :last-child {
+  padding-bottom: clamp(var(--spacing-20), 12vw, var(--spacing-30));
+}
