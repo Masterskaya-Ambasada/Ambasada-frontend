@@ -12,7 +12,7 @@ export const useUrlFilters = () => {
     [searchParams],
   );
 
-   console.log("PARSED TAGS:", tags);
+  console.log("PARSED TAGS:", tags);
   const updateFilters = useCallback(
     (updates: { search?: string; type?: string; tags?: string[] }) => {
       setSearchParams((prev) => {

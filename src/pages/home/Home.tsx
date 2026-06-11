@@ -29,9 +29,9 @@ export const Home: React.FC = () => {
       <div className={styles.mainContainer}>
         <h1>Главная страница</h1>
         <Link to={routesPaths.projects}>Проекты</Link>
-        <SectionHero hero={data.hero}/>
+        <SectionHero hero={data.hero} />
         <AboutCommunity aboutPreview={data.about_preview} />
-        <SectionTeam teamPreview={data.team_preview}/>
+        <SectionTeam teamPreview={data.team_preview} />
         <SectionProjects projects_preview={data.projects_preview} />
       </div>
       <ContactSection />

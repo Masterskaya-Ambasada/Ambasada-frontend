@@ -20,20 +20,15 @@ export const projectHandlers = [
 
     // фильтр по типу проекта
     if (projectType) {
-      filtered = filtered.filter(
-        (p) => p.project_type === projectType,
-      );
+      filtered = filtered.filter((p) => p.project_type === projectType);
     }
 
     // фильтр по тегу
     if (tags) {
-      const selectedTags = tags
-    .split(",")
-    .map((tag) => tag.toLowerCase());
-    
+      const selectedTags = tags.split(",").map((tag) => tag.toLowerCase());
+
       filtered = filtered.filter((p) =>
-        p.tags.some((t) => 
-          selectedTags.includes(t.toLowerCase())),
+        p.tags.some((t) => selectedTags.includes(t.toLowerCase())),
       );
     }
 

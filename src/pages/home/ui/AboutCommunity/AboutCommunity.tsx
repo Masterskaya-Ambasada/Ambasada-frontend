@@ -13,9 +13,7 @@ export const AboutCommunity = ({ aboutPreview }: AboutCommunityProps) => {
         </h2>
 
         {/* TEXT */}
-        <p className={styles.text}>
-          {aboutPreview.text}
-        </p>
+        <p className={styles.text}>{aboutPreview.text}</p>
 
         {/* BUTTON */}
         <Link to={aboutPreview.action_button.link} className={styles.button}>
