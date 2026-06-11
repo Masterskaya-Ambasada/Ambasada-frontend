@@ -21,7 +21,7 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
   const dropdownRef = useRef<HTMLDivElement>(null);
   // Фильтруем категории, убирая "Все" если она есть в массиве
   const filteredCategories = categories.filter(
-    (cat) => cat.id !== ALL_ID && cat.name !== "Все",
+    (cat) => cat.id !== ALL_ID && cat.label !== "Все",
   );
 
   // Закрытие дропдауна при клике вне его
@@ -83,7 +83,7 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
             }`}
             onClick={() => handleSelect(category.id)}
           >
-            {category.name}
+            {category.label}
           </button>
         ))}
       </div>
@@ -130,7 +130,7 @@ export const TypeFilter: React.FC<ITypeFilterProps> = ({
                 }`}
                 onClick={() => handleSelect(category.id)}
               >
-                {category.name}
+                {category.label}
               </button>
             ))}
           </div>

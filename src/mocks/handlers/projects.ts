@@ -10,7 +10,7 @@ export const projectHandlers = [
     const url = new URL(request.url);
 
     const projectType = url.searchParams.get("project_type");
-    const tag = url.searchParams.get("tag");
+    const tags = url.searchParams.get("tags");
     const search = url.searchParams.get("search");
 
     const offset = Number(url.searchParams.get("offset")) || 0;
@@ -21,14 +21,19 @@ export const projectHandlers = [
     // фильтр по типу проекта
     if (projectType) {
       filtered = filtered.filter(
-        (p) => p.project_type.toLowerCase() === projectType.toLowerCase(),
+        (p) => p.project_type === projectType,
       );
     }
 
     // фильтр по тегу
-    if (tag) {
+    if (tags) {
+      const selectedTags = tags
+    .split(",")
+    .map((tag) => tag.toLowerCase());
+    
       filtered = filtered.filter((p) =>
-        p.tags.some((t) => t.toLowerCase() === tag.toLowerCase()),
+        p.tags.some((t) => 
+          selectedTags.includes(t.toLowerCase())),
       );
     }
 
@@ -55,7 +60,9 @@ export const projectHandlers = [
 
   // GET /projects/categories
   http.get("/api/v1/projects/categories", () => {
-    return HttpResponse.json(categories);
+    return HttpResponse.json({
+      types: categories,
+    });
   }),
 
   // GET /projects/predefined-categories

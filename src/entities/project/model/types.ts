@@ -1,6 +1,10 @@
 export type Category = {
   id: string;
-  name: string;
+  label: string;
+};
+
+export type CategoriesResponse = {
+  types: Category[];
 };
 
 export type Tag = {

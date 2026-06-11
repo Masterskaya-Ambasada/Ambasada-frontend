@@ -15,7 +15,7 @@ export function getProjects(
   }
 
   if (params.type && params.type !== "all") {
-    urlParams.append("type", params.type);
+    urlParams.append("project_type", params.type);
   }
 
   if (params.tags && params.tags.length > 0) {
