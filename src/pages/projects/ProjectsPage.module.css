@@ -54,6 +54,7 @@
 .loader,
 .empty {
   font: var(--desktop_h2);
+  padding-bottom: 120px;
 }
 
 .pagination {
