@@ -8,6 +8,7 @@ import eslintConfigPrettier from "eslint-config-prettier";
 import boundaries from "eslint-plugin-boundaries";
 import { defineConfig, globalIgnores } from "eslint/config";
 import importPlugin from "eslint-plugin-import";
+import customRules from "./scripts/checkCSSname.js";
 
 export default defineConfig([
   globalIgnores(["dist", "node_modules"]),
@@ -29,6 +30,7 @@ export default defineConfig([
       prettier,
       boundaries,
       import: importPlugin,
+      custom: customRules,
     },
     settings: {
       "import/resolver": {
@@ -137,6 +139,7 @@ export default defineConfig([
 
       "boundaries/no-unknown": "error",
       "boundaries/no-unknown-files": "error",
+      "custom/css-modules-camelcase": "error",
     },
   },
   {

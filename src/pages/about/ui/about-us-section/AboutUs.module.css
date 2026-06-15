@@ -1,4 +1,4 @@
-.about_section {
+.aboutSection {
   width: 100%;
 }
 
@@ -37,7 +37,7 @@
   z-index: -1;
 }
 
-.content_wrapper {
+.contentWrapper {
   max-width: 1280px;
   width: 100%;
   display: flex;
@@ -57,7 +57,7 @@
   font: var(--desktop_h2);
 }
 
-.paragraphs_container {
+.paragraphsContainer {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--spacing-6);
@@ -65,15 +65,15 @@
   margin: var(--spacing-10) 0;
 }
 
-.paragraphs_container .paragraph_card:first-child {
+.paragraphsContainer .paragraphCard:first-child {
   width: 100%;
 }
 
-.paragraphs_container .paragraph_card:nth-child(2) {
+.paragraphsContainer .paragraphCard:nth-child(2) {
   width: 75%;
 }
 
-.paragraph_card {
+.paragraphCard {
   border: 1px solid var(--ecologic);
   border-radius: 8px;
   padding: var(--spacing-5) var(--spacing-8);
@@ -81,16 +81,16 @@
   font: var(--desktop_main);
 }
 
-.first_sentence {
+.firstSentence {
   font-family: "Inter", sans-serif;
   font-weight: 500;
 }
 
-.main_text {
+.mainText {
   font-weight: 300;
 }
 
-.custom_button {
+.customButton {
   min-width: 200px;
   max-width: 500px;
   align-self: center;
@@ -119,11 +119,11 @@
     padding: var(--spacing-8) var(--spacing-10) 0;
   }
 
-  .paragraphs_container {
+  .paragraphsContainer {
     margin: 0;
   }
 
-  .content_wrapper {
+  .contentWrapper {
     max-width: 100%;
     gap: var(--spacing-10);
   }
@@ -132,18 +132,18 @@
     font: var(--tablet_h2);
   }
 
-  .paragraph_card {
+  .paragraphCard {
     padding: var(--spacing-5);
     font: var(--tablet_main);
   }
 
-  .custom_button {
+  .customButton {
     max-width: 350px;
     height: 48px;
     font: var(--tablet_button);
   }
 
-  .paragraphs_container .paragraph_card:nth-child(2) {
+  .paragraphsContainer .paragraphCard:nth-child(2) {
     width: 100%;
   }
 
@@ -174,7 +174,7 @@
     display: none;
   }
 
-  .content_wrapper {
+  .contentWrapper {
     gap: var(--spacing-5);
   }
 
@@ -182,15 +182,15 @@
     font: var(--mobile_h2);
   }
 
-  .paragraphs_container {
+  .paragraphsContainer {
     gap: var(--spacing-4);
   }
 
-  .paragraph_card {
+  .paragraphCard {
     font: var(--mobile_main);
   }
 
-  .custom_button {
+  .customButton {
     max-width: 255px;
     height: 36px;
     font: var(--tablet_button);
@@ -219,8 +219,16 @@
   }
 }
 
-.custom_button:focus-visible,
-.breadcrumb_link:focus-visible {
+.customButton:focus-visible,
+.breadcrumbLink:focus-visible {
   outline: none;
   box-shadow: var(--focus-ring);
+}
+
+.breadcrumbLink:hover {
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-underline-offset: 25%;
+  text-decoration-thickness: 0%;
+  text-decoration-skip-ink: auto;
 }

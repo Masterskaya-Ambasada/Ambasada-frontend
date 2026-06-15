@@ -21,7 +21,24 @@
     "sr-Cyrl": "Serbian"
   },
   "footer": {
-    "site_name": "Ambasada za urbanizam"
+    "site_name": "Ambasada for Urbanism",
+
+    "aria": {
+      "home": "Go to home"
+    },
+
+    "nav": {
+      "catalog": "Project Catalog",
+      "about": "About Community",
+      "contacts": "Contact Us",
+      "home": "Home",
+      "projects": "Projects"
+    },
+
+    "legal": {
+      "privacy_policy": "Privacy Policy",
+      "personal_data_processing_agreement": "Consent to Personal Data Processing"
+    }
   },
   "search": {
     "placeholder": "Search",
@@ -71,12 +88,6 @@
       "button": "Try again"
     }
   },
-  "captcha": {
-    "notRobotLabel": "I am not a robot",
-    "continuePrompt": "Click to continue",
-    "imageTextLabel": "Enter the text from the image",
-    "confirmButton": "Confirm"
-  },
   "projectDetails": {
     "textButtonDesktop": "Back to catalog",
     "textButtonTablet": "To catalog",
@@ -110,6 +121,11 @@
   "navigation": {
     "home": "Home",
     "projects": "Project Catalog",
-    "breadcrumbs": "Breadcrumbs"
+    "breadcrumbs": "Breadcrumbs",
+    "about": "About the community"
+  },
+  "cookieConsent": {
+    "ariaLabel": "Cookie usage notification",
+    "acceptButtonAriaLabel": "Accept cookies"
   }
 }

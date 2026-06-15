@@ -1,17 +1,17 @@
-.gallery_section {
+.gallerySection {
   display: flex;
   flex-direction: column;
   overflow: hidden;
   gap: var(--spacing-10);
 }
 
-.gallery_title {
+.galleryTitle {
   padding: 0 var(--spacing-20);
   font: var(--desktop_h2);
   letter-spacing: -2%;
 }
 
-.carousel_wrapper {
+.carouselWrapper {
   position: relative;
   display: flex;
   align-items: center;
@@ -19,7 +19,7 @@
   left: -25px;
 }
 
-.slides_container {
+.slidesContainer {
   display: grid;
   gap: var(--spacing-8);
   align-items: center;
@@ -34,20 +34,20 @@
   );
 }
 
-.slide_current {
+.slideCurrent {
   z-index: 2;
   box-shadow: 0 var(--spacing-2) var(--spacing-8) rgba(0, 0, 0, 0.15);
 }
 
 .slide img,
-.single_container img {
+.singleContainer img {
   width: 100%;
   height: clamp(215px, 58vw, 534px);
   object-fit: cover;
   border-radius: var(--spacing-2);
 }
 
-.nav_button {
+.navButton {
   width: var(--spacing-20);
   height: 100%;
   background-color: rgba(230, 226, 255, 0.2);
@@ -66,31 +66,31 @@
   z-index: 20;
 }
 
-.nav_prev {
+.navPrev {
   left: 25px;
 }
 
-.nav_next {
+.navNext {
   right: -25px;
 }
 
-.single_container {
+.singleContainer {
   padding: 0 var(--spacing-5);
 }
 
-.slide_out_left {
+.slideOutLeft {
   animation: slideOutLeft 0.3s forwards;
 }
 
-.slide_out_right {
+.slideOutRight {
   animation: slideOutRight 0.3s forwards;
 }
 
-.slide_in_from_right {
+.slideInFromRight {
   animation: slideInFromRight 0.3s forwards;
 }
 
-.slide_in_from_left {
+.slideInFromLeft {
   animation: slideInFromLeft 0.3s forwards;
 }
 
@@ -139,38 +139,38 @@
 }
 
 @media (max-width: 1023px) {
-  .nav_button:disabled {
+  .navButton:disabled {
     opacity: 0;
     visibility: hidden;
     cursor: not-allowed;
   }
 
-  .gallery_title {
+  .galleryTitle {
     font: var(--tablet_h2);
   }
 
-  .carousel_wrapper {
+  .carouselWrapper {
     left: 0;
   }
 
-  .nav_prev {
+  .navPrev {
     left: 0;
   }
 
-  .nav_next {
+  .navNext {
     right: 0;
   }
 }
 
 @media (max-width: 833px) {
-  .gallery_title {
+  .galleryTitle {
     padding: 0 var(--spacing-5);
     font: var(--mobile_h2);
   }
 }
 
 @media (min-width: 834px) and (max-width: 1023px) {
-  .slides_container {
+  .slidesContainer {
     grid-template-columns: repeat(3, min(752px, 100%));
   }
 }

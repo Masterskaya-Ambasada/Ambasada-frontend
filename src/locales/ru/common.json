@@ -122,7 +122,8 @@
   "navigation": {
     "home": "Главная",
     "projects": "Каталог проектов",
-    "breadcrumbs": "Навигация"
+    "breadcrumbs": "Навигация",
+    "about": "О сообществе"
   },
   "cookieConsent": {
     "ariaLabel": "Уведомление об использовании cookies",

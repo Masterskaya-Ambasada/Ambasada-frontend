@@ -25,13 +25,13 @@ export const Gallery = ({ data }: ICarouselProps) => {
 
   if (itemsLength === 1) {
     return (
-      <section className={styles.gallery_section}>
-        <h2 className={styles.gallery_title}>{data.title}</h2>
-        <div className={styles.single_container}>
+      <section className={styles.gallerySection}>
+        <h2 className={styles.galleryTitle}>{data.title}</h2>
+        <div className={styles.singleContainer}>
           <img
             src={images[0].url}
             alt={images[0].alt}
-            className={styles.single_image}
+            className={styles.singleImage}
           />
         </div>
       </section>
@@ -56,15 +56,15 @@ export const Gallery = ({ data }: ICarouselProps) => {
   };
 
   return (
-    <section className={styles.gallery_section}>
-      <h2 className={styles.gallery_title}>{data.title}</h2>
+    <section className={styles.gallerySection}>
+      <h2 className={styles.galleryTitle}>{data.title}</h2>
 
-      <div className={styles.carousel_wrapper}>
+      <div className={styles.carouselWrapper}>
         <button
-          className={`${styles.nav_button} ${styles.nav_prev}`}
+          className={`${styles.navButton} ${styles.navPrev}`}
           onClick={prevSlide}
           disabled={isAnimating}
-          aria-label={t("gallery.previous")}
+          aria-label={t("pagination.previous")}
           type="button"
         >
           <svg width="13" height="24" viewBox="0 0 13 24" fill="none">
@@ -75,8 +75,8 @@ export const Gallery = ({ data }: ICarouselProps) => {
           </svg>
         </button>
 
-        <ul className={styles.slides_container}>
-          <li className={`${styles.slide} ${styles.slide_prev}`}>
+        <ul className={styles.slidesContainer}>
+          <li className={`${styles.slide} ${styles.slidePrev}`}>
             <img
               src={images[prevIndex].url}
               alt={images[prevIndex].alt}
@@ -85,7 +85,7 @@ export const Gallery = ({ data }: ICarouselProps) => {
             />
           </li>
 
-          <li className={`${styles.slide} ${styles.slide_current}`}>
+          <li className={`${styles.slide} ${styles.slideCurrent}`}>
             <img
               src={images[currentIndex].url}
               alt={images[currentIndex].alt}
@@ -94,16 +94,16 @@ export const Gallery = ({ data }: ICarouselProps) => {
               className={
                 isAnimating
                   ? direction === "next"
-                    ? styles.slide_out_left
-                    : styles.slide_out_right
+                    ? styles.slideOutLeft
+                    : styles.slideOutRight
                   : direction === "next"
-                    ? styles.slide_in_from_right
-                    : styles.slide_in_from_left
+                    ? styles.slideInFromRight
+                    : styles.slideInFromLeft
               }
             />
           </li>
 
-          <li className={`${styles.slide} ${styles.slide_next}`}>
+          <li className={`${styles.slide} ${styles.slideNext}`}>
             <img
               src={images[nextIndex].url}
               alt={images[nextIndex].alt}
@@ -114,10 +114,10 @@ export const Gallery = ({ data }: ICarouselProps) => {
         </ul>
 
         <button
-          className={`${styles.nav_button} ${styles.nav_next}`}
+          className={`${styles.navButton} ${styles.navNext}`}
           onClick={nextSlide}
           disabled={isAnimating}
-          aria-label={t("gallery.next")}
+          aria-label={t("pagination.next")}
           type="button"
         >
           <svg width="13" height="24" viewBox="0 0 13 24" fill="none">

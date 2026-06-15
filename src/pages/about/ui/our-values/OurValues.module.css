@@ -1,4 +1,4 @@
-.our_values_section {
+.ourValuesSection {
   width: 100%;
   padding: 0 var(--spacing-20);
   overflow-x: auto;
@@ -10,45 +10,45 @@
   letter-spacing: -0.02em;
 }
 
-.items_list {
+.itemsList {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--spacing-10) var(--spacing-6);
 }
 
-.items_list li {
+.itemsList li {
   padding: var(--spacing-10);
   border-radius: var(--spacing-5);
   min-height: 450px;
 }
 
-.items_list li:nth-child(4n + 1) {
+.itemsList li:nth-child(4n + 1) {
   background-image: linear-gradient(#d0c9ff, #ffffff);
 }
 
-.items_list li:nth-child(4n + 2) {
+.itemsList li:nth-child(4n + 2) {
   background-image: linear-gradient(#a0d448, #fff);
 }
 
-.items_list li:nth-child(4n + 3) {
+.itemsList li:nth-child(4n + 3) {
   background-image: linear-gradient(#a0d448, #fff);
 }
 
-.items_list li:nth-child(4n + 4) {
+.itemsList li:nth-child(4n + 4) {
   background-image: linear-gradient(#d0c9ff, #ffffff);
 }
 
-.items_list h3 {
+.itemsList h3 {
   margin-bottom: var(--spacing-5);
   font: var(--desktop_h3);
 }
 
-.items_list p {
+.itemsList p {
   font: var(--desktop_main);
 }
 
 @media (max-width: 1023px) {
-  .our_values_section {
+  .ourValuesSection {
     padding: 0 var(--spacing-10);
   }
 
@@ -56,37 +56,37 @@
     font: var(--tablet_h2);
   }
 
-  .items_list {
+  .itemsList {
     display: flex;
     gap: var(--spacing-5);
   }
 
-  .items_list li {
+  .itemsList li {
     padding: var(--spacing-10) var(--spacing-5);
     width: clamp(335px, 70vw, 369px);
     flex-shrink: 0;
   }
 
-  .items_list h3 {
+  .itemsList h3 {
     margin-bottom: var(--spacing-3);
     font: var(--tablet_h3);
   }
 
-  .items_list p {
+  .itemsList p {
     font: var(--tablet_main);
   }
 
-  .items_list li:nth-child(odd) {
+  .itemsList li:nth-child(odd) {
     background-image: linear-gradient(#d0c9ff, #ffffff);
   }
 
-  .items_list li:nth-child(even) {
+  .itemsList li:nth-child(even) {
     background-image: linear-gradient(#a0d448, #fff);
   }
 }
 
 @media (max-width: 833px) {
-  .our_values_section {
+  .ourValuesSection {
     padding: 0 var(--spacing-5);
   }
 
@@ -95,21 +95,21 @@
     margin-bottom: var(--spacing-5);
   }
 
-  .items_list {
+  .itemsList {
     flex-direction: column;
   }
 
-  .items_list li {
+  .itemsList li {
     width: 100%;
     min-height: 320px;
   }
 
-  .items_list h3 {
+  .itemsList h3 {
     margin-bottom: var(--spacing-3);
     font: var(--mobile_h3);
   }
 
-  .items_list p {
+  .itemsList p {
     font: var(--mobile_main);
   }
 }

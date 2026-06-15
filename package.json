@@ -12,7 +12,8 @@
     "lint": "eslint .",
     "format": "prettier ./src --write",
     "typecheck": "tsc -b --noEmit",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "locales:check": "node scripts/checkTranslateFiles.js"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.100.5",
