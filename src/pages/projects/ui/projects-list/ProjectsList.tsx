@@ -15,13 +15,25 @@ interface Project {
 
 interface ProjectsListProps {
   projects: Project[];
+  currentFilters?: {  
+    search?: string;
+    type?: string;
+    tags?: string[];
+  };
 }
 
-export const ProjectsList: React.FC<ProjectsListProps> = ({ projects }) => {
+export const ProjectsList: React.FC<ProjectsListProps> = ({
+   projects,
+   currentFilters = {}
+ }) => {
   return (
     <div className={styles.container}>
       <ul className={styles.grid}>
-        {projects.map((project) => (
+        {projects.map((project) => {
+          // Формируем URL для перехода
+          const projectLink = project.action_button.link.replace("{id}", project.id);
+        
+          return (
           <li key={project.id} className={styles.card}>
             <img
               src={project.image}
@@ -35,7 +47,8 @@ export const ProjectsList: React.FC<ProjectsListProps> = ({ projects }) => {
               <p className={styles.description}>{project.description}</p>
 
               <Link
-                to={project.action_button.link.replace("{id}", project.id)}
+                to={projectLink}
+                state={{ fromProjects: currentFilters }}
                 className={styles.button}
                 aria-label={project.action_button.label}
               >
@@ -50,7 +63,8 @@ export const ProjectsList: React.FC<ProjectsListProps> = ({ projects }) => {
               </Link>
             </div>
           </li>
-        ))}
+          );
+         })}
       </ul>
     </div>
   );

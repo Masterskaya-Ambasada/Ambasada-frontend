@@ -41,3 +41,4 @@ export type GetProjectsParams = {
   type?: string;
   tags?: string[];
 };
+

@@ -1,4 +1,4 @@
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import { routesPaths } from "@shared/config/routesPaths";
 import { useTranslation } from "react-i18next";
 import { MainInfo } from "./ui/MainInfo/";
@@ -13,6 +13,7 @@ export const ProjectDetails: React.FC = () => {
   const { t } = useTranslation("common");
   const { isMobile, isTablet } = useViewportWidth();
   const navigate = useNavigate();
+  const location = useLocation();
   const { data, isLoading, isError, error } = useProjectDetailsQuery(
     slug || "",
   );
@@ -32,6 +33,8 @@ export const ProjectDetails: React.FC = () => {
   if (!data || isError) {
     return null;
   }
+
+  const savedFilters = location.state?.fromProjects || {};
 
   const mainInfo = {
     picture: data.info.image,
@@ -75,6 +78,7 @@ export const ProjectDetails: React.FC = () => {
           className={`${!isMobile ? "btn btn--primary" : ""} ${styles.button}`}
           aria-label={t("projectDetails.textButtonDesktop")}
           to={routesPaths.projects}
+          state={{ fromProjects: savedFilters }}
         >
           {!isTablet && !isMobile && t("projectDetails.textButtonDesktop")}
           {isTablet && !isMobile && t("projectDetails.textButtonTablet")}

@@ -1,5 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
+import React, { 
+  useState, 
+  useEffect, 
+  useCallback,
+  useLayoutEffect 
+} from "react";
+import { Link, useLocation } from "react-router-dom";
 import { routesPaths } from "@shared/config/routesPaths.ts";
 import { useUrlFilters } from "./hooks/useUrlFilters";
 import { useViewportWidth } from "@shared/lib/useWidthViewPort";
@@ -14,11 +19,13 @@ import { useProjectsQuery } from "@entities/project/model/useProjectsQuery";
 import { useCategoriesQuery } from "@entities/project/model/useCategoriesQuery";
 import { useTagsQuery } from "@entities/project/model/useTagsQuery";
 
+
 export const ProjectsPage: React.FC = () => {
   const { t } = useTranslation("common");
-
+  const location = useLocation();
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(12);
+  const [isRestoring, setIsRestoring] = useState(true);
 
   const {
     search: urlSearch,
@@ -95,6 +102,26 @@ export const ProjectsPage: React.FC = () => {
     },
     [updateFilters],
   );
+
+  // для восстановления фильтров ДО рендера
+  useLayoutEffect(() => {
+    const state = location.state as { fromProjects?: { search?: string; type?: string; tags?: string[] } } | null;
+    
+    if (state?.fromProjects) {
+      const { search = '', type = '', tags = [] } = state.fromProjects;
+      updateFilters({ search, type, tags });
+      window.history.replaceState({}, document.title);
+    }
+    setIsRestoring(false);
+  }, []); 
+
+  if (isRestoring) {
+  return (
+    <div className={styles.loader} role="status" aria-live="polite">
+      {t("projects.loading", "Загрузка...")}
+    </div>
+  );
+}
 
   const totalItems = projectsData?.pagination.totalItems || 0;
   const totalPages = Math.ceil(totalItems / limit);
@@ -225,7 +252,10 @@ export const ProjectsPage: React.FC = () => {
           </div>
         ) : (
           <>
-            <ProjectsList projects={projectsData?.items || []} />
+            <ProjectsList 
+            projects={projectsData?.items || []} 
+            currentFilters={{ search: urlSearch, type: urlType, tags: urlTags }}
+            />
 
             {/* Пагинация */}
             {totalPages > 1 && (
