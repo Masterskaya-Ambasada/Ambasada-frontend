@@ -64,6 +64,15 @@ export const commonHandlers = [
     return HttpResponse.json(about);
   }),
 
+  // CONTACTS PAGE
+  http.get("/api/v1/contacts", () => {
+    return HttpResponse.json({
+      phone: "+381 1234567",
+      address: "Beograd, Palilula, Braće Jugovića",
+      map_image: "/images/contacts-map.jpg",
+    });
+  }),
+
   // CONTACT
   http.post("/api/v1/contact", async ({ request }) => {
     const body = (await request.json()) as ContactRequest;

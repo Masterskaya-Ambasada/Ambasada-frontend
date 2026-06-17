@@ -18,8 +18,8 @@ export function getProjects(
     urlParams.append("project_type", params.type);
   }
 
-  if (params.tags && params.tags.length > 0) {
-    urlParams.append("tags", params.tags.join(","));
+  if (params.tag && params.tag.length > 0) {
+    urlParams.append("tag", params.tag.join(","));
   }
 
   return apiClient.get<ProjectsResponse>(`/projects?${urlParams.toString()}`, {

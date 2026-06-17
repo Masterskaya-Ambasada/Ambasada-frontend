@@ -1,0 +1,429 @@
+.hero {
+  position: relative;
+  max-width: 1356px;
+  height: 927px;
+  overflow: hidden;
+}
+
+/* =========================
+   ФОН (MAP)
+========================= */
+.mapWrapper {
+  position: absolute;
+  top: 124px;
+  width: 1356px;
+  height: 800px;
+  overflow: hidden;
+  border-radius: 0 8px 8px 0;
+  z-index: 0;
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  object-fit: cover;
+  object-position: -230%;
+}
+
+/* =========================
+   ФИГУРА (PURPLE SHAPE)
+========================= */
+.backgroundShape {
+  position: absolute;
+  left: 0;
+  width: 881px;
+  height: 803px;
+  top: 124px;
+  background: var(--purpure_1);
+  border-radius: 0 8px 8px 0;
+  z-index: 1;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    20% 104%,
+    0 100%
+    );
+}
+
+/* =========================
+   FIX: BREADCRUMBS
+========================= */
+
+.breadcrumbsWrapper {
+  position: absolute;
+  left: 80px;
+  top: 50px;
+  z-index: 2;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font: var(--desktop_main);
+  color: var(--black);
+}
+
+.breadcrumbLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.breadcrumbLink:hover {
+  text-decoration: underline;
+}
+
+.breadcrumbLink:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+.breadcrumbSeparator {
+  user-select: none;
+}
+
+/* =========================
+   КОНТЕНТ
+========================= */
+.info {
+  position: absolute;
+  left: 80.5px;
+  top: 163px;
+  width: 582px;
+  height: 564px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  z-index: 2;
+}
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+
+.title {
+  margin: 0;
+  font: var(--desktop_h2);
+  color: var(--black);
+  letter-spacing: -0.02em;
+}
+
+.contactBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 292px;
+}
+
+.subtitle {
+  margin: 0;
+  font: var(--desktop_h3);
+  color: var(--black);
+}
+
+.link,
+.address {
+  font-style: normal;
+  font: var(--desktop_main);
+  color: var(--black);
+  color: inherit;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.link:active {
+  opacity: 0.8;
+}
+
+.link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+.address {
+  margin: 0;
+  max-width: 13ch;
+}
+
+/* =========================
+   SOCIALS
+========================= */
+
+.socials {
+  display: flex;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.socialItem {
+  display: flex;
+}
+
+.socialLink {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s ease;
+}
+
+.socialLink:hover {
+  opacity: 0.8;
+}
+
+.socialLink:active {
+  opacity: 0.6;
+}
+
+.socialLink:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+.socialLink svg,
+.socialLink img {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+/* =========================
+   TABLET VERSION (835px)
+========================= */
+@media (max-width: 835px) {
+  .hero {
+    max-width: 835px;
+    height: 732px;
+  }
+
+  /* =========================
+     MAP (фон)
+  ========================= */
+  .mapWrapper {
+    top: 130px;
+    max-width: 835px;
+    height: 598px;
+  }
+
+  .map {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  object-fit: cover;
+  object-position: 50%;
+  }
+
+  /* =========================
+     PURPLE SHAPE
+  ========================= */
+  .backgroundShape {
+    width: 712.5px;
+    height: 599px;
+    top: 130px;
+    left: -181px;
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      51.5% 100%,
+      0 100%
+    );
+  }
+
+  /* =========================
+     BREADCRUMBS
+  ========================= */
+  .breadcrumbsWrapper {
+    left: 40px;
+    top: 38.7px;
+    transform: translateY(1px);
+  }
+
+  .breadcrumbs {
+    font: var(--tablet_main);
+    gap: 36px;
+    align-items: center;
+  }
+
+  .breadcrumbSeparator {
+    letter-spacing: -1em;
+    transform: translateY(-1.7px);
+  }
+
+  .breadcrumbCurrent {
+    margin-left: -6px;
+    transform: translateX(1px);
+  }
+
+  /* =========================
+     INFO BLOCK
+  ========================= */
+  .info {
+    left: 40px;
+    top: 169px;
+    width: 289px;
+    height: 473px;
+    gap: 40px;
+  }
+
+  /* =========================
+     TYPOGRAPHY ADAPTATION
+  ========================= */
+  .title {
+    font: var(--tablet_h2);
+  }
+
+  .subtitle {
+    font: var(--tablet_h3); 
+  }
+
+  .link,
+  .address {
+    font: var(--tablet_main);
+  }
+
+  /* =========================
+     SOCIAL ICON LAYOUT
+  ========================= */
+  .socials {
+    gap: 12px;
+  }
+
+  .socialLink {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* =========================
+     CONTACT BLOCK WIDTH FIX
+  ========================= */
+  .contactBlock {
+    max-width: 249px;
+  }
+
+  .address {
+    max-width: 160px;
+  }
+}
+
+/* =========================
+   MOBILE VERSION (375px)
+========================= */
+@media (max-width: 640px) {
+  .hero {
+    width: 100%;
+    height: 685px;
+  }
+
+  /* =========================
+     HIDE BREADCRUMBS (FIX)
+  ========================= */
+  .breadcrumbsWrapper {
+    display: none; 
+  }
+
+  /* =========================
+     MAP (низ страницы)
+  ========================= */
+  .mapWrapper {
+    top: 285px;
+    width: 100%;
+    height: 400px;
+  }
+
+  .map {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* =========================
+     PURPLE SHAPE
+  ========================= */
+  .backgroundShape {
+    top: 0;
+    width: 100%;
+    height: 285px;
+    left: 0;
+    clip-path: none;
+    border-radius: 0;
+  }
+
+  /* =========================
+     INFO BLOCK (контакты)
+  ========================= */
+  .info {
+    position: absolute;
+    top: 20px;
+    left: 20px; 
+    width: 335px;
+    height: auto;
+    gap: 20px;
+  }
+
+  /* =========================
+     TITLE (mobile H2)
+  ========================= */
+  .title {
+    display: none;
+  }
+
+  /* =========================
+     CONTACT BLOCKS
+  ========================= */
+  .contactBlock {
+    max-width: 320px;
+    gap: 12px;
+  }
+
+  .subtitle {
+    font: var(--mobile_h2);
+    letter-spacing: -0.02em; 
+  }
+
+  .link,
+  .address {
+    font: var(--mobile_main);
+    line-height: 140%;
+  }
+
+  .address {
+    max-width: 261px;
+  }
+
+  /* =========================
+     SOCIALS
+  ========================= */
+  .socials {
+    gap: 12px;
+    width: 248px;
+    height: 40px;
+  }
+
+  .socialLink {
+    width: 40px;
+    height: 40px;
+  }
+
+  .socialItem {
+    width: 40px;
+    height: 40px;
+  }
+}

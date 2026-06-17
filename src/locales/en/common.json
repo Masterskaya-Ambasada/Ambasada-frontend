@@ -122,6 +122,15 @@
     "home": "Home",
     "projects": "Project Catalog",
     "breadcrumbs": "Breadcrumbs",
+    "contacts": "Contact us"
+  },
+  "contacts": {
+    "titleDesktop": "Contact us in any convenient way",
+    "titleTablet": "Contact us conveniently",
+    "call": "Call",
+    "write": "Write",
+    "visitOffice": "Visit Our Office",
+    "breadcrumbs": "Breadcrumbs",
     "about": "About the community"
   },
   "cookieConsent": {

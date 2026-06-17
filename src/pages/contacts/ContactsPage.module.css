@@ -1,0 +1,17 @@
+.contactsPage {
+  width: 100%;
+  min-height: 100vh;
+  padding-bottom: 97px;
+}
+
+@media (max-width: 835px) {
+  .contactsPage {
+    padding-bottom: 100px;
+  }
+}
+
+@media (max-width: 640px) {
+  .contactsPage {
+    padding-bottom:80px;
+  }
+}

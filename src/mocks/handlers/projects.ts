@@ -10,7 +10,7 @@ export const projectHandlers = [
     const url = new URL(request.url);
 
     const projectType = url.searchParams.get("project_type");
-    const tags = url.searchParams.get("tags");
+    const tag = url.searchParams.get("tag");
     const search = url.searchParams.get("search");
 
     const offset = Number(url.searchParams.get("offset")) || 0;
@@ -24,8 +24,8 @@ export const projectHandlers = [
     }
 
     // фильтр по тегу
-    if (tags) {
-      const selectedTags = tags.split(",").map((tag) => tag.toLowerCase());
+    if (tag) {
+      const selectedTags = tag.split(",").map((tag) => tag.toLowerCase());
 
       filtered = filtered.filter((p) =>
         p.tags.some((t) => selectedTags.includes(t.toLowerCase())),

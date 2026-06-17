@@ -39,6 +39,6 @@ export type GetProjectsParams = {
   offset: number;
   search?: string;
   type?: string;
-  tags?: string[];
+  tag?: string[];
 };
 

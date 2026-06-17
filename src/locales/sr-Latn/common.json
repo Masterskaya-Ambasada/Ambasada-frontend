@@ -122,11 +122,19 @@
     "home": "Početna",
     "projects": "Katalog projekata",
     "breadcrumbs": "Navigacija",
+    "contacts": "Kontaktirajte nas",
     "about": "O zajednici"
   },
   "cookieConsent": {
     "ariaLabel": "Obaveštenje o korišćenju kolačića",
     "acceptButtonAriaLabel": "Prihvati kolačiće"
+  },
+  "contacts": {
+    "titleDesktop": "Kontaktirajte nas na bilo koji pogodan način",
+    "titleTablet": "Kontaktirajte nas na pogodan način",
+    "call": "Pozovite",
+    "write": "Pišite nam",
+    "visitOffice": "Posetite našu kancelariju"
   },
   "errorBoundary": {
     "buttonText": "Nazad",

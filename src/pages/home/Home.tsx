@@ -33,6 +33,8 @@ export const Home: React.FC = () => {
         <AboutCommunity aboutPreview={data.about_preview} />
         <SectionTeam teamPreview={data.team_preview} />
         <SectionProjects projects_preview={data.projects_preview} />
+        <SectionTeam teamPreview={data.team_preview} />
+        {/* ProjectsSection */}
       </div>
       <ContactSection />
     </>

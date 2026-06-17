@@ -74,7 +74,7 @@ export const ProjectsPage: React.FC = () => {
     offset: (page - 1) * limit,
     search: urlSearch,
     type: urlType,
-    tags: urlTags,
+    tag: urlTags,
   });
 
   // сброс страницы при изменении фильтров
@@ -258,7 +258,7 @@ export const ProjectsPage: React.FC = () => {
             />
 
             {/* Пагинация */}
-            {totalPages > 1 && (
+            {totalPages >= 1 && (
               <nav
                 className={styles.pagination}
                 aria-label={t("pagination.label", "Пагинация проектов")}
