@@ -66,6 +66,7 @@
   height: 24px;
 }
 
+
 /* Адаптив */
 @media (min-width: 834px) and (max-width: 1023px) {
   .searchContainer {
