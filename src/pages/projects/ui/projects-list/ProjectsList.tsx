@@ -15,7 +15,7 @@ interface Project {
 
 interface ProjectsListProps {
   projects: Project[];
-  currentFilters?: {  
+  currentFilters?: {
     search?: string;
     type?: string;
     tags?: string[];
@@ -23,48 +23,51 @@ interface ProjectsListProps {
 }
 
 export const ProjectsList: React.FC<ProjectsListProps> = ({
-   projects,
-   currentFilters = {}
- }) => {
+  projects,
+  currentFilters = {},
+}) => {
   return (
     <div className={styles.container}>
       <ul className={styles.grid}>
         {projects.map((project) => {
           // Формируем URL для перехода
-          const projectLink = project.action_button.link.replace("{id}", project.id);
-        
-          return (
-          <li key={project.id} className={styles.card}>
-            <img
-              src={project.image}
-              alt={project.title}
-              className={styles.image}
-              loading="lazy"
-            />
-
-            <div className={styles.content}>
-              <h3 className={styles.title}>{project.title}</h3>
-              <p className={styles.description}>{project.description}</p>
-
-              <Link
-                to={projectLink}
-                state={{ fromProjects: currentFilters }}
-                className={styles.button}
-                aria-label={project.action_button.label}
-              >
-                <img
-                  src="/button for cards.svg"
-                  alt=""
-                  className={styles.icon}
-                />
-                <span className={styles.buttonText}>
-                  {project.action_button.label}
-                </span>
-              </Link>
-            </div>
-          </li>
+          const projectLink = project.action_button.link.replace(
+            "{id}",
+            project.id,
           );
-         })}
+
+          return (
+            <li key={project.id} className={styles.card}>
+              <img
+                src={project.image}
+                alt={project.title}
+                className={styles.image}
+                loading="lazy"
+              />
+
+              <div className={styles.content}>
+                <h3 className={styles.title}>{project.title}</h3>
+                <p className={styles.description}>{project.description}</p>
+
+                <Link
+                  to={projectLink}
+                  state={{ fromProjects: currentFilters }}
+                  className={styles.button}
+                  aria-label={project.action_button.label}
+                >
+                  <img
+                    src="/button for cards.svg"
+                    alt=""
+                    className={styles.icon}
+                  />
+                  <span className={styles.buttonText}>
+                    {project.action_button.label}
+                  </span>
+                </Link>
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

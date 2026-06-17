@@ -1,8 +1,8 @@
-import React, { 
-  useState, 
-  useEffect, 
+import React, {
+  useState,
+  useEffect,
   useCallback,
-  useLayoutEffect 
+  useLayoutEffect,
 } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { routesPaths } from "@shared/config/routesPaths.ts";
@@ -18,7 +18,6 @@ import styles from "./ProjectsPage.module.css";
 import { useProjectsQuery } from "@entities/project/model/useProjectsQuery";
 import { useCategoriesQuery } from "@entities/project/model/useCategoriesQuery";
 import { useTagsQuery } from "@entities/project/model/useTagsQuery";
-
 
 export const ProjectsPage: React.FC = () => {
   const { t } = useTranslation("common");
@@ -105,23 +104,25 @@ export const ProjectsPage: React.FC = () => {
 
   // для восстановления фильтров ДО рендера
   useLayoutEffect(() => {
-    const state = location.state as { fromProjects?: { search?: string; type?: string; tags?: string[] } } | null;
-    
+    const state = location.state as {
+      fromProjects?: { search?: string; type?: string; tags?: string[] };
+    } | null;
+
     if (state?.fromProjects) {
-      const { search = '', type = '', tags = [] } = state.fromProjects;
+      const { search = "", type = "", tags = [] } = state.fromProjects;
       updateFilters({ search, type, tags });
       window.history.replaceState({}, document.title);
     }
     setIsRestoring(false);
-  }, []); 
+  }, []);
 
   if (isRestoring) {
-  return (
-    <div className={styles.loader} role="status" aria-live="polite">
-      {t("projects.loading", "Загрузка...")}
-    </div>
-  );
-}
+    return (
+      <div className={styles.loader} role="status" aria-live="polite">
+        {t("projects.loading", "Загрузка...")}
+      </div>
+    );
+  }
 
   const totalItems = projectsData?.pagination.totalItems || 0;
   const totalPages = Math.ceil(totalItems / limit);
@@ -252,9 +253,13 @@ export const ProjectsPage: React.FC = () => {
           </div>
         ) : (
           <>
-            <ProjectsList 
-            projects={projectsData?.items || []} 
-            currentFilters={{ search: urlSearch, type: urlType, tags: urlTags }}
+            <ProjectsList
+              projects={projectsData?.items || []}
+              currentFilters={{
+                search: urlSearch,
+                type: urlType,
+                tags: urlTags,
+              }}
             />
 
             {/* Пагинация */}

@@ -65,6 +65,7 @@ export const ProjectDetails: React.FC = () => {
               className={styles.pathText}
               aria-label={t("projectDetails.catalogProject")}
               to={routesPaths.projects}
+              state={{ fromProjects: savedFilters }}
             >
               {!isMobile && t("projectDetails.catalogProject")}
               {isMobile && "..."}
