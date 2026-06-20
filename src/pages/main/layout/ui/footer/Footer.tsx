@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 import styles from "./Footer.module.css";
 import { FooterNav } from "./nav/FooterNav";
 import { FooterSocials } from "./socials/FooterSocials";
@@ -10,13 +12,15 @@ type Props = {
 };
 
 export const Footer = ({ data }: Props) => {
-  let siteName = "";
+  const { t, i18n } = useTranslation("common");
 
-  if (!data?.site_name) {
-    siteName = "";
-  } else {
-    siteName = data.site_name;
-  }
+  const isLocalizedLanguage =
+    i18n.language.startsWith("en") ||
+    i18n.language.startsWith("ru");
+
+  const siteName = isLocalizedLanguage
+    ? t("footer.site_name")
+    : (data.site_name ?? "");
 
   const words = siteName.split(" ");
   const firstWord = words[0];
@@ -25,13 +29,10 @@ export const Footer = ({ data }: Props) => {
   return (
     <footer className={styles.footer}>
       <div className={styles.content}>
-        {/* TOP ROW */}
         <div className={styles.topRow}>
           <a href="/" aria-label={siteName} className={styles.logoLink}>
-            {/* LOGO IMAGE */}
             <img src="/logo.svg" alt={siteName} className={styles.logoImage} />
 
-            {/*новый layout текста*/}
             <span className={styles.logoText}>
               <span className={styles.logoTextMain}>{firstWord}</span>
 
@@ -47,15 +48,12 @@ export const Footer = ({ data }: Props) => {
           </div>
         </div>
 
-        {/* BOTTOM ROW */}
         <div className={styles.bottomRow}>
-          <FooterCopyright copyright={data?.copyright} />
-          <FooterLegalLinks legalLinks={data?.legal_links} />
+          <FooterCopyright copyright={data.copyright} />
+          <FooterLegalLinks legalLinks={data.legal_links} />
         </div>
 
-        {/* ДЕКОРАТИВНЫЙ ПАТТЕРН (как в Figma) */}
         <div className={styles.pattern} aria-hidden="true">
-          {/* Первая группа (правая часть) */}
           <div className={styles.rect138} />
           <div className={styles.rect139} />
           <div className={styles.rect140} />
@@ -74,7 +72,6 @@ export const Footer = ({ data }: Props) => {
           <div className={styles.rect154} />
           <div className={styles.rect142} />
 
-          {/* Вторая группа (левая часть) */}
           <div className={styles.rect138b} />
           <div className={styles.rect139b} />
           <div className={styles.rect140b} />

@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 80px;
+  padding: 50px 80px 0; /* внутренний отступ для блоков контента от хедера 50px*/
   background-color: var(--white);
   box-sizing: border-box;
   display: flex;
@@ -13,7 +13,7 @@
 /* Планшет (834px) */
 @media (max-width: 834px) {
   .mainContainer {
-    padding: 0 40px; /* tablet-макет: отступы по бокам */
+    padding: 60px 40px 0; /* tablet-макет: отступы по бокам, отступ от хедера 60px*/
     gap: 100px; /* tablet: отступы между секциями */
   }
 }
@@ -21,7 +21,7 @@
 /* Мобильные (375px) */
 @media (max-width: 375px) {
   .mainContainer {
-    padding: 0 20px; /* mobile-макет: отступы по бокам */
+    padding: 20px 20px 0; /* mobile-макет: отступы по бокам, отступ от хедера 20px**/
     gap: 80px; /* mobile: отступы между секциями */
   }
 }

@@ -1,7 +1,9 @@
-import styles from "./FooterNav.module.css";
-import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import { routesPaths } from "@shared/config/routesPaths";
+
+import styles from "./FooterNav.module.css";
 
 export const FooterNav = () => {
   const { t } = useTranslation("common");
@@ -26,13 +28,13 @@ export const FooterNav = () => {
   ];
 
   return (
-    <nav aria-label="Footer navigation">
+    <nav aria-label={t("footer.navigation")}>
       <ul className={styles.footerNav}>
         {NAV_ITEMS.map((item) => {
           let label = t(`footer.nav.${item.key}`);
 
           if (item.key === "catalog" && isTablet) {
-            label = "Проекты";
+            label = t("footer.nav.catalog_tablet");
           }
 
           return (

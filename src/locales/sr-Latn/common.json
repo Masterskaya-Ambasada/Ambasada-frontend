@@ -29,6 +29,7 @@
 
     "nav": {
       "catalog": "Katalog projekata",
+      "catalog_tablet": "Projekti",
       "about": "O zajednici",
       "contacts": "Kontaktirajte nas",
       "home": "Početna",

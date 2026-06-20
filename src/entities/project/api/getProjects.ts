@@ -1,5 +1,6 @@
 import { apiClient } from "@/shared/api/client";
 import type { ProjectsResponse, GetProjectsParams } from "../model/types";
+import { apiPaths } from "@/shared/api/config/apiPaths";
 
 export function getProjects(
   params: GetProjectsParams,
@@ -22,7 +23,10 @@ export function getProjects(
     urlParams.append("tag", params.tag.join(","));
   }
 
-  return apiClient.get<ProjectsResponse>(`/projects?${urlParams.toString()}`, {
-    signal,
-  });
+  return apiClient.get<ProjectsResponse>(
+    `${apiPaths.projects.list}?${urlParams.toString()}`,
+    {
+      signal,
+    },
+  );
 }

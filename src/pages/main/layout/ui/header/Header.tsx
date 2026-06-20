@@ -74,13 +74,13 @@ export const Header = ({ data }: HeaderProps) => {
       ? "sr"
       : currentLangCode;
 
-  let siteName = "";
+  const isLocalizedLanguage =
+    i18n.language.startsWith("en") ||
+    i18n.language.startsWith("ru");
 
-  if (!data?.site_name) {
-    siteName = "";
-  } else {
-    siteName = data.site_name;
-  }
+  const siteName = isLocalizedLanguage
+  ? t("header.site_name")
+  : (data?.site_name ?? "");
 
   const words = siteName.split(" ");
   const firstWord = words[0];
@@ -154,7 +154,6 @@ export const Header = ({ data }: HeaderProps) => {
         </nav>
 
         <div className={styles.headerActions}>
-          {/* LANGUAGE SWITCHER */}
           <div className={styles.langSwitcher} ref={langRef}>
             <button
               type="button"
@@ -235,7 +234,6 @@ export const Header = ({ data }: HeaderProps) => {
             </ul>
           </div>
 
-          {/* BURGER */}
           <button
             ref={burgerRef}
             type="button"
@@ -258,7 +256,6 @@ export const Header = ({ data }: HeaderProps) => {
         </div>
       </div>
 
-      {/* MOBILE MENU */}
       <div
         className={`${styles.mobileMenu} ${
           isMenuOpen ? styles.mobileMenuOpen : ""

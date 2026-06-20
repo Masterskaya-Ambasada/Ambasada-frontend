@@ -7,6 +7,7 @@
     "ariaLabel3": "Language selection",
     "ariaLabel4": "Close the menu",
     "ariaLabel5": "Open the menu",
+    "site_name": "Ambasada za Urbanizam",
     "menu": {
       "projects_desktop": "Project catalog",
       "projects_tablet": "Projects",
@@ -21,7 +22,7 @@
     "sr-Cyrl": "Serbian"
   },
   "footer": {
-    "site_name": "Ambasada for Urbanism",
+    "site_name": "Ambasada za Urbanizam",
 
     "aria": {
       "home": "Go to home"
@@ -29,6 +30,7 @@
 
     "nav": {
       "catalog": "Project Catalog",
+      "catalog_tablet": "Projects",
       "about": "About Community",
       "contacts": "Contact Us",
       "home": "Home",
