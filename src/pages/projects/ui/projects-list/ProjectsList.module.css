@@ -22,6 +22,8 @@
   flex-direction: column;
   gap: 20px;
   box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
 }
 
 .image {
@@ -41,6 +43,7 @@
   gap: 20px; /* десктоп + планшет */
   min-height: 0;
   overflow: hidden;
+  width: 100%;
 }
 
 .title {
@@ -56,6 +59,7 @@
   word-wrap: break-word;
   hyphens: auto;
   letter-spacing: -2%;
+  flex-shrink: 0; 
 }
 
 .description {
@@ -90,6 +94,7 @@
   text-decoration: none;
   cursor: pointer;
   transition: width 0.3s ease;
+  flex-shrink: 0; 
 }
 
 .button:hover {
@@ -165,30 +170,40 @@
   }
 }
 
-@media (max-width: 833px) {
+@media (max-width: 833.98px) {
   .grid {
     grid-template-columns: 1fr; /* мобильный 1 колонка */
   }
 
   .card {
-    block-size: 519px;
+    height: auto;
   }
 
   .content {
     gap: 16px;
     height: 295px;
+    min-height: 0;
   }
 
   .image {
     max-height: 205px;
+    flex-shrink: 0;
   }
 
   .title {
     font: var(--mobile_h3);
+    -webkit-line-clamp: 1; /* 1 строка */
+    line-clamp: 1;
+    flex-shrink: 0;
   }
 
   .description {
     font: var(--mobile_main);
+    -webkit-line-clamp: 4; /* 4 строки на мобильном */
+    line-clamp: 4;
+    flex: 1;
+    min-height: 0;
+    line-height: 1.4;
   }
 
   .button {
