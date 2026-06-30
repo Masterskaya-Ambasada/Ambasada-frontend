@@ -2,7 +2,7 @@ import { useQuery, type UseQueryResult } from "@tanstack/react-query";
 import { getProjects } from "../api/getProjects";
 import type { ProjectsResponse, GetProjectsParams } from "./types";
 
-const INIT_STALE_TIME = 0; // 5 минут
+const INIT_STALE_TIME = 5 * 60 * 1000; // 5 минут
 const INIT_GC_TIME = 10 * 60 * 1000; // 10 минут
 
 export function useProjectsQuery(
