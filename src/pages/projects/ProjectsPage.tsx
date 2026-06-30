@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { routesPaths } from "@shared/config/routesPaths.ts";
 import { useViewportWidth } from "@shared/lib/useWidthViewPort";
@@ -12,32 +12,43 @@ import styles from "./ProjectsPage.module.css";
 import { useGetProjectsData } from "./hooks/useGetProjectsData";
 import { useSearchString } from "./hooks/useSearchString";
 import { useRestoreFilters } from "./hooks/useRestoreFilters";
-
+import { useProjectsLoading } from "./hooks/useProjectsLoading";
 
 export const ProjectsPage: React.FC = () => {
   const { t } = useTranslation("common");
   const { isMobile } = useViewportWidth();
 
+  const [isTagsDropdownOpen, setIsTagsDropdownOpen] = useState(false);
+  useEffect(() => {
+    console.log("ProjectsPage mounted");
+
+    return () => {
+      console.log("ProjectsPage unmounted");
+    };
+  }, []);
+  useEffect(() => {
+    console.log("DROPDOWN STATE", isTagsDropdownOpen);
+  }, [isTagsDropdownOpen]);
+
+  console.log("isTagsDropdownOpen =", isTagsDropdownOpen);
   //хук для получения всех данных
   const {
     projects,
     categories,
     availableTags,
     loading,
-    isFetching,
     error,
     filters,
     updateFilters,
     pagination,
   } = useGetProjectsData();
 
+  // Хук для отслеживания загрузки
+  const { isFetching } = useProjectsLoading();
+
   // Хук для управления поиском
-  const {
-    localSearch,
-    setLocalSearch,
-    isSearchOpen,
-    setIsSearchOpen,
-  } = useSearchString();
+  const { localSearch, setLocalSearch, isSearchOpen, setIsSearchOpen } =
+    useSearchString();
 
   //Хук для восстановления фильтров
   const { isRestoring } = useRestoreFilters();
@@ -86,7 +97,7 @@ export const ProjectsPage: React.FC = () => {
           {!shouldHideTitle && (
             <h1 className={styles.title}>{t("projects.title", "Проекты")}</h1>
           )}
-          
+
           <ProjectsSearch
             value={localSearch}
             onChange={setLocalSearch}
@@ -102,9 +113,7 @@ export const ProjectsPage: React.FC = () => {
               <TypeFilter
                 categories={categories}
                 selectedType={filters.type || null}
-                onChange={(newType) =>
-                  updateFilters({ type: newType || "" })
-                }
+                onChange={(newType) => updateFilters({ type: newType || "" })}
               />
             )}
 
@@ -113,6 +122,8 @@ export const ProjectsPage: React.FC = () => {
                 tags={availableTags}
                 selectedTags={filters.tags}
                 onChange={(newTags) => updateFilters({ tags: newTags })}
+                isOpen={isTagsDropdownOpen}
+                onOpenChange={setIsTagsDropdownOpen}
               />
             )}
           </div>
@@ -127,10 +138,7 @@ export const ProjectsPage: React.FC = () => {
           </div>
         ) : (
           <>
-            <ProjectsList
-              projects={projects}
-              currentFilters={filters}
-            />
+            <ProjectsList projects={projects} currentFilters={filters} />
 
             {/* Пагинация */}
             {pagination.totalPages >= 1 && (
@@ -167,11 +175,13 @@ export const ProjectsPage: React.FC = () => {
                         aria-label={t("pagination.page", "Страница {{page}}", {
                           page: item,
                         })}
-                        aria-current={item === pagination.currentPage ? "page" : undefined}
+                        aria-current={
+                          item === pagination.currentPage ? "page" : undefined
+                        }
                       >
                         {item}
                       </button>
-                    )
+                    ),
                   )}
                 </div>
 

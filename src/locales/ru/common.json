@@ -108,7 +108,8 @@
     "filterByTag": "Фильтр по тегу {{tagName}}",
     "filterTagsDialog": "Выбор тегов для фильтрации",
     "sortByTags": "Сортировка по тегам:",
-    "collapseTags": "Свернуть теги",
+    "collapseTags": "свернуть теги",
+    "resetTags": "сбросить",
     "allProjects": "Все проекты",
     "all": "Все"
   },

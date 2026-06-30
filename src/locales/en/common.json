@@ -107,7 +107,8 @@
     "filterByTag": "Filter by tag {{tagName}}",
     "filterTagsDialog": "Select tags for filtering",
     "sortByTags": "Sort by tags:",
-    "collapseTags": "Collapse tags",
+    "collapseTags": "collapse tags",
+    "resetTags": "reset",
     "allProjects": "All projects",
     "all": "All"
   },

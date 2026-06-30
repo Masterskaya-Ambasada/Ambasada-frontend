@@ -1,6 +1,6 @@
-import { useLayoutEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { useUrlFilters } from './useUrlFilters';
+import { useLayoutEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useUrlFilters } from "./useUrlFilters";
 
 export const useRestoreFilters = () => {
   const location = useLocation();
@@ -13,7 +13,7 @@ export const useRestoreFilters = () => {
     } | null;
 
     if (state?.fromProjects) {
-      const { search = '', type = '', tags = [] } = state.fromProjects;
+      const { search = "", type = "", tags = [] } = state.fromProjects;
       updateFilters({ search, type, tags });
       window.history.replaceState({}, document.title);
     }

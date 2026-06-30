@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect } from 'react';
+import { useState, useMemo, useCallback, useEffect } from "react";
 
 interface UsePaginationProps {
   totalItems: number;
@@ -42,7 +42,7 @@ export const usePagination = ({
     return Math.ceil(totalItems / limit) || 1;
   }, [totalItems, limit]);
 
-  const offset = useMemo(() => { 
+  const offset = useMemo(() => {
     return (currentPage - 1) * limit;
   }, [currentPage, limit]);
 
@@ -57,41 +57,47 @@ export const usePagination = ({
   // Универсальная логика отображения страниц
   const visiblePages = useMemo(() => {
     const pages: (number | string)[] = [];
-    
+
     if (totalPages <= 4) {
       pages.push(...Array.from({ length: totalPages }, (_, i) => i + 1));
     } else {
-      const currentPages = [currentPage, currentPage + 1, currentPage + 2]
-        .filter(p => p <= totalPages);
-      
+      const currentPages = [
+        currentPage,
+        currentPage + 1,
+        currentPage + 2,
+      ].filter((p) => p <= totalPages);
+
       pages.push(1);
-      
-      if (currentPages[0] > 2) pages.push('...');
-      
-      currentPages.forEach(p => {
+
+      if (currentPages[0] > 2) pages.push("...");
+
+      currentPages.forEach((p) => {
         if (p !== 1 && p !== totalPages) {
           pages.push(p);
         }
       });
-      
+
       const lastVisible = currentPages[currentPages.length - 1];
-      if (lastVisible < totalPages - 1) pages.push('...');
-      
+      if (lastVisible < totalPages - 1) pages.push("...");
+
       pages.push(totalPages);
     }
-    
+
     return pages;
   }, [currentPage, totalPages]);
 
-  const goToPage = useCallback((page: number) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
-      onPageChange?.(page);
-      
-      // Скролл к верху
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  }, [totalPages, onPageChange]);
+  const goToPage = useCallback(
+    (page: number) => {
+      if (page >= 1 && page <= totalPages) {
+        setCurrentPage(page);
+        onPageChange?.(page);
+
+        // Скролл к верху
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    },
+    [totalPages, onPageChange],
+  );
 
   const goToNext = useCallback(() => {
     if (hasNext) goToPage(currentPage + 1);

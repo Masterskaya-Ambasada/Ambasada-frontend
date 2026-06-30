@@ -15,8 +15,7 @@ export const Footer = ({ data }: Props) => {
   const { t, i18n } = useTranslation("common");
 
   const isLocalizedLanguage =
-    i18n.language.startsWith("en") ||
-    i18n.language.startsWith("ru");
+    i18n.language.startsWith("en") || i18n.language.startsWith("ru");
 
   const siteName = isLocalizedLanguage
     ? t("footer.site_name")

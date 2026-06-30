@@ -10,7 +10,7 @@ interface ProjectsSearchProps {
   disabled?: boolean; // Возможность отключить поле поиска в мобильной версии
   className?: string; // Дополнительный класс для стилизации
   isOpen?: boolean; // возможность контролировать открытие в мобильной версии
-  onOpenChange?: (isOpen: boolean) => void; 
+  onOpenChange?: (isOpen: boolean) => void;
 }
 
 export const ProjectsSearch: React.FC<ProjectsSearchProps> = ({

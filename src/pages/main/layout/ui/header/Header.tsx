@@ -75,12 +75,11 @@ export const Header = ({ data }: HeaderProps) => {
       : currentLangCode;
 
   const isLocalizedLanguage =
-    i18n.language.startsWith("en") ||
-    i18n.language.startsWith("ru");
+    i18n.language.startsWith("en") || i18n.language.startsWith("ru");
 
   const siteName = isLocalizedLanguage
-  ? t("header.site_name")
-  : (data?.site_name ?? "");
+    ? t("header.site_name")
+    : (data?.site_name ?? "");
 
   const words = siteName.split(" ");
   const firstWord = words[0];

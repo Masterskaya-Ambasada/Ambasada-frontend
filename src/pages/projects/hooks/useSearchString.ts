@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback } from 'react';
-import { useUrlFilters } from './useUrlFilters';
+import { useState, useEffect, useCallback } from "react";
+import { useUrlFilters } from "./useUrlFilters";
 
 export const useSearchString = () => {
   const { search: urlSearch, updateFilters } = useUrlFilters();
