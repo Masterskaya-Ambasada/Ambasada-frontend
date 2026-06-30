@@ -1,5 +1,4 @@
 import { useIsFetching } from '@tanstack/react-query';
-import { useEffect } from 'react';
 
 export const useProjectsLoading = () => {
   // Отслеживаем все запросы с ключом "projects"
