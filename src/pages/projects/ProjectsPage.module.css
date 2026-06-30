@@ -50,6 +50,43 @@
   padding-bottom: 24px;
 }
 
+.fetchingBar {
+  width: 100%;
+  height: 2px;
+
+  margin-bottom: 24px;
+
+  overflow: hidden;
+  position: relative;
+
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.fetchingBar::after {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: -30%;
+
+  width: 30%;
+  height: 100%;
+
+  background: var(--ecologic);
+
+  animation: loadingBar 1s infinite linear;
+}
+
+@keyframes loadingBar {
+  from {
+    left: -30%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
 .fetching,
 .loader,
 .empty {

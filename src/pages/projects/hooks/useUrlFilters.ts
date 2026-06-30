@@ -3,7 +3,6 @@ import { useCallback, useMemo } from "react";
 
 export const useUrlFilters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log("URL:", searchParams.toString());
   const search = searchParams.get("search") || "";
   const type = searchParams.get("type") || "";
 
@@ -12,7 +11,6 @@ export const useUrlFilters = () => {
     [searchParams],
   );
 
-  console.log("PARSED TAGS:", tags);
   const updateFilters = useCallback(
     (updates: { search?: string; type?: string; tags?: string[] }) => {
       setSearchParams((prev) => {
