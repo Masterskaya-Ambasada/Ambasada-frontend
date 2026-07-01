@@ -74,10 +74,9 @@ export const useGetProjectsData = () => {
     pagination.setLimit(limit);
   }, [limit, pagination]);
 
-  // 
-  const isLoading = isFirstRender.current && (queryResult.isLoading || categoriesQuery.isLoading || tagsQuery.isLoading);
-
-  // 
+  // показываем loading только если нет данных И это первый рендер
+  const isLoading = isFirstRender.current && queryResult.isLoading;
+  
   return useMemo(() => ({
     projects: queryResult.data?.items || [],
     categories: categoriesQuery.data || [],

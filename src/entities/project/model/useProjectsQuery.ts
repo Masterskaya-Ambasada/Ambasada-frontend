@@ -16,5 +16,6 @@ export function useProjectsQuery(
     retry: 1,
     refetchOnWindowFocus: true,
     refetchOnReconnect: true,
+    placeholderData: (previousData) => previousData,
   });
 }
