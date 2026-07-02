@@ -26,6 +26,7 @@
 
 .titleContainer {
   position: relative;
+  height: 252px;
 }
 
 .title {
@@ -149,6 +150,10 @@
     gap: 207px;
   }
 
+  .titleContainer {
+    height: 100%;
+  }
+
   .title {
     font: var(--tablet_h1);
   }
@@ -233,6 +238,10 @@
   .squares,
   .imageWrapperLeft {
     display: none;
+  }
+
+  .titleContainer {
+    height: 100%;
   }
 
   .title {

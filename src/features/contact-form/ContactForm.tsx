@@ -40,7 +40,6 @@ const initialTouched: TTouchedFields = {
 };
 
 const EMAIL_REGEXP = /^[^\s@]+@[^\s@]+\.[^\s@]+$/u;
-
 const NAME_REGEXP = /^[\p{Script=Latin}\p{Script=Cyrillic}\s'-]+$/u;
 
 const ContactForm = ({
@@ -54,13 +53,7 @@ const ContactForm = ({
   const [values, setValues] = useState<contactFormPost>(initialValues);
   const [errors, setErrors] = useState<TFormErrors>({});
   const [touched, setTouched] = useState<TTouchedFields>(initialTouched);
-  const [hints, setHints] = useState<TFormErrors>(() => ({
-    name: t("contactForm.hints.nameRequired"),
-    email: t("contactForm.hints.emailRequired"),
-    message: t("contactForm.hints.messageRequired", {
-      min: FIELD_LIMITS.messageMin,
-    }),
-  }));
+
   const nameFieldId = `${id}-name`;
   const emailFieldId = `${id}-email`;
   const messageFieldId = `${id}-message`;
@@ -70,6 +63,26 @@ const ContactForm = ({
   const message = values.message.trim();
   const contactPreference = values.contact_preference.trim();
   const reason = "submitForm";
+
+  const getHints = (): TFormErrors => {
+    const hints: TFormErrors = {};
+
+    if (!values.name.trim()) {
+      hints.name = t("contactForm.hints.nameRequired");
+    }
+
+    if (!values.email.trim()) {
+      hints.email = t("contactForm.hints.emailRequired");
+    }
+
+    if (!values.message.trim()) {
+      hints.message = t("contactForm.hints.messageRequired", {
+        min: FIELD_LIMITS.messageMin,
+      });
+    }
+
+    return hints;
+  };
 
   const validateValues = (formValues: contactFormPost) => {
     const nextErrors: TFormErrors = {};
@@ -106,7 +119,6 @@ const ContactForm = ({
   };
 
   const allErrors = validateValues(values);
-
   const isFormValid =
     Object.keys(allErrors).length === 0 && contactPreference.length === 0;
 
@@ -120,18 +132,13 @@ const ContactForm = ({
   ) => {
     const nextAllErrors = validateValues(nextValues);
     const nextVisibleErrors: TFormErrors = {};
-    const nextHints: TFormErrors = {};
 
     if (nextValues.name.trim() && nextTouched.name && nextAllErrors.name) {
       nextVisibleErrors.name = nextAllErrors.name;
-    } else if (!nextValues.name.trim()) {
-      nextHints.name = t("contactForm.hints.nameRequired");
     }
 
     if (nextValues.email.trim() && nextTouched.email && nextAllErrors.email) {
       nextVisibleErrors.email = nextAllErrors.email;
-    } else if (!nextValues.email.trim()) {
-      nextHints.email = t("contactForm.hints.emailRequired");
     }
 
     if (
@@ -140,14 +147,9 @@ const ContactForm = ({
       nextAllErrors.message
     ) {
       nextVisibleErrors.message = nextAllErrors.message;
-    } else if (!nextValues.message.trim()) {
-      nextHints.message = t("contactForm.hints.messageRequired", {
-        min: FIELD_LIMITS.messageMin,
-      });
     }
 
     setErrors(nextVisibleErrors);
-    setHints(nextHints);
   };
 
   const handleChange = (
@@ -224,18 +226,13 @@ const ContactForm = ({
       setValues(initialValues);
       setErrors({});
       setTouched(initialTouched);
-      const initialHints: TFormErrors = {};
-      initialHints.name = t("contactForm.hints.nameRequired");
-      initialHints.email = t("contactForm.hints.emailRequired");
-      initialHints.message = t("contactForm.hints.messageRequired", {
-        min: FIELD_LIMITS.messageMin,
-      });
-      setHints(initialHints);
       onValidityChange?.(false);
     } catch (error) {
       console.error("Ошибка при отправке формы:", error);
     }
   };
+
+  const hints = getHints();
 
   return (
     <form

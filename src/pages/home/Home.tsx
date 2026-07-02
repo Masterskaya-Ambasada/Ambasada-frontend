@@ -28,7 +28,6 @@ export const Home: React.FC = () => {
         <SectionHero hero={data.hero} />
         <AboutCommunity aboutPreview={data.about_preview} />
         <SectionTeam teamPreview={data.team_preview} />
-        <SectionTeam teamPreview={data.team_preview} />
         <SectionProjects projects_preview={data.projects_preview} />
         <ContactSection />
       </div>
