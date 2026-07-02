@@ -208,11 +208,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 24px 24px;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  gap: 30px;
 }
 
-/* Планшет (768px - 1023px) */
-@media (min-width: 768px) and (max-width: 1023px) {
+
+@media (min-width: 834px) and (max-width: 1024px) {
   .dropdown {
     max-width: 351px;
     min-width: 240px;
@@ -229,9 +231,10 @@
     font-size: 13px;
   }
 
-  .collapseButton {
+  /* Кнопки "Свернуть теги" "сбросить" */
+  .collapseButton,
+  .resetButton {
     font: var(--tablet_caption);
-    padding: 12px 20px 20px 36px;
   }
 
   .filterIcon {
@@ -240,8 +243,7 @@
   }
 }
 
-/* Мобилка (< 768px) */
-@media (max-width: 767px) {
+@media (max-width: 833px) {
   .container {
     display: none;
   }

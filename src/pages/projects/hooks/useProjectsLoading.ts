@@ -11,15 +11,6 @@ export const useProjectsLoading = () => {
 
   const isFetching = fetchCount > 0;
 
-  // Логи для отладки
-  useEffect(() => {
-    console.log("🔄 useProjectsLoading:", {
-      isFetching,
-      fetchCount,
-      timestamp: new Date().toISOString(),
-    });
-  }, [isFetching, fetchCount]);
-
   return {
     isFetching,
     fetchCount,

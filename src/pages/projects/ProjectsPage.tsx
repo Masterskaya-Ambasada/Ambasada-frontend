@@ -19,18 +19,7 @@ export const ProjectsPage: React.FC = () => {
   const { isMobile } = useViewportWidth();
 
   const [isTagsDropdownOpen, setIsTagsDropdownOpen] = useState(false);
-  useEffect(() => {
-    console.log("ProjectsPage mounted");
 
-    return () => {
-      console.log("ProjectsPage unmounted");
-    };
-  }, []);
-  useEffect(() => {
-    console.log("DROPDOWN STATE", isTagsDropdownOpen);
-  }, [isTagsDropdownOpen]);
-
-  console.log("isTagsDropdownOpen =", isTagsDropdownOpen);
   //хук для получения всех данных
   const {
     projects,
