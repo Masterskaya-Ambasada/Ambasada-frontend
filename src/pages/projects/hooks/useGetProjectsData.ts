@@ -15,8 +15,8 @@ export const useGetProjectsData = () => {
   } = useUrlFilters();
   
   const { isMobile, isTablet } = useViewportWidth();
-  
   const isFirstRender = useRef(true);
+  const prevFiltersRef = useRef({ search: urlSearch, type: urlType, tags: urlTags });
   
   const limit = useMemo(() => {
     return (isMobile || isTablet) ? 6 : 12;
@@ -28,16 +28,26 @@ export const useGetProjectsData = () => {
     initialLimit: limit,
   });
 
-  const queryResult = useProjectsQuery({
+  const queryParams = useMemo(() => ({
     limit: pagination.limit,
     offset: pagination.offset,
     search: urlSearch,
     type: urlType,
     tag: urlTags,
-  });
+  }), [pagination.limit, pagination.offset, urlSearch, urlType, urlTags]);
+
+  const queryResult = useProjectsQuery(queryParams);
 
   const categoriesQuery = useCategoriesQuery();
   const tagsQuery = useTagsQuery();
+
+  // Обновляем totalItems
+  useEffect(() => {
+    const totalItems = queryResult.data?.pagination?.totalItems;
+    if (totalItems !== undefined) {
+      pagination.setTotalItems(totalItems);
+    }
+  }, [queryResult.data, pagination]);
 
   const handleUpdateFilters = useCallback(
     (filters: { search?: string; type?: string; tags?: string[] }) => {
@@ -62,26 +72,37 @@ export const useGetProjectsData = () => {
     [urlUpdateFilters, urlSearch, urlType, urlTags, pagination]
   );
 
-  // 
+  // Сбрасываем страницу только при реальном изменении фильтров
   useEffect(() => {
-    if (!isFirstRender.current) {
+    const prevFilters = prevFiltersRef.current;
+    const filtersChanged = 
+      urlSearch !== prevFilters.search ||
+      urlType !== prevFilters.type ||
+      urlTags.length !== prevFilters.tags.length ||
+      urlTags.some((tag, index) => tag !== prevFilters.tags[index]);
+
+    if (filtersChanged && !isFirstRender.current) {
       pagination.resetPage();
+      prevFiltersRef.current = { search: urlSearch, type: urlType, tags: urlTags };
     }
-    isFirstRender.current = false;
+    
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      prevFiltersRef.current = { search: urlSearch, type: urlType, tags: urlTags };
+    }
   }, [urlSearch, urlType, urlTags, pagination]);
 
   useEffect(() => {
     pagination.setLimit(limit);
   }, [limit, pagination]);
 
-  // показываем loading только если нет данных И это первый рендер
   const isLoading = isFirstRender.current && queryResult.isLoading;
   
   return useMemo(() => ({
     projects: queryResult.data?.items || [],
     categories: categoriesQuery.data || [],
     availableTags: tagsQuery.data || [],
-    loading: isLoading, // Используем вычисленное значение
+    loading: isLoading,
     isFetching: queryResult.isFetching,
     error: queryResult.error || categoriesQuery.error || tagsQuery.error,
     filters: {
@@ -93,7 +114,7 @@ export const useGetProjectsData = () => {
     pagination: {
       currentPage: pagination.currentPage,
       totalPages: pagination.totalPages,
-      totalItems: queryResult.data?.pagination?.totalItems || 0,
+      totalItems: pagination.totalItems,
       visiblePages: pagination.visiblePages,
       goToPage: pagination.goToPage,
       goToNext: pagination.goToNext,

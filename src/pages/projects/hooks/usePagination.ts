@@ -20,23 +20,41 @@ interface UsePaginationReturn {
   hasPrev: boolean;
   limit: number;
   setLimit: (limit: number) => void;
+  setTotalItems: (total: number) => void;
   offset: number;
   resetPage: () => void;
 }
 
 export const usePagination = ({
-  totalItems,
+  totalItems: initialTotalItems = 0,
   initialPage = 1,
   initialLimit = 12,
   onPageChange,
 }: UsePaginationProps): UsePaginationReturn => {
   const [currentPage, setCurrentPage] = useState(initialPage);
   const [limit, setLimit] = useState(initialLimit);
+  const [totalItems, setTotalItemsState] = useState(initialTotalItems);
+
+  // Обновленная функция с проверкой на изменение
+  const setTotalItems = useCallback((total: number) => {
+    setTotalItemsState(prev => {
+      if (prev === total) return prev;
+      return total;
+    });
+  }, []);
 
   // Сброс страницы при изменении лимита
   useEffect(() => {
     setCurrentPage(1);
   }, [limit]);
+
+  // Сброс страницы при изменении общего количества элементов
+  useEffect(() => {
+    const maxPage = Math.ceil(totalItems / limit) || 1;
+    if (currentPage > maxPage) {
+      setCurrentPage(1);
+    }
+  }, [totalItems, limit, currentPage]);
 
   const totalPages = useMemo(() => {
     return Math.ceil(totalItems / limit) || 1;
@@ -124,6 +142,7 @@ export const usePagination = ({
     hasPrev,
     limit,
     setLimit,
+    setTotalItems, 
     offset,
     resetPage,
   };
